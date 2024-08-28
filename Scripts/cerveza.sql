@@ -190,13 +190,13 @@ ENGINE = InnoDB;
 
 
 -- recetas
-CREATE TABLE  IF NOT EXISTS recetas
+CREATE TABLE  IF NOT EXISTS receta
 (
-  id_recetas INT NOT NULL AUTO_INCREMENT,
-  procedimientos VARCHAR(100) NOT NULL,
+  id_receta INT NOT NULL AUTO_INCREMENT,
+  procedimiento VARCHAR(100) NOT NULL,
   id_grano INT NOT NULL,
   id_cerveza INT NOT NULL,
-  PRIMARY KEY (id_recetas),
+  PRIMARY KEY (id_receta),
   INDEX rec_gra ( id_grano  ASC),
   INDEX rec_cer( id_cerveza ASC),
   CONSTRAINT rec_gra
