@@ -4,7 +4,7 @@
 -- grano
 CREATE TABLE IF NOT EXISTS grano (
     id_grano INT NOT NULL AUTO_INCREMENT,
-    gra_nombre VARCHAR(15) NOT NULL,
+    gra_nombre VARCHAR(25) NOT NULL,
     gra_procedencia VARCHAR (25) NOT NULL,
     PRIMARY KEY (id_grano))
 ENGINE = InnoDB;
@@ -14,8 +14,8 @@ CREATE TABLE IF NOT EXISTS sede (
     id_sede INT NOT NULL AUTO_INCREMENT,
     sed_nombre VARCHAR (20) NOT NULL,
     sed_telefono INT NOT NULL,
-    sed_tipo VARCHAR (15) NOT NULL,
-    sed_estado VARCHAR (10) NOT NULL,
+    sed_tipo VARCHAR (25) NOT NULL,
+    sed_estado VARCHAR (20) NOT NULL,
     sed_ubicacion VARCHAR (100) NOT NULL,
     PRIMARY KEY (id_sede))
 ENGINE = InnoDB;
@@ -23,7 +23,7 @@ ENGINE = InnoDB;
 -- expendio
 CREATE TABLE IF NOT EXISTS expendio (
     id_expendio INT NOT NULL AUTO_INCREMENT,
-    exp_nombre VARCHAR (15) NOT NULL,
+    exp_nombre VARCHAR (25) NOT NULL,
     exp_rfc INT NOT NULL,
     exp_ubicacion VARCHAR (100) NOT NULL,
     PRIMARY KEY (id_expendio))
@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS fabricante(
         ON DELETE RESTRICT
         ON UPDATE CASCADE)
 ENGINE=InnoDB;
-
+ 
 -- marca
 CREATE TABLE IF NOT EXISTS marca(
     id_marca INT NOT NULL AUTO_INCREMENT,
