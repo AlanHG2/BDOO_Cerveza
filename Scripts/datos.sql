@@ -7,11 +7,11 @@ INSERT INTO grano (gra_nombre, gra_procedencia) VALUES
 ("Avena", "Oaxaca");
 
 INSERT INTO sede (sed_nombre, sed_telefono, sed_tipo, sed_estado, sed_ubicacion) VALUES
-("Cerveza Esencia", 5512345678, "Principal", "Jalisco", "Av. Chapultepec 123, Guadalajara"),
-("Casa Lúpulo", 5523456789, "Secundaria", "Nuevo León", "Calle Morelos 456, Monterrey"),
-("Malta Viva", 5534567890, "Secundaria", "Ciudad de México", "Insurgentes Sur 789, Coyoacán"),
-("La Barrica", 5545678901, "Principal", "Qolima", "Av. Universidad 321, Manzanillo"),
-("Cañón Cebada", 5556789012, "Principal", "Yucatán", "Calle 60 No. 654, Mérida");
+("Cerveza Esencia", "5512345678", "Principal", "Jalisco", "Av. Chapultepec 123, Guadalajara"),
+("Casa Lúpulo", "5523456789", "Secundaria", "Nuevo León", "Calle Morelos 456, Monterrey"),
+("Malta Viva", "5534567890", "Secundaria", "Ciudad de México", "Insurgentes Sur 789, Coyoacán"),
+("La Barrica", "5545678901", "Principal", "Qolima", "Av. Universidad 321, Manzanillo"),
+("Cañón Cebada", "5556789012", "Principal", "Yucatán", "Calle 60 No. 654, Mérida");
 
 INSERT INTO expendio (exp_nombre, exp_rfc, exp_ubicacion) VALUES
 ("La Europea", "ABC010203XYZ", "Av. Insurgentes Sur 1234, Ciudad de México"),

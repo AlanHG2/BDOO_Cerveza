@@ -13,7 +13,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS sede (
     id_sede INT NOT NULL AUTO_INCREMENT,
     sed_nombre VARCHAR (50) NOT NULL,
-    sed_telefono INT NOT NULL,
+    sed_telefono VARCHAR(10) NOT NULL,
     sed_tipo VARCHAR (25) NOT NULL,
     sed_estado VARCHAR (25) NOT NULL,
     sed_ubicacion VARCHAR (100) NOT NULL,
