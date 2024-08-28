@@ -76,6 +76,8 @@ INSERT INTO venta (vent_precioU, vent_cantidad, vent_fecha, id_expendio, id_pres
 
 INSERT INTO receta (procedimiento, id_grano, id_cerveza) VALUES
 ('Maceración y filtrado', 1, 1),
+('Maceración y filtrado', 2, 1),
+('Maceración y filtrado', 3, 1),
 ('Molienda y cocción', 2, 2),
 ('Fermentación y maduración', 3, 3),
 ('Mezcla y embotellado', 4, 4),

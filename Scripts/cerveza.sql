@@ -189,7 +189,7 @@ CREATE TABLE IF NOT EXISTS venta
 ENGINE = InnoDB;
 
 
--- recetas
+-- receta
 CREATE TABLE  IF NOT EXISTS receta
 (
   id_receta INT NOT NULL AUTO_INCREMENT,
