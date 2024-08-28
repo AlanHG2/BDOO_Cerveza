@@ -12,10 +12,10 @@ ENGINE = InnoDB;
 -- sede
 CREATE TABLE IF NOT EXISTS sede (
     id_sede INT NOT NULL AUTO_INCREMENT,
-    sed_nombre VARCHAR (20) NOT NULL,
+    sed_nombre VARCHAR (50) NOT NULL,
     sed_telefono INT NOT NULL,
     sed_tipo VARCHAR (25) NOT NULL,
-    sed_estado VARCHAR (20) NOT NULL,
+    sed_estado VARCHAR (25) NOT NULL,
     sed_ubicacion VARCHAR (100) NOT NULL,
     PRIMARY KEY (id_sede))
 ENGINE = InnoDB;
@@ -23,8 +23,8 @@ ENGINE = InnoDB;
 -- expendio
 CREATE TABLE IF NOT EXISTS expendio (
     id_expendio INT NOT NULL AUTO_INCREMENT,
-    exp_nombre VARCHAR (25) NOT NULL,
-    exp_rfc INT NOT NULL,
+    exp_nombre VARCHAR (50) NOT NULL,
+    exp_rfc VARCHAR (15) NOT NULL,
     exp_ubicacion VARCHAR (100) NOT NULL,
     PRIMARY KEY (id_expendio))
 ENGINE = InnoDB;
