@@ -55,17 +55,23 @@ HAVING
     COUNT(receta.id_grano) > 3;
 
 -- 6. Número de cervezas con más de 500 unidades vendidas en la última semana
+
 SELECT 
-    COUNT(DISTINCT cerveza.id_cerveza) AS Numero_Cervezas
+    COUNT(*) AS NumCervezas
 FROM 
-    venta
-JOIN 
-    presentacion ON venta.id_presentacion = presentacion.id_presentacion
-JOIN 
-    cerveza ON presentacion.id_cerveza = cerveza.id_cerveza
-WHERE 
-    venta.vent_fecha >= CURDATE() - INTERVAL 7 DAY
-GROUP BY 
-    cerveza.id_cerveza
-HAVING 
-    SUM(venta.vent_cantidad) > 500;
+    (
+        SELECT 
+            cerveza.id_cerveza
+        FROM 
+            venta
+        JOIN 
+            presentacion ON venta.id_presentacion = presentacion.id_presentacion
+        JOIN 
+            cerveza ON presentacion.id_cerveza = cerveza.id_cerveza
+        WHERE 
+            venta.vent_fecha >= CURDATE() - INTERVAL 20 DAY
+        GROUP BY 
+            cerveza.id_cerveza
+        HAVING 
+            SUM(venta.vent_cantidad) > 100
+    ) AS CervezasVendidas;
