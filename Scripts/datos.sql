@@ -1,4 +1,3 @@
-
 INSERT INTO grano (gra_nombre, gra_procedencia) VALUES
 ("Cebada", "Jalisco"),
 ("Trigo", "Hidalgo"),
@@ -54,7 +53,7 @@ INSERT INTO presentacion (id_cerveza, pre_descripcion, pre_tipo_envase, pre_capa
 (4, 'Lata 473 ml', 'Lata', 473),
 (5, 'Botella 1 L', 'Vidrio', 1000);
 
-NSERT INTO pedido (id_presentacion, id_expendio, ped_cantidad, ped_fecha_orden, ped_fecha_despacho, ped_total, ped_subtotal, ped_iva) VALUES
+INSERT INTO pedido (id_presentacion, id_expendio, ped_cantidad, ped_fecha_orden, ped_fecha_despacho, ped_total, ped_subtotal, ped_iva) VALUES
 (1, 1, 100, '2024-08-01', '2024-08-02', 2500.00, 2100.00, 400.00),
 (2, 2, 200, '2024-08-03', '2024-08-04', 6000.00, 5000.00, 1000.00),
 (3, 3, 150, '2024-08-05', '2024-08-06', 4200.00, 3600.00, 600.00),

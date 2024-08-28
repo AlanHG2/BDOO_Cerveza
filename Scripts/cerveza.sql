@@ -197,15 +197,15 @@ CREATE TABLE  IF NOT EXISTS receta
   id_grano INT NOT NULL,
   id_cerveza INT NOT NULL,
   PRIMARY KEY (id_receta),
-  INDEX rec_gra ( id_grano  ASC),
-  INDEX rec_cer( id_cerveza ASC),
+  INDEX rec_gra (id_grano ASC),
+  INDEX rec_cer(id_cerveza ASC),
   CONSTRAINT rec_gra
      FOREIGN KEY (id_grano) 
      REFERENCES grano(id_grano),
-CONSTRAINT rec_cer
-  FOREIGN KEY (id_cerveza) 
+  CONSTRAINT rec_cer
+   FOREIGN KEY (id_cerveza) 
    REFERENCES cerveza(id_cerveza)
    ON DELETE RESTRICT
-    ON UPDATE CASCADE
+   ON UPDATE CASCADE
 )
 ENGINE = InnoDB;
