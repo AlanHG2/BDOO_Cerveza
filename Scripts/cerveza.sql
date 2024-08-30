@@ -218,7 +218,7 @@ CREATE TABLE  IF NOT EXISTS receta
 )
 ENGINE = InnoDB;
 
-
+-- Trigger
 ALTER TABLE cerveza ADD COLUMN cer_existencia_total INT NOT NULL DEFAULT 0;
 DELIMITER $$
 

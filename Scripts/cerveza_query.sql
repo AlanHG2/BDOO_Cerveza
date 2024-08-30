@@ -166,6 +166,7 @@ ORDER BY
 
 -- TRIGGER: Agregar un campo a la entidad Cerveza que almacene y actualice la existencia total de esa cerveza,
 -- es decir, la sumatoria de las existencias de ese producto en todos los expendios.
+ALTER TABLE cerveza ADD COLUMN cer_existencia_total INT NOT NULL DEFAULT 0;
 DELIMITER $$
 CREATE TRIGGER update_cerveza_existencia
 BEFORE INSERT ON almacen
