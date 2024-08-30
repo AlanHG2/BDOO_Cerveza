@@ -168,7 +168,7 @@ ORDER BY
 -- es decir, la sumatoria de las existencias de ese producto en todos los expendios.
 DELIMITER $$
 CREATE TRIGGER update_cerveza_existencia
-AFTER INSERT ON almacen
+BEFORE INSERT ON almacen
 FOR EACH ROW
 BEGIN
     DECLARE total_existencia INT;
