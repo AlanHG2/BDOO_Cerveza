@@ -223,7 +223,7 @@ ALTER TABLE cerveza ADD COLUMN cer_existencia_total INT NOT NULL DEFAULT 0;
 DELIMITER $$
 
 CREATE TRIGGER update_cerveza_existencia
-AFTER INSERT ON almacen
+BEFORE INSERT ON almacen
 FOR EACH ROW
 BEGIN
     DECLARE total_existencia INT;
