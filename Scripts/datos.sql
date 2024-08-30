@@ -1,3 +1,11 @@
+-- OPTATIVA 1: BASES DE DATOS ORIENTADAS A OBJETOS
+--7°1
+
+--Aguilar Jiménez Jade Ameyalli
+--Calvo Díaz Obeth Yael
+--García García Alan HAzel
+--Serrano Muñoz Patricia Itzel
+
 INSERT INTO grano (gra_nombre, gra_procedencia) VALUES
 ("Cebada", "Jalisco"),
 ("Trigo", "Hidalgo"),
