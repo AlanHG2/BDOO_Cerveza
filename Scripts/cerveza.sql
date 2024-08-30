@@ -209,3 +209,29 @@ CREATE TABLE  IF NOT EXISTS receta
    ON UPDATE CASCADE
 )
 ENGINE = InnoDB;
+ALTER TABLE cerveza ADD COLUMN cer_existencia_total INT NOT NULL DEFAULT 0;
+DELIMITER //
+
+CREATE TRIGGER update_cerveza_existencia
+AFTER INSERT ON almacen
+FOR EACH ROW
+BEGIN
+    DECLARE total_existencia INT;
+    
+    -- Calcular la suma total de existencias de la cerveza
+    SELECT SUM(alma_existencia)
+    INTO total_existencia
+    FROM almacen
+    WHERE id_presentacion = NEW.id_presentacion;
+    
+    -- Actualizar el campo cer_existencia_total en la tabla cerveza
+    UPDATE cerveza
+    SET cer_existencia_total = total_existencia
+    WHERE id_cerveza = (
+        SELECT id_cerveza
+        FROM presentacion
+        WHERE id_presentacion = NEW.id_presentacion
+    );
+END //
+
+DELIMITER ;
