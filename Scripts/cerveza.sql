@@ -1,5 +1,13 @@
--- CREATE DATABASE IF NOT EXISTS cervezas ;
--- use cervezas ;
+-- OPTATIVA 1: BASES DE DATOS ORIENTADAS A OBJETOS
+--7°1
+
+--Aguilar Jiménez Jade Ameyalli
+--Calvo Díaz Obeth Yael
+--García García Alan HAzel
+--Serrano Muñoz Patricia Itzel
+
+CREATE DATABASE IF NOT EXISTS cervezas ;
+use cervezas ;
 
 -- grano
 CREATE TABLE IF NOT EXISTS grano (
@@ -209,8 +217,10 @@ CREATE TABLE  IF NOT EXISTS receta
    ON UPDATE CASCADE
 )
 ENGINE = InnoDB;
+
+
 ALTER TABLE cerveza ADD COLUMN cer_existencia_total INT NOT NULL DEFAULT 0;
-DELIMITER //
+DELIMITER $$
 
 CREATE TRIGGER update_cerveza_existencia
 AFTER INSERT ON almacen
@@ -232,6 +242,6 @@ BEGIN
         FROM presentacion
         WHERE id_presentacion = NEW.id_presentacion
     );
-END //
+END $$
 
 DELIMITER ;
