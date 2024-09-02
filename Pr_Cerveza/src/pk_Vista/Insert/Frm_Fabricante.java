@@ -18,14 +18,17 @@ public class Frm_Fabricante extends javax.swing.JFrame {
     ArrayList<Sede> list;
     public Frm_Fabricante() {
         initComponents();
-        
         setTitle("Registro de Fabricantes");
         setLocationRelativeTo(null);
+        
         llenarSedes();
     }
     private void llenarSedes(){
+//        Instancia la clase controladora (de pk_Crud)
         Cls_Sede o=new Cls_Sede();
+//        Almacena el arraylist obtenido de getsedes en list
         list =o.getSedes();
+//        se recorre el arraylist para añadir los elementos de "nombre" de cada índice de la lista al combobox
         for(int i=0; i<list.size();i++){
             Sede s=list.get(i);
             cb_Sede.addItem(s.getSed_Nombre());
@@ -135,6 +138,7 @@ public class Frm_Fabricante extends javax.swing.JFrame {
     }//GEN-LAST:event_cb_SedeItemStateChanged
 
     private void cb_SedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_SedeActionPerformed
+//        Para seleccionar el id del elemento seleccionado en el combobox
         Sede s=list.get(cb_Sede.getSelectedIndex());
         System.out.println("Id seleccionado:"+s.getId_Sede());
     }//GEN-LAST:event_cb_SedeActionPerformed
