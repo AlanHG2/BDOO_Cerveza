@@ -1,4 +1,4 @@
-package src.pk_Modelo;
+package pk_Modelo;
 
 public class Expendio {
     private int id_Expendio;
