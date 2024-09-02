@@ -39,3 +39,4 @@ out/
 # Archivos temporales de editores
 *.swp
 *.swo
+/Pr_Cerveza/nbproject/private/
