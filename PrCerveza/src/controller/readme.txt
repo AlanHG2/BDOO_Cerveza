@@ -1,2 +1,0 @@
-operaciones CRUD
-conexión bd

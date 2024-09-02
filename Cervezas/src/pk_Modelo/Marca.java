@@ -1,4 +1,4 @@
-package model;
+package pk_Modelo;
 
 public class Marca {
     private int id_Marca;

@@ -1,4 +1,4 @@
-package model;
+package pk_Modelo;
 
 public class Fabricante {
     private int id_Fabricante;
