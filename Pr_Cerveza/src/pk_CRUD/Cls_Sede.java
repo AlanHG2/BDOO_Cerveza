@@ -44,12 +44,12 @@ public class Cls_Sede {
     }
 
     public ArrayList<Sede> getSedes() {
-        int res = 0;
         ArrayList<Sede> lista = new ArrayList();
         String SQL_Select = "SELECT *FROM sede";
         try {
             PS = CN.getConexion().prepareStatement(SQL_Select);
             RS = PS.executeQuery();
+//            por cada elemento en RS, se crea un objeto en el arraylist con cada una de los atributos de la entidad Sede
             while(RS.next()){
                 lista.add(new Sede(RS.getInt("id_Sede"),
                         RS.getString("sed_nombre"),

@@ -9,7 +9,6 @@ public class Frm_Sede extends javax.swing.JFrame {
     public Frm_Sede() {
         initComponents();
         CA=new Cls_Sede();
-        CA.getSedes();
         setTitle("Registro de Sede");
         setLocationRelativeTo(null);
     }
