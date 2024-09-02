@@ -175,7 +175,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS venta
 (
   id_venta INT NOT NULL AUTO_INCREMENT,
-  vent_precioU INT NOT NULL,
+  vent_precioU DOUBLE NOT NULL,
   vent_cantidad INT NOT NULL,
   vent_fecha DATE NOT NULL,
   id_expendio INT NOT NULL,
