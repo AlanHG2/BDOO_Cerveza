@@ -183,7 +183,7 @@ public class Frm_Sede extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_AgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AgregarActionPerformed
-        String nombre = txt_Nombre.getText();
+String nombre = txt_Nombre.getText();
         String telefono = txt_Telefono.getText();
         String tipo = cb_Tipo.getSelectedItem().toString();
         String calle = txt_Calle.getText();

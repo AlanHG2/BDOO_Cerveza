@@ -3,6 +3,7 @@ package pk_Vista.Insert;
 
 import javax.swing.JOptionPane;
 import pk_CRUD.Cls_Grano;
+import pk_Vista.Preview.Frm_GranoPrev;
 
 public class Frm_Grano extends javax.swing.JFrame {
 
@@ -129,11 +130,11 @@ public class Frm_Grano extends javax.swing.JFrame {
         if (mensajeError.length() > 0) {
             JOptionPane.showMessageDialog(null, mensajeError.toString(), "Error", JOptionPane.ERROR_MESSAGE);
         } else {
-            // Si no hay errores, proceder con la inserción
-            int res = CA.insertarDatos(gra_nombre, gra_procedencia);
-            if (res > 0) {
-                JOptionPane.showMessageDialog(null, "Registro Exitoso", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-            }
+            // Si no hay errores, mostrar preview           
+            this.setVisible(false); 
+            Frm_GranoPrev preview = new Frm_GranoPrev(gra_nombre, gra_procedencia);
+            preview.setVisible(true);
+            
         }
     }//GEN-LAST:event_btn_AgregarActionPerformed
 
