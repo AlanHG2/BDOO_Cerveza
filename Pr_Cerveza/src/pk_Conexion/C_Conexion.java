@@ -9,7 +9,7 @@ public class C_Conexion {
     private static final String DRIVER= "com.mysql.jdbc.Driver";
     private static final String BD = "cervezas";
     private static final String USER = "root";
-    private static final String PASS = "root";
+    private static final String PASS = "1234";
     private static final String URL = "jdbc:mysql://localhost:3306/" + BD +
             "?useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC";
 

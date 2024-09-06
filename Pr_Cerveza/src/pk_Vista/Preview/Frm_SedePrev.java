@@ -4,18 +4,30 @@
  */
 package pk_Vista.Preview;
 
+import javax.swing.JOptionPane;
+import pk_CRUD.Cls_Sede;
+import pk_Modelo.Sede;
+import pk_Vista.Insert.Frm_Sede;
+
 /**
  *
  * @author jadey
  */
 public class Frm_SedePrev extends javax.swing.JFrame {
 
-
-    
-    public Frm_SedePrev() {
-       
+    private Frm_Sede fSede;
+    private final Cls_Sede CA;
+    Sede[] s=new Sede[1];
+    public Frm_SedePrev(String nombre, String telefono, String tipo, String calle, int cp, String mpio, String estado, int numExt) {
+        CA = new Cls_Sede();
+        setLocationRelativeTo(null);
         initComponents();
-
+        txt_PrevNombre.setText(nombre);
+        txt_PrevEstado.setText(estado);
+        txt_PrevTipo.setText(tipo);
+        txt_PrevTel.setText(telefono);
+        txt_PrevDireccion.setText(estado+", "+mpio+", "+cp+". "+calle+" #"+numExt);
+        s[0]=new Sede(0,nombre,telefono,tipo,calle,cp,mpio,estado,numExt);
     }
 
     /**
@@ -40,6 +52,8 @@ public class Frm_SedePrev extends javax.swing.JFrame {
         txt_PrevEstado = new javax.swing.JLabel();
         txt_PrevTel = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        txt_PrevDireccion = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -54,8 +68,18 @@ public class Frm_SedePrev extends javax.swing.JFrame {
         jLabel5.setText("Teléfono:");
 
         btn_Regresar.setText("Regresar");
+        btn_Regresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_RegresarActionPerformed(evt);
+            }
+        });
 
         btb_Confirmar.setText("Confirmar");
+        btb_Confirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btb_ConfirmarActionPerformed(evt);
+            }
+        });
 
         txt_PrevNombre.setText("jLabel6");
 
@@ -67,6 +91,10 @@ public class Frm_SedePrev extends javax.swing.JFrame {
 
         jButton1.setText("Cancelar");
 
+        jLabel6.setText("Dirección");
+
+        txt_PrevDireccion.setText("jLabel7");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -74,28 +102,32 @@ public class Frm_SedePrev extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5))
-                .addGap(9, 9, 9)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
+                    .addComponent(jLabel6)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txt_PrevTel)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txt_PrevEstado)
-                                .addComponent(txt_PrevTipo, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
-                                .addComponent(txt_PrevNombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(17, 17, 17)
-                        .addComponent(btn_Regresar)
-                        .addGap(18, 18, 18)
-                        .addComponent(btb_Confirmar)
-                        .addGap(12, 12, 12)
-                        .addComponent(jButton1)))
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5))
+                        .addGap(9, 9, 9)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(23, 23, 23)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txt_PrevTel)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(txt_PrevEstado)
+                                        .addComponent(txt_PrevTipo, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+                                        .addComponent(txt_PrevNombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(txt_PrevDireccion)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(17, 17, 17)
+                                .addComponent(btn_Regresar)
+                                .addGap(18, 18, 18)
+                                .addComponent(btb_Confirmar)
+                                .addGap(12, 12, 12)
+                                .addComponent(jButton1)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -119,7 +151,11 @@ public class Frm_SedePrev extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(txt_PrevTel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(txt_PrevDireccion))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_Regresar)
                     .addComponent(btb_Confirmar)
@@ -146,6 +182,20 @@ public class Frm_SedePrev extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btb_ConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btb_ConfirmarActionPerformed
+        int res = CA.insertarDatos(s[0].getSed_Nombre(), s[0].getSed_Telefono(),
+                s[0].getSed_Tipo(), s[0].getSed_Calle(), s[0].getSed_CPostal(),
+                s[0].getSed_Municipio(), s[0].getSed_Estado(), s[0].getSed_NumExt());
+        if (res > 0) {
+            JOptionPane.showMessageDialog(null, "Registro Exitoso", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_btb_ConfirmarActionPerformed
+
+    private void btn_RegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_RegresarActionPerformed
+        this.dispose();
+        fSede.setVisible(true);
+    }//GEN-LAST:event_btn_RegresarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -177,7 +227,7 @@ public class Frm_SedePrev extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-               //new Frm_SedePrev().setVisible(true);
+                //new Frm_SedePrev().setVisible(true);
             }
         });
     }
@@ -191,7 +241,9 @@ public class Frm_SedePrev extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel txt_PrevDireccion;
     private javax.swing.JLabel txt_PrevEstado;
     private javax.swing.JLabel txt_PrevNombre;
     private javax.swing.JLabel txt_PrevTel;

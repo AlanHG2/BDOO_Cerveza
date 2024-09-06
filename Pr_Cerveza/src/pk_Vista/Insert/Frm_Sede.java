@@ -2,6 +2,7 @@ package pk_Vista.Insert;
 
 import javax.swing.JOptionPane;
 import pk_CRUD.Cls_Sede;
+import pk_Vista.Preview.Frm_SedePrev;
 
 public class Frm_Sede extends javax.swing.JFrame {
 
@@ -183,7 +184,9 @@ public class Frm_Sede extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_AgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AgregarActionPerformed
-String nombre = txt_Nombre.getText();
+        
+        
+        String nombre = txt_Nombre.getText();
         String telefono = txt_Telefono.getText();
         String tipo = cb_Tipo.getSelectedItem().toString();
         String calle = txt_Calle.getText();
@@ -191,10 +194,11 @@ String nombre = txt_Nombre.getText();
         String mpio = txt_Mpio.getText(); //TODO cambiar por combobox
         String estado = cb_Estado.getSelectedItem().toString();
         int numExt = Integer.parseInt(txt_num_exterior.getText());
-        int res = CA.insertarDatos(nombre, telefono, tipo, calle, cp,mpio,estado,numExt);
-        if (res > 0) {
-            JOptionPane.showMessageDialog(null, "Registro Exitoso", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-        }
+        
+        
+        this.setVisible(false);
+        Frm_SedePrev preview = new Frm_SedePrev(nombre, telefono, tipo,calle,cp,mpio,estado,numExt);
+        preview.setVisible(true);
     }//GEN-LAST:event_btn_AgregarActionPerformed
 
     /**

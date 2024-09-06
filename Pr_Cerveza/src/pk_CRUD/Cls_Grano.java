@@ -29,10 +29,10 @@ public class Cls_Grano {
             PS.setString(2,gra_procedencia);
             res = PS.executeUpdate();
             if (res > 0){
-                JOptionPane.showMessageDialog(null, "Registro Exitoso", "Succeed", 1);
+                System.out.println("Registro exitoso");
             }
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error de inserción" + e, "Error", 0);
+            System.out.println("Error de inserción");
         } finally {
             PS = null;
             CN.close();
