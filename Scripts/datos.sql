@@ -1,3 +1,4 @@
+--Data
 INSERT INTO grano (gra_nombre, gra_procedencia) VALUES
 ("Cebada", "Jalisco"),
 ("Trigo", "Hidalgo"),
