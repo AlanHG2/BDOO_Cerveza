@@ -185,20 +185,72 @@ public class Frm_Sede extends javax.swing.JFrame {
 
     private void btn_AgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AgregarActionPerformed
         
+        String nombre = txt_Nombre.getText().trim();
+        String telefono = txt_Telefono.getText().trim();
+        String tipo = cb_Tipo.getSelectedItem() != null ? cb_Tipo.getSelectedItem().toString() : "";
+        String calle = txt_Calle.getText().trim();
+        String cpStr = txt_CP.getText().trim();
+        String mpio = txt_Mpio.getText().trim(); // TODO cambiar por combobox
+        String estado = cb_Estado.getSelectedItem() != null ? cb_Estado.getSelectedItem().toString() : "";
+        String numExtStr = txt_num_exterior.getText().trim();
+
+        StringBuilder mensajeError = new StringBuilder();
+
+        // Validación del nombre (no vacío y mínimo 3 caracteres)
+        if (nombre.isEmpty() || nombre.length() < 3) {
+            mensajeError.append("El nombre debe tener al menos 3 caracteres y no puede estar vacío.\n");
+        }
+
+        // Validación del teléfono (no vacío y debe contener solo números)
+        if (telefono.isEmpty() || !telefono.matches("\\d+")) {
+            mensajeError.append("El teléfono no puede estar vacío y debe contener solo números.\n");
+        }
+
+        // Validación del tipo (asegurar que se ha seleccionado un valor)
+        if (cb_Tipo.getSelectedIndex() == -1) {
+            mensajeError.append("Debe seleccionar un tipo.\n");
+        }
+
+        // Validación de la calle (no vacía)
+        if (calle.isEmpty()) {
+            mensajeError.append("La calle no puede estar vacía.\n");
+        }
+
+        // Validación del Código Postal (no vacío, debe ser numérico y de 5 dígitos)
+        if (cpStr.isEmpty() || !cpStr.matches("\\d{5}")) {
+            mensajeError.append("El Código Postal no puede estar vacío y debe contener exactamente 5 dígitos numéricos.\n");
+        }
+
+        // Validación del municipio (no vacío)
+        if (mpio.isEmpty()) {
+            mensajeError.append("El municipio no puede estar vacío.\n");
+        }
+
+        // Validación del estado (asegurar que se ha seleccionado un valor)
+        if (cb_Estado.getSelectedIndex() == -1) {
+            mensajeError.append("Debe seleccionar un Estado.\n");
+        }
+
+        // Validación del número exterior (no vacío y debe ser numérico)
+        if (numExtStr.isEmpty() || !numExtStr.matches("\\d+")) {
+            mensajeError.append("El número exterior no puede estar vacío y debe ser un valor numérico.\n");
+        }
+
+        // Mostrar los mensajes de error si existen
+        if (mensajeError.length() > 0) {
+            JOptionPane.showMessageDialog(null, mensajeError.toString(), "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            // Convertir valores numéricos después de las validaciones
+            int cp = Integer.parseInt(cpStr);
+            int numExt = Integer.parseInt(numExtStr);
+
+            // Insertar datos en la base de datos
+            int res = CA.insertarDatos(nombre, telefono, tipo, calle, cp, mpio, estado, numExt);
+            if (res > 0) {
+                JOptionPane.showMessageDialog(null, "Registro Exitoso", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            }
+        }
         
-        String nombre = txt_Nombre.getText();
-        String telefono = txt_Telefono.getText();
-        String tipo = cb_Tipo.getSelectedItem().toString();
-        String calle = txt_Calle.getText();
-        int cp = Integer.parseInt(txt_CP.getText());
-        String mpio = txt_Mpio.getText(); //TODO cambiar por combobox
-        String estado = cb_Estado.getSelectedItem().toString();
-        int numExt = Integer.parseInt(txt_num_exterior.getText());
-        
-        
-        this.setVisible(false);
-        Frm_SedePrev preview = new Frm_SedePrev(Frm_Sede.this,nombre, telefono, tipo,calle,cp,mpio,estado,numExt);
-        preview.setVisible(true);
     }//GEN-LAST:event_btn_AgregarActionPerformed
 
     /**
