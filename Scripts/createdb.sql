@@ -1,10 +1,10 @@
 -- OPTATIVA 1: BASES DE DATOS ORIENTADAS A OBJETOS
---7°1
+-- 7°1
 
---Aguilar Jiménez Jade Ameyalli
---Calvo Díaz Obeth Yael
---García García Alan HAzel
---Serrano Muñoz Patricia Itzel
+-- Aguilar Jiménez Jade Ameyalli
+-- Calvo Díaz Obeth Yael
+-- García García Alan HAzel
+-- Serrano Muñoz Patricia Itzel
 
 CREATE DATABASE IF NOT EXISTS cervezas ;
 use cervezas ;
@@ -23,8 +23,11 @@ CREATE TABLE IF NOT EXISTS sede (
     sed_nombre VARCHAR (50) NOT NULL,
     sed_telefono VARCHAR(10) NOT NULL,
     sed_tipo VARCHAR (25) NOT NULL,
+    sed_calle VARCHAR (25) NOT NULL,
+    sed_postal int NOT NULL,
+    sed_municipio VARCHAR (25) NOT NULL,
     sed_estado VARCHAR (25) NOT NULL,
-    sed_ubicacion VARCHAR (100) NOT NULL,
+    sed_numExterior int NOT NULL,
     PRIMARY KEY (id_sede))
 ENGINE = InnoDB;
 
@@ -33,7 +36,11 @@ CREATE TABLE IF NOT EXISTS expendio (
     id_expendio INT NOT NULL AUTO_INCREMENT,
     exp_nombre VARCHAR (50) NOT NULL,
     exp_rfc VARCHAR (15) NOT NULL,
-    exp_ubicacion VARCHAR (100) NOT NULL,
+    exp_calle VARCHAR (25) NOT NULL,
+    exp_postal int NOT NULL,
+    exp_municipio VARCHAR (25) NOT NULL,
+    exp_estado VARCHAR (25) NOT NULL,
+    exp_numExterior int NOT NULL,
     PRIMARY KEY (id_expendio))
 ENGINE = InnoDB;
 
@@ -223,7 +230,7 @@ ALTER TABLE cerveza ADD COLUMN cer_existencia_total INT NOT NULL DEFAULT 0;
 DELIMITER $$
 
 CREATE TRIGGER update_cerveza_existencia
-BEFORE INSERT ON almacen
+AFTER INSERT ON almacen
 FOR EACH ROW
 BEGIN
     DECLARE total_existencia INT;

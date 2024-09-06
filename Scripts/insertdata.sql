@@ -1,10 +1,10 @@
 -- OPTATIVA 1: BASES DE DATOS ORIENTADAS A OBJETOS
---7°1
+-- 7°1
 
---Aguilar Jiménez Jade Ameyalli
---Calvo Díaz Obeth Yael
---García García Alan HAzel
---Serrano Muñoz Patricia Itzel
+-- Aguilar Jiménez Jade Ameyalli
+-- Calvo Díaz Obeth Yael
+-- García García Alan HAzel
+-- Serrano Muñoz Patricia Itzel
 
 INSERT INTO grano (gra_nombre, gra_procedencia) VALUES
 ("Cebada", "Jalisco"),
@@ -13,36 +13,36 @@ INSERT INTO grano (gra_nombre, gra_procedencia) VALUES
 ("Centeno", "Coahuila"),
 ("Avena", "Oaxaca");
 
-INSERT INTO sede (sed_nombre, sed_telefono, sed_tipo, sed_estado, sed_ubicacion) VALUES
-("Cerveza Esencia", "5512345678", "Principal", "Jalisco", "Av. Chapultepec 123, Guadalajara"),
-("Casa Lúpulo", "5523456789", "Secundaria", "Nuevo León", "Calle Morelos 456, Monterrey"),
-("Malta Viva", "5534567890", "Secundaria", "Ciudad de México", "Insurgentes Sur 789, Coyoacán"),
-("La Barrica", "5545678901", "Principal", "Qolima", "Av. Universidad 321, Manzanillo"),
-("Cervecería Loba", "5556678912", "Principal", "Jalisco", "Pobladito No. 784, Guadalajara"),
-("Cervecería Primus", "5526415371", "Secundaria", "Ciudad de México", "Av. Pinos 890, Iztacalco"),
-("Cervecería Allende", "5519078432", "Secundaria", "Guanajuato", "Calle Rosas No. 64, San Miguel de Allende"),
-("Cervecería del Norte", "5511122233", "Principal", "Chihuahua", "Av. Revolución 102, Chihuahua"),
-("Lúpulo Fino", "5522233344", "Secundaria", "Puebla", "Calle Juárez 77, Puebla"),
-("Malta Dorada", "5533344455", "Principal", "Guanajuato", "Av. Hidalgo 456, León"),
-("La Espuma", "5544455566", "Secundaria", "Querétaro", "Blvd. Bernardo Quintana 200, Querétaro"),
-("El Barril de Oro", "5555566677", "Principal", "Jalisco", "Calle Independencia 999, Tlaquepaque"),
-("Cerveza Artesanal", "5566677788", "Secundaria", "Oaxaca", "Calle de Alcalá 123, Oaxaca"),
-("Lúpulo en Flor", "5577788899", "Principal", "Veracruz", "Malecón 101, Veracruz"),
-("Cerveza Viva", "5588899900", "Principal", "Baja California", "Av. Internacional 54, Tijuana"),
-("La Cebada Pura", "5599900011", "Secundaria", "Sonora", "Blvd. Rodríguez 1200, Hermosillo"),
-("El Tanque de Malta", "5510011122", "Principal", "Michoacán", "Calle Madero 300, Morelia");
+INSERT INTO sede (sed_nombre, sed_telefono, sed_tipo, sed_calle, sed_postal, sed_municipio, sed_estado, sed_numExterior) VALUES
+("Cerveza Esencia", "5512345678", "Principal", "Av. Chapultepec", 44160, "Guadalajara", "Jalisco", 123),
+("Casa Lúpulo", "5523456789", "Secundaria", "Calle Morelos", 64000, "Monterrey", "Nuevo León", 456),
+("Malta Viva", "5534567890", "Secundaria", "Insurgentes Sur", 04530, "Coyoacán", "Ciudad de México", 789),
+("La Barrica", "5545678901", "Principal", "Av. Universidad", 28218, "Manzanillo", "Colima", 321),
+("Cervecería Loba", "5556678912", "Principal", "Pobladito", 44180, "Guadalajara", "Jalisco", 784),
+("Cervecería Primus", "5526415371", "Secundaria", "Av. Pinos", 08030, "Iztacalco", "Ciudad de México", 890),
+("Cervecería Allende", "5519078432", "Secundaria", "Calle Rosas", 37700, "San Miguel de Allende", "Guanajuato", 64),
+("Cervecería del Norte", "5511122233", "Principal", "Av. Revolución", 31000, "Chihuahua", "Chihuahua", 102),
+("Lúpulo Fino", "5522233344", "Secundaria", "Calle Juárez", 72000, "Puebla", "Puebla", 77),
+("Malta Dorada", "5533344455", "Principal", "Av. Hidalgo", 37500, "León", "Guanajuato", 456),
+("La Espuma", "5544455566", "Secundaria", "Blvd. Bernardo Quintana", 76000, "Querétaro", "Querétaro", 200),
+("El Barril de Oro", "5555566677", "Principal", "Calle Independencia", 45500, "Tlaquepaque", "Jalisco", 999),
+("Cerveza Artesanal", "5566677788", "Secundaria", "Calle de Alcalá", 68000, "Oaxaca", "Oaxaca", 123),
+("Lúpulo en Flor", "5577788899", "Principal", "Malecón", 91700, "Veracruz", "Veracruz", 101),
+("Cerveza Viva", "5588899900", "Principal", "Av. Internacional", 22010, "Tijuana", "Baja California", 54),
+("La Cebada Pura", "5599900011", "Secundaria", "Blvd. Rodríguez", 83000, "Hermosillo", "Sonora", 1200),
+("El Tanque de Malta", "5510011122", "Principal", "Calle Madero", 58000, "Morelia", "Michoacán", 300);
 
-INSERT INTO expendio (exp_nombre, exp_rfc, exp_ubicacion) VALUES
-("La Europea", "ABC010203XYZ", "Av. Insurgentes Sur 1234, Ciudad de México"),
-("Beer House", "CDE040506MNO", "Av. Revolución 567, Guadalajara, Jalisco"),
-("The Beer Company", "FGH070809PQR", "Calle 5 de Mayo 89, Monterrey, Nuevo León"),
-("Hops Beer Shop", "IJK101112STU", "Av. Universidad 456, Coyoacán, Ciudad de México"),
-("La Belga", "LMN131415VWX", "Calle Amsterdam 234, Colonia Condesa, Ciudad de México"),
-("Biergarten", "NOP161718YZA", "Av. Álvaro Obregón 299, Colonia Roma, Ciudad de México"),
-("El Depósito", "BCD192021EFG", "Calle Morelos 123, Zapopan, Jalisco"),
-("Lúpulo Craft Beer Bar", "HIJ222324KLM", "Calle 60 456, Centro, Mérida, Yucatán"),
-("La Taberna", "NOP252627OPQ", "Paseo de la Reforma 789, Ciudad de México"),
-("Cervecería Reforma", "RST282930UVW", "Av. Juárez 321, Puebla, Puebla");
+INSERT INTO expendio (exp_nombre, exp_rfc, exp_calle, exp_postal, exp_municipio, exp_estado, exp_numExterior) VALUES
+("La Europea", "ABC010203XYZ", "Av. Insurgentes Sur", 03940, "Ciudad de México", "Ciudad de México", 1234),
+("Beer House", "CDE040506MNO", "Av. Revolución", 44100, "Guadalajara", "Jalisco", 567),
+("The Beer Company", "FGH070809PQR", "Calle 5 de Mayo", 64000, "Monterrey", "Nuevo León", 89),
+("Hops Beer Shop", "IJK101112STU", "Av. Universidad", 04530, "Coyoacán", "Ciudad de México", 456),
+("La Belga", "LMN131415VWX", "Calle Amsterdam", 06100, "Colonia Condesa", "Ciudad de México", 234),
+("Biergarten", "NOP161718YZA", "Av. Álvaro Obregón", 06700, "Colonia Roma", "Ciudad de México", 299),
+("El Depósito", "BCD192021EFG", "Calle Morelos", 45040, "Zapopan", "Jalisco", 123),
+("Lúpulo Craft Beer Bar", "HIJ222324KLM", "Calle 60", 97000, "Mérida", "Yucatán", 456),
+("La Taberna", "NOP252627OPQ", "Paseo de la Reforma", 06500, "Ciudad de México", "Ciudad de México", 789),
+("Cervecería Reforma", "RST282930UVW", "Av. Juárez", 72000, "Puebla", "Puebla", 321);
 
 INSERT INTO fabricante (fab_nombre,id_sede) VALUES
 ("Cervecería Rrëy", 1),
