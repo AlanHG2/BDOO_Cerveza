@@ -197,7 +197,7 @@ public class Frm_Sede extends javax.swing.JFrame {
         
         
         this.setVisible(false);
-        Frm_SedePrev preview = new Frm_SedePrev(nombre, telefono, tipo,calle,cp,mpio,estado,numExt);
+        Frm_SedePrev preview = new Frm_SedePrev(Frm_Sede.this,nombre, telefono, tipo,calle,cp,mpio,estado,numExt);
         preview.setVisible(true);
     }//GEN-LAST:event_btn_AgregarActionPerformed
 

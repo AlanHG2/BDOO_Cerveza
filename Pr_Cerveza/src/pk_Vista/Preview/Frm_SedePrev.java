@@ -18,7 +18,7 @@ public class Frm_SedePrev extends javax.swing.JFrame {
     private Frm_Sede fSede;
     private final Cls_Sede CA;
     Sede[] s=new Sede[1];
-    public Frm_SedePrev(String nombre, String telefono, String tipo, String calle, int cp, String mpio, String estado, int numExt) {
+    public Frm_SedePrev(Frm_Sede frmSede,String nombre, String telefono, String tipo, String calle, int cp, String mpio, String estado, int numExt) {
         CA = new Cls_Sede();
         setLocationRelativeTo(null);
         initComponents();
@@ -28,6 +28,7 @@ public class Frm_SedePrev extends javax.swing.JFrame {
         txt_PrevTel.setText(telefono);
         txt_PrevDireccion.setText(estado+", "+mpio+", "+cp+". "+calle+" #"+numExt);
         s[0]=new Sede(0,nombre,telefono,tipo,calle,cp,mpio,estado,numExt);
+        fSede=frmSede;
     }
 
     /**
