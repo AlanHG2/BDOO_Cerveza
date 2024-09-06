@@ -157,10 +157,30 @@ public class Frm_Fabricante extends javax.swing.JFrame {
         String nombre=txt_Nombre.getText();
         Sede s=list.get(cb_Sede.getSelectedIndex());
         int id_sede=s.getId_Sede();
-        int res = CA.insertarDatos(nombre,id_sede);
-        if (res > 0) {
-            JOptionPane.showMessageDialog(null, "Registro Exitoso", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+        
+        if (nombre.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "El nombre no puede estar vacío", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
         }
+
+        if (id_sede < 0) {
+            JOptionPane.showMessageDialog(null, "Debe seleccionar una sede", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        try {
+            int res = CA.insertarDatos(nombre, id_sede);
+            if (res > 0) {
+                JOptionPane.showMessageDialog(null, "Registro Exitoso", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "Error al insertar los datos", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        int res = CA.insertarDatos(nombre,id_sede);
+
     }//GEN-LAST:event_btn_AgregarActionPerformed
 
     /**
