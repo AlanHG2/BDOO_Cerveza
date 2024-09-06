@@ -121,7 +121,7 @@ public class Frm_Grano extends javax.swing.JFrame {
         }
 
         // Validación de la procedencia
-        if (cmb_Procedencia.getSelectedIndex() == 0) {
+        if (cmb_Procedencia.getSelectedIndex() == -1) {
             mensajeError.append("Seleccione un Estado.\n");
         }
 

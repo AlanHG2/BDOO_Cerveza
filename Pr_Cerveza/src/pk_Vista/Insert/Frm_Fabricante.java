@@ -6,6 +6,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import pk_CRUD.Cls_Fabricante;
 import pk_CRUD.Cls_Sede;
 import pk_Modelo.Sede;
 
@@ -14,14 +16,16 @@ public class Frm_Fabricante extends javax.swing.JFrame {
 
     /**
      * Creates new form Frm_Fabricante
-     */
+     */ 
     ArrayList<Sede> list;
+    private final Cls_Fabricante CA;
     public Frm_Fabricante() {
         initComponents();
         setTitle("Registro de Fabricantes");
         setLocationRelativeTo(null);
         
         llenarSedes();
+        CA = new Cls_Fabricante();
     }
     private void llenarSedes(){
 //        Instancia la clase controladora (de pk_Crud)
@@ -31,8 +35,9 @@ public class Frm_Fabricante extends javax.swing.JFrame {
 //        se recorre el arraylist para añadir los elementos de "nombre" de cada índice de la lista al combobox
         for(int i=0; i<list.size();i++){
             Sede s=list.get(i);
-            cb_Sede.addItem(s.getSed_Nombre());
+            cb_Sede.addItem(s.getSed_Nombre()); //aquí necesita más detalles
         }
+        cb_Sede.setSelectedIndex(-1);
     }
 
     /**
@@ -72,6 +77,11 @@ public class Frm_Fabricante extends javax.swing.JFrame {
         jLabel3.setText("Fabricante");
 
         btn_Agregar.setText("Agregar");
+        btn_Agregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_AgregarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jp_FabricanteLayout = new javax.swing.GroupLayout(jp_Fabricante);
         jp_Fabricante.setLayout(jp_FabricanteLayout);
@@ -139,9 +149,19 @@ public class Frm_Fabricante extends javax.swing.JFrame {
 
     private void cb_SedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_SedeActionPerformed
 //        Para seleccionar el id del elemento seleccionado en el combobox
-        Sede s=list.get(cb_Sede.getSelectedIndex());
-        System.out.println("Id seleccionado:"+s.getId_Sede());
+//        Sede s=list.get(cb_Sede.getSelectedIndex());
+//        System.out.println("Id seleccionado:"+s.getId_Sede());
     }//GEN-LAST:event_cb_SedeActionPerformed
+
+    private void btn_AgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AgregarActionPerformed
+        String nombre=txt_Nombre.getText();
+        Sede s=list.get(cb_Sede.getSelectedIndex());
+        int id_sede=s.getId_Sede();
+        int res = CA.insertarDatos(nombre,id_sede);
+        if (res > 0) {
+            JOptionPane.showMessageDialog(null, "Registro Exitoso", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_btn_AgregarActionPerformed
 
     /**
      * @param args the command line arguments

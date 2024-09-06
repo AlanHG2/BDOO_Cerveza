@@ -1,14 +1,30 @@
 
 package pk_Vista.Insert;
 
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import pk_CRUD.Cls_Cerveza;
+import pk_CRUD.Cls_Marca;
+import pk_Modelo.Marca;
+
 
 public class Frm_Cerveza extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Frm_Cerveza
-     */
+    ArrayList<Marca> list;
+    Cls_Cerveza CA;
     public Frm_Cerveza() {
         initComponents();
+        setLocationRelativeTo(null);
+        CA=new Cls_Cerveza();
+        llenarMarca();
+    }
+    private void llenarMarca(){
+        list=new Cls_Marca().getMarcas();
+        for (int i = 0; i < list.size(); i++) {
+            Marca m =list.get(i);
+            cb_Marca.addItem(m.getMar_Nombre());
+        }
+        cb_Marca.setSelectedIndex(-1);
     }
 
     /**
@@ -41,6 +57,11 @@ public class Frm_Cerveza extends javax.swing.JFrame {
         jLabel4.setText("Marca");
 
         btn_Agregar.setText("Agregar");
+        btn_Agregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_AgregarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -103,6 +124,17 @@ public class Frm_Cerveza extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btn_AgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AgregarActionPerformed
+        String nombre=txt_Nombre.getText();
+        float graduacion=Float.parseFloat(txt_Graduacion.getText());
+        Marca m=list.get(cb_Marca.getSelectedIndex());
+        int id_marca=m.getId_Marca();
+        int res=CA.insertarDatos(nombre, graduacion,id_marca);
+        if (res>0) {
+            JOptionPane.showMessageDialog(null, "Registro exitoso", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_btn_AgregarActionPerformed
 
     /**
      * @param args the command line arguments

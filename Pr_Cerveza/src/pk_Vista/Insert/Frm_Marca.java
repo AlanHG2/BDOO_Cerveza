@@ -1,16 +1,36 @@
 
 package pk_Vista.Insert;
 
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import pk_CRUD.Cls_Fabricante;
+import pk_CRUD.Cls_Marca;
+import pk_Modelo.Fabricante;
+
 
 public class Frm_Marca extends javax.swing.JFrame {
 
     /**
      * Creates new form Frm_Marca
      */
+    ArrayList <Fabricante> list;
+    Cls_Marca CA; //CA significa clase articulo, hacer refactor para que coincida con un nombre referente a cada clase
     public Frm_Marca() {
         initComponents();
+        setTitle("Registro de Marcas");
+        setLocationRelativeTo(null);
+        llenarFabricantes();
+        CA=new Cls_Marca();
     }
-
+    private void llenarFabricantes(){
+        Cls_Fabricante o=new Cls_Fabricante();
+        list=o.getFabricantes();
+        for (int i = 0; i < list.size(); i++) {
+            Fabricante f=list.get(i);
+            cb_Fabricante.addItem(f.getFab_Nombre());
+        }
+        cb_Fabricante.setSelectedIndex(-1);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -34,9 +54,20 @@ public class Frm_Marca extends javax.swing.JFrame {
 
         jLabel2.setText("Nombre");
 
+        cb_Fabricante.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cb_FabricanteActionPerformed(evt);
+            }
+        });
+
         jLabel1.setText("Marca");
 
         btn_Agregar.setText("Agregar");
+        btn_Agregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_AgregarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -93,6 +124,20 @@ public class Frm_Marca extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void cb_FabricanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_FabricanteActionPerformed
+        
+    }//GEN-LAST:event_cb_FabricanteActionPerformed
+
+    private void btn_AgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AgregarActionPerformed
+        Fabricante f=list.get(cb_Fabricante.getSelectedIndex());
+        String nombre=txt_Nombre.getText();
+        int id_fab=f.getId_Fabricante();
+        int res=CA.insertarDatos(nombre, id_fab);
+        if(res>0){
+            JOptionPane.showMessageDialog(null, "Inserción correcta","Éxito",JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_btn_AgregarActionPerformed
 
     /**
      * @param args the command line arguments
