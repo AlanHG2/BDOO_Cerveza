@@ -154,6 +154,9 @@ private final Cls_Grano CA;
         if (res > 0) {
             JOptionPane.showMessageDialog(null, "Registro Exitoso", "Éxito", JOptionPane.INFORMATION_MESSAGE);
         }
+        
+        
+        
     }//GEN-LAST:event_btb_ConfirmarActionPerformed
 
     private void btn_RegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_RegresarActionPerformed

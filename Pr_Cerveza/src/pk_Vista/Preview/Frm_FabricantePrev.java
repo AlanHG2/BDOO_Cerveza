@@ -4,18 +4,29 @@
  */
 package pk_Vista.Preview;
 
+import javax.swing.JOptionPane;
+import pk_CRUD.Cls_Fabricante;
+import pk_Modelo.Sede;
+
 
 /**
  *
  * @author ALAN
  */
+
 public class Frm_FabricantePrev extends javax.swing.JFrame {
 
+    private final Cls_Fabricante CA;
+    
     /**
      * Creates new form Frm_FabricantePrev
      */
-    public Frm_FabricantePrev() {      
+    public Frm_FabricantePrev(String nombre, int id_sede ) {      
         initComponents();
+        txt_Nombre.setText(nombre);
+        txt_Sede.setText(String.valueOf(id_sede));
+        setLocationRelativeTo(null);
+        CA = new Cls_Fabricante();
     }
 
     /**
@@ -52,6 +63,11 @@ public class Frm_FabricantePrev extends javax.swing.JFrame {
         btn_Regresar.setText("Regresar");
 
         btb_Confirmar.setText("Confirmar");
+        btb_Confirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btb_ConfirmarActionPerformed(evt);
+            }
+        });
 
         jButton1.setText("Cancelar");
 
@@ -124,6 +140,24 @@ public class Frm_FabricantePrev extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btb_ConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btb_ConfirmarActionPerformed
+        // TODO add your handling code here:
+        String nombre = txt_Nombre.getText();
+        int id_sede = Integer.parseInt(txt_Sede.getText());
+        
+        try{
+            int res = CA.insertarDatos(nombre, id_sede);
+            if (res > 0) {
+               JOptionPane.showMessageDialog(null, "Registro Exitoso", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            } 
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            
+        }
+       
+        
+    }//GEN-LAST:event_btb_ConfirmarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -154,7 +188,7 @@ public class Frm_FabricantePrev extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Frm_FabricantePrev().setVisible(true);
+                //new Frm_FabricantePrev().setVisible(true);
             }
         });
     }

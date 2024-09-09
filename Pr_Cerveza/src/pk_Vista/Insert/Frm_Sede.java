@@ -2,6 +2,7 @@ package pk_Vista.Insert;
 
 import javax.swing.JOptionPane;
 import pk_CRUD.Cls_Sede;
+import pk_Modelo.Sede;
 import pk_Vista.Preview.Frm_SedePrev;
 
 public class Frm_Sede extends javax.swing.JFrame {
@@ -14,7 +15,16 @@ public class Frm_Sede extends javax.swing.JFrame {
         setTitle("Registro de Sede");
         setLocationRelativeTo(null);
     }
-
+    public void limpiar(){
+        cb_Estado.setSelectedIndex(-1);
+        cb_Tipo.setSelectedIndex(-1);
+        txt_CP.setText("");
+        txt_Calle.setText("");
+        txt_Mpio.setText("");
+        txt_Nombre.setText("");
+        txt_Telefono.setText("");
+        txt_num_exterior.setText("");
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -184,7 +194,7 @@ public class Frm_Sede extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_AgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AgregarActionPerformed
-        
+
         String nombre = txt_Nombre.getText().trim();
         String telefono = txt_Telefono.getText().trim();
         String tipo = cb_Tipo.getSelectedItem() != null ? cb_Tipo.getSelectedItem().toString() : "";
@@ -243,14 +253,14 @@ public class Frm_Sede extends javax.swing.JFrame {
             // Convertir valores numéricos después de las validaciones
             int cp = Integer.parseInt(cpStr);
             int numExt = Integer.parseInt(numExtStr);
-
-            // Insertar datos en la base de datos
-            int res = CA.insertarDatos(nombre, telefono, tipo, calle, cp, mpio, estado, numExt);
-            if (res > 0) {
-                JOptionPane.showMessageDialog(null, "Registro Exitoso", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-            }
+            
+            this.setVisible(false);
+            //se crea una instancia de Sede y se pasa como parámetro al otro formulario
+            Sede sede=new Sede(0,nombre,telefono,tipo,calle,cp,mpio,estado,numExt);
+            Frm_SedePrev preview = new Frm_SedePrev(Frm_Sede.this, sede);
+            preview.setVisible(true);
         }
-        
+
     }//GEN-LAST:event_btn_AgregarActionPerformed
 
     /**
