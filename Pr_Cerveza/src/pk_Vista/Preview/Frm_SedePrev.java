@@ -17,18 +17,20 @@ public class Frm_SedePrev extends javax.swing.JFrame {
 
     private Frm_Sede fSede;
     private final Cls_Sede CA;
-    Sede[] s=new Sede[1];
-    public Frm_SedePrev(Frm_Sede frmSede,String nombre, String telefono, String tipo, String calle, int cp, String mpio, String estado, int numExt) {
+    Sede[] s = new Sede[1];
+
+    public Frm_SedePrev(Frm_Sede frmSede, Sede sede) {
         CA = new Cls_Sede();
         setLocationRelativeTo(null);
         initComponents();
-        txt_PrevNombre.setText(nombre);
-        txt_PrevEstado.setText(estado);
-        txt_PrevTipo.setText(tipo);
-        txt_PrevTel.setText(telefono);
-        txt_PrevDireccion.setText(estado+", "+mpio+", "+cp+". "+calle+" #"+numExt);
-        s[0]=new Sede(0,nombre,telefono,tipo,calle,cp,mpio,estado,numExt);
-        fSede=frmSede;
+
+        txt_PrevDireccion.setText(sede.getSed_Municipio() + ", " + sede.getSed_CPostal() + ". " + sede.getSed_Calle() + " #" + sede.getSed_NumExt());
+        txt_PrevNombre.setText(sede.getSed_Nombre());
+        txt_PrevEstado.setText(sede.getSed_Estado());
+        txt_PrevTipo.setText(sede.getSed_Tipo());
+        txt_PrevTel.setText(sede.getSed_Telefono());
+        s[0] = sede;
+        fSede = frmSede;
     }
 
     /**
@@ -91,6 +93,11 @@ public class Frm_SedePrev extends javax.swing.JFrame {
         txt_PrevTel.setText("jLabel7");
 
         jButton1.setText("Cancelar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel6.setText("Dirección");
 
@@ -191,12 +198,21 @@ public class Frm_SedePrev extends javax.swing.JFrame {
         if (res > 0) {
             JOptionPane.showMessageDialog(null, "Registro Exitoso", "Éxito", JOptionPane.INFORMATION_MESSAGE);
         }
+        this.dispose();
+        fSede.setVisible(true);
+        fSede.limpiar();
     }//GEN-LAST:event_btb_ConfirmarActionPerformed
 
     private void btn_RegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_RegresarActionPerformed
         this.dispose();
         fSede.setVisible(true);
     }//GEN-LAST:event_btn_RegresarActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.dispose();
+        fSede.setVisible(true);
+        fSede.limpiar();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
