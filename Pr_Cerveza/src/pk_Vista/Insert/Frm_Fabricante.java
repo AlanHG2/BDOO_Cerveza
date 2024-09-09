@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 import pk_CRUD.Cls_Fabricante;
 import pk_CRUD.Cls_Sede;
 import pk_Modelo.Sede;
+import pk_Vista.Preview.Frm_FabricantePrev;
 
 
 public class Frm_Fabricante extends javax.swing.JFrame {
@@ -158,29 +159,25 @@ public class Frm_Fabricante extends javax.swing.JFrame {
         Sede s=list.get(cb_Sede.getSelectedIndex());
         int id_sede=s.getId_Sede();
         
+        StringBuilder mensajeError = new StringBuilder();
+        
         if (nombre.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "El nombre no puede estar vacío", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
+            mensajeError.append("El nombre no puede estar vacio");
         }
 
         if (id_sede < 0) {
-            JOptionPane.showMessageDialog(null, "Debe seleccionar una sede", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        try {
-            int res = CA.insertarDatos(nombre, id_sede);
-            if (res > 0) {
-                JOptionPane.showMessageDialog(null, "Registro Exitoso", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-            } else {
-                JOptionPane.showMessageDialog(null, "Error al insertar los datos", "Error", JOptionPane.ERROR_MESSAGE);
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            mensajeError.append("Antes debe de selccionar una sede valida");
         }
         
-        int res = CA.insertarDatos(nombre,id_sede);
-
+        if (mensajeError.length() > 0) {
+            JOptionPane.showMessageDialog(null, mensajeError.toString(), "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+           // Si no hay errores, mostrar preview           
+            this.setVisible(false); 
+            Frm_FabricantePrev preview = new Frm_FabricantePrev(nombre, id_sede);
+            preview.setVisible(true);
+        }
+        
     }//GEN-LAST:event_btn_AgregarActionPerformed
 
     /**
@@ -213,7 +210,7 @@ public class Frm_Fabricante extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Frm_Fabricante().setVisible(true);
+               // new Frm_Fabricante().setVisible(true);
             }
         });
     }
