@@ -233,9 +233,9 @@ CREATE TRIGGER update_cerveza_existencia
 AFTER INSERT ON almacen
 FOR EACH ROW
 BEGIN
-    DECLARE total_existencia INT;
-    
     -- Calcular la suma total de existencias de la cerveza
+    DECLARE total_existencia INT DEFAULT 0;
+    
     SELECT SUM(alma_existencia)
     INTO total_existencia
     FROM almacen
@@ -252,3 +252,6 @@ BEGIN
 END $$
 
 DELIMITER ;
+
+
+
