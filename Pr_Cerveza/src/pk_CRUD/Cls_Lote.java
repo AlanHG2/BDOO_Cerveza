@@ -28,7 +28,7 @@ public class Cls_Lote {
 
     public int insertarDatos (int id_cerveza, String lot_fecha_prod, String lot_fecha_cadu, int lot_cantidad){
         int res = 0;
-        String SQL_Insert = "INSERT INTO grano (id_cerveza, lot_fecha_prod, lot_fecha_cadu, lot_cantidad) VALUES (?,?,?,?)";
+        String SQL_Insert = "INSERT INTO lote (id_cerveza, lot_fecha_prod, lot_fecha_cadu, lot_cantidad) VALUES (?,?,?,?)";
         try {
             PS = CN.getConexion().prepareStatement(SQL_Insert);
             PS.setInt(1,id_cerveza);
