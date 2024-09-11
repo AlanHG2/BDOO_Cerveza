@@ -17,7 +17,7 @@ public class Frm_SedePrev extends javax.swing.JFrame {
 
     private Frm_Sede fSede;
     private final Cls_Sede CA;
-    Sede[] s = new Sede[1];
+    Sede s = new Sede();
 
     public Frm_SedePrev(Frm_Sede frmSede, Sede sede) {
         CA = new Cls_Sede();
@@ -29,7 +29,7 @@ public class Frm_SedePrev extends javax.swing.JFrame {
         txt_PrevEstado.setText(sede.getSed_Estado());
         txt_PrevTipo.setText(sede.getSed_Tipo());
         txt_PrevTel.setText(sede.getSed_Telefono());
-        s[0] = sede;
+        s = sede;
         fSede = frmSede;
     }
 
@@ -192,9 +192,9 @@ public class Frm_SedePrev extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btb_ConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btb_ConfirmarActionPerformed
-        int res = CA.insertarDatos(s[0].getSed_Nombre(), s[0].getSed_Telefono(),
-                s[0].getSed_Tipo(), s[0].getSed_Calle(), s[0].getSed_CPostal(),
-                s[0].getSed_Municipio(), s[0].getSed_Estado(), s[0].getSed_NumExt());
+        int res = CA.insertarDatos(s.getSed_Nombre(), s.getSed_Telefono(),
+                s.getSed_Tipo(), s.getSed_Calle(), s.getSed_CPostal(),
+                s.getSed_Municipio(), s.getSed_Estado(), s.getSed_NumExt());
         if (res > 0) {
             JOptionPane.showMessageDialog(null, "Registro Exitoso", "Éxito", JOptionPane.INFORMATION_MESSAGE);
         }
