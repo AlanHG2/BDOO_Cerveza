@@ -1,8 +1,5 @@
 package pk_CRUD;
 import pk_Conexion.C_Conexion;
-import pk_Modelo.Grano;
-
-import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -39,10 +36,6 @@ public class Cls_Grano {
         }
         return res;
     }
-
-
-
-
 
 
 }
