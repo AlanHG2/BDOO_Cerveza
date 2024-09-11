@@ -308,7 +308,7 @@ INSERT INTO venta (vent_precioU, vent_cantidad, vent_fecha, id_expendio, id_pres
 (33, 170, '2024-09-12', 9, 2),
 (28, 140, '2024-09-13', 10, 3);
 
-INSERT INTO receta (procedimiento, id_grano, id_cerveza) VALUES
+INSERT INTO receta (rec_procedimiento, id_grano, id_cerveza) VALUES
 ('Maceración y filtrado', 4, 1),
 ('Maceración y filtrado', 1, 1),
 ('Maceración y filtrado', 2, 1),
