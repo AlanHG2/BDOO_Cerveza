@@ -6,6 +6,7 @@ package pk_CRUD;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import pk_Conexion.C_Conexion;
 
 /**
@@ -41,7 +42,7 @@ public class Cls_Expendio {
             if (res > 0){
                 System.out.println("Registro exitoso");
             }           
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println("Error de inserción: " + e);
         } finally {
             PS = null;
