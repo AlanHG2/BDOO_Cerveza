@@ -208,7 +208,7 @@ ENGINE = InnoDB;
 CREATE TABLE  IF NOT EXISTS receta
 (
   id_receta INT NOT NULL AUTO_INCREMENT,
-  procedimiento VARCHAR(100) NOT NULL,
+  rec_procedimiento VARCHAR(100) NOT NULL,
   id_grano INT NOT NULL,
   id_cerveza INT NOT NULL,
   PRIMARY KEY (id_receta),
