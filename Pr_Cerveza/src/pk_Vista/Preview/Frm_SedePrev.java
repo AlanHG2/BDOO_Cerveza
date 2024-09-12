@@ -17,6 +17,7 @@ public class Frm_SedePrev extends javax.swing.JFrame {
 
     private Frm_Sede fSede;
     private final Cls_Sede CA;
+    boolean flag_insert = false; //para conocer si se hace inserción o actualización
     Sede s = new Sede();
 
     public Frm_SedePrev(Frm_Sede frmSede, Sede sede) {
@@ -24,12 +25,18 @@ public class Frm_SedePrev extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         initComponents();
 
-        txt_PrevDireccion.setText(sede.getSed_Municipio() + ", " + sede.getSed_CPostal() + ". " + sede.getSed_Calle() + " #" + sede.getSed_NumExt());
+        txt_PrevDireccion.setText(sede.getSed_Municipio() + ", " + sede.getSed_CPostal() + ". " + sede.getSed_Calle() + ". #" + sede.getSed_NumExt());
         txt_PrevNombre.setText(sede.getSed_Nombre());
         txt_PrevEstado.setText(sede.getSed_Estado());
         txt_PrevTipo.setText(sede.getSed_Tipo());
         txt_PrevTel.setText(sede.getSed_Telefono());
         s = sede;
+// si el id es 0, se está haciendo una inserción, de lo contrario una actualización
+        if (s.getId_Sede() == 0) {
+            flag_insert = true;
+        } else {
+            flag_insert = false;
+        }
         fSede = frmSede;
     }
 
@@ -58,7 +65,7 @@ public class Frm_SedePrev extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         txt_PrevDireccion = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("¿Desea agregar los siguientes datos?");
 
@@ -192,15 +199,29 @@ public class Frm_SedePrev extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btb_ConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btb_ConfirmarActionPerformed
-        int res = CA.insertarDatos(s.getSed_Nombre(), s.getSed_Telefono(),
-                s.getSed_Tipo(), s.getSed_Calle(), s.getSed_CPostal(),
-                s.getSed_Municipio(), s.getSed_Estado(), s.getSed_NumExt());
-        if (res > 0) {
-            JOptionPane.showMessageDialog(null, "Registro Exitoso", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+        if (flag_insert) {
+            int res = CA.insertarRegistro(s.getSed_Nombre(), s.getSed_Telefono(),
+                    s.getSed_Tipo(), s.getSed_Calle(), s.getSed_CPostal(),
+                    s.getSed_Municipio(), s.getSed_Estado(), s.getSed_NumExt());
+            if (res > 0) {
+                JOptionPane.showMessageDialog(null, "Registro Exitoso", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            }
+            this.dispose();
+            fSede.setVisible(true);
+            fSede.limpiar();
+        } else {
+            int res = CA.actualizarRegistro(s.getId_Sede(), s.getSed_Nombre(), s.getSed_Telefono(),
+                    s.getSed_Tipo(), s.getSed_Calle(), s.getSed_CPostal(),
+                    s.getSed_Municipio(), s.getSed_Estado(), s.getSed_NumExt());
+            if (res > 0) {
+                JOptionPane.showMessageDialog(this, "Actualización exitosa", "Éxito", 1);
+            }
+            this.dispose();
+            fSede.limpiar();
+            fSede.dispose();
+
         }
-        this.dispose();
-        fSede.setVisible(true);
-        fSede.limpiar();
+
     }//GEN-LAST:event_btb_ConfirmarActionPerformed
 
     private void btn_RegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_RegresarActionPerformed
