@@ -40,6 +40,11 @@ public class Frm_Fabricante extends javax.swing.JFrame {
         }
         cb_Sede.setSelectedIndex(-1);
     }
+    
+    public void limpiar(){
+        txt_Nombre.setText("");
+        cb_Sede.setSelectedIndex(-1);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -155,29 +160,39 @@ public class Frm_Fabricante extends javax.swing.JFrame {
     }//GEN-LAST:event_cb_SedeActionPerformed
 
     private void btn_AgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AgregarActionPerformed
-        String nombre=txt_Nombre.getText();
-        Sede s=list.get(cb_Sede.getSelectedIndex());
-        int id_sede=s.getId_Sede();
-        
+        String nombre = txt_Nombre.getText();
+        int id = cb_Sede.getSelectedIndex(); // Obtener el índice seleccionado
+    
         StringBuilder mensajeError = new StringBuilder();
-        
-        if (nombre.isEmpty()) {
-            mensajeError.append("El nombre no puede estar vacio");
+    
+        // Validación del campo de texto "nombre"
+        if (nombre.isEmpty() || nombre.length() > 40 || nombre.length() < 3) {
+            mensajeError.append("Longitud de nombre no válida (entre 3 y 40 caracteres).\n");
         }
 
-        if (id_sede < 0) {
-            mensajeError.append("Antes debe de selccionar una sede valida");
-        }
-        
-        if (mensajeError.length() > 0) {
-            JOptionPane.showMessageDialog(null, mensajeError.toString(), "Error", JOptionPane.ERROR_MESSAGE);
+        // Validación del JComboBox "cb_Sede"
+        if (id == -1) { // No se ha seleccionado ninguna sede
+            mensajeError.append("Debe seleccionar una sede válida.\n");
         } else {
-           // Si no hay errores, mostrar preview           
-            this.setVisible(false); 
-            Frm_FabricantePrev preview = new Frm_FabricantePrev(nombre, id_sede);
-            preview.setVisible(true);
+            Sede s = list.get(id); // Obtener la sede seleccionada
+            if (s.getId_Sede() < 0) { 
+                mensajeError.append("La sede seleccionada no es válida.\n");
+            }
         }
-        
+
+        // Si hay errores, mostrar un mensaje
+        if (mensajeError.length() > 0) {
+            JOptionPane.showMessageDialog(null, mensajeError.toString(),
+                    "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            // Si no hay errores, declara el id que el usuario selecciono
+            int id_sede = list.get(id).getId_Sede();
+            String nombreSede = (String) cb_Sede.getSelectedItem();
+            Frm_FabricantePrev preview = new Frm_FabricantePrev(Frm_Fabricante.this,
+                    nombre, nombreSede,id_sede);
+            preview.setVisible(true);
+            this.setVisible(false); 
+        }  
     }//GEN-LAST:event_btn_AgregarActionPerformed
 
     /**
@@ -210,7 +225,7 @@ public class Frm_Fabricante extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-               // new Frm_Fabricante().setVisible(true);
+               new Frm_Fabricante().setVisible(true);
             }
         });
     }

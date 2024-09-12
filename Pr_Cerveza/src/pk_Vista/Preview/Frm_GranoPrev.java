@@ -6,21 +6,27 @@ package pk_Vista.Preview;
 
 import javax.swing.JOptionPane;
 import pk_CRUD.Cls_Grano;
+import pk_Modelo.Grano;
+import pk_Vista.Insert.Frm_Grano;
 /**
  *
  * @author jadey
  */
 public class Frm_GranoPrev extends javax.swing.JFrame {
 
-private final Cls_Grano CA;  
-    
-    public Frm_GranoPrev(String nombre, String procedencia) {
+    private final Cls_Grano CA;  
+    private Frm_Grano fGrano;
+    Grano g = new Grano();
+
+    public Frm_GranoPrev(Frm_Grano frmGrano, Grano grano) {
         
         initComponents();
-        txt_PrevGrano.setText(nombre);
-        txt_PrevProce.setText(procedencia);
+        txt_PrevGrano.setText(grano.getGra_nombre());
+        txt_PrevProce.setText(grano.getGra_procedencia());
         setLocationRelativeTo(null);
         CA = new Cls_Grano();
+        g = grano;
+        fGrano = frmGrano;
     }
 
     /**
@@ -40,7 +46,7 @@ private final Cls_Grano CA;
         btb_Confirmar = new javax.swing.JButton();
         txt_PrevGrano = new javax.swing.JLabel();
         txt_PrevProce = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -68,10 +74,10 @@ private final Cls_Grano CA;
 
         txt_PrevProce.setText("jLabel5");
 
-        jButton1.setText("Cancelar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnCancelarActionPerformed(evt);
             }
         });
 
@@ -100,7 +106,7 @@ private final Cls_Grano CA;
                         .addGap(12, 12, 12)
                         .addComponent(btb_Confirmar)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton1))
+                        .addComponent(btnCancelar))
                     .addComponent(txt_PrevProce)
                     .addComponent(txt_PrevGrano))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -122,7 +128,7 @@ private final Cls_Grano CA;
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_Regresar)
                     .addComponent(btb_Confirmar)
-                    .addComponent(jButton1))
+                    .addComponent(btnCancelar))
                 .addGap(29, 29, 29))
         );
 
@@ -147,26 +153,27 @@ private final Cls_Grano CA;
     }// </editor-fold>//GEN-END:initComponents
 
     private void btb_ConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btb_ConfirmarActionPerformed
-        String gra_nombre = txt_PrevGrano.getText();
-        String gra_procedencia = txt_PrevProce.getText();
-        
-        int res = CA.insertarDatos(gra_nombre, gra_procedencia);
+ 
+        int res = CA.insertarDatos(g.getGra_nombre(), g.getGra_procedencia());
         if (res > 0) {
             JOptionPane.showMessageDialog(null, "Registro Exitoso", "Éxito", JOptionPane.INFORMATION_MESSAGE);
         }
-        
-        
-        
+        this.dispose();
+        fGrano.setVisible(true);
+        fGrano.limpiar();
     }//GEN-LAST:event_btb_ConfirmarActionPerformed
 
     private void btn_RegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_RegresarActionPerformed
-        
+        this.dispose();
+        fGrano.setVisible(true);
 
     }//GEN-LAST:event_btn_RegresarActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        this.setVisible(false);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        this.dispose();
+        fGrano.setVisible(true);
+        fGrano.limpiar();
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -206,8 +213,8 @@ private final Cls_Grano CA;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btb_Confirmar;
+    private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btn_Regresar;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

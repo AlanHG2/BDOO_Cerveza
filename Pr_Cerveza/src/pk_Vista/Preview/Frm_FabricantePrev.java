@@ -7,6 +7,7 @@ package pk_Vista.Preview;
 import javax.swing.JOptionPane;
 import pk_CRUD.Cls_Fabricante;
 import pk_Modelo.Sede;
+import pk_Vista.Insert.Frm_Fabricante;
 
 
 /**
@@ -15,18 +16,24 @@ import pk_Modelo.Sede;
  */
 
 public class Frm_FabricantePrev extends javax.swing.JFrame {
-
+    
+    private Frm_Fabricante fFabricante;
     private final Cls_Fabricante CA;
+    private int id_sede;
     
     /**
      * Creates new form Frm_FabricantePrev
      */
-    public Frm_FabricantePrev(String nombre, int id_sede ) {      
+    public Frm_FabricantePrev(Frm_Fabricante frmFabricante, String nombre, 
+            String nombreSede,int id_sede ) {      
         initComponents();
-        txt_Nombre.setText(nombre);
-        txt_Sede.setText(String.valueOf(id_sede));
+        txt_PrevNombre.setText(nombre);
+        txt_PrevSede.setText(nombreSede);
+        this.id_sede = id_sede;
         setLocationRelativeTo(null);
         CA = new Cls_Fabricante();
+        fFabricante = frmFabricante;
+        
     }
 
     /**
@@ -41,12 +48,12 @@ public class Frm_FabricantePrev extends javax.swing.JFrame {
         jp_Fabricante = new javax.swing.JPanel();
         txt_Titulo = new javax.swing.JLabel();
         txt_PrevNombre = new javax.swing.JLabel();
-        txt_Nombre = new javax.swing.JLabel();
-        txt_Sede = new javax.swing.JLabel();
+        lbNombre = new javax.swing.JLabel();
+        lbSede = new javax.swing.JLabel();
         txt_PrevSede = new javax.swing.JLabel();
         btn_Regresar = new javax.swing.JButton();
         btb_Confirmar = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -54,13 +61,18 @@ public class Frm_FabricantePrev extends javax.swing.JFrame {
 
         txt_PrevNombre.setText("jLabel2");
 
-        txt_Nombre.setText("Nombre:");
+        lbNombre.setText("Nombre:");
 
-        txt_Sede.setText("Sede:");
+        lbSede.setText("Sede:");
 
         txt_PrevSede.setText("jLabel5");
 
         btn_Regresar.setText("Regresar");
+        btn_Regresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_RegresarActionPerformed(evt);
+            }
+        });
 
         btb_Confirmar.setText("Confirmar");
         btb_Confirmar.addActionListener(new java.awt.event.ActionListener() {
@@ -69,7 +81,12 @@ public class Frm_FabricantePrev extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Cancelar");
+        btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jp_FabricanteLayout = new javax.swing.GroupLayout(jp_Fabricante);
         jp_Fabricante.setLayout(jp_FabricanteLayout);
@@ -83,12 +100,12 @@ public class Frm_FabricantePrev extends javax.swing.JFrame {
                     .addGroup(jp_FabricanteLayout.createSequentialGroup()
                         .addGap(28, 28, 28)
                         .addGroup(jp_FabricanteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txt_Nombre)
-                            .addComponent(txt_Sede, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lbNombre)
+                            .addComponent(lbSede, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(21, 21, 21)
                         .addGroup(jp_FabricanteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txt_PrevSede, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_PrevNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txt_PrevSede, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txt_PrevNombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jp_FabricanteLayout.createSequentialGroup()
                 .addContainerGap(80, Short.MAX_VALUE)
@@ -96,7 +113,7 @@ public class Frm_FabricantePrev extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(btb_Confirmar)
                 .addGap(27, 27, 27)
-                .addComponent(jButton1)
+                .addComponent(btnCancelar)
                 .addGap(17, 17, 17))
         );
         jp_FabricanteLayout.setVerticalGroup(
@@ -107,16 +124,16 @@ public class Frm_FabricantePrev extends javax.swing.JFrame {
                 .addGap(36, 36, 36)
                 .addGroup(jp_FabricanteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txt_PrevNombre)
-                    .addComponent(txt_Nombre))
+                    .addComponent(lbNombre))
                 .addGap(30, 30, 30)
                 .addGroup(jp_FabricanteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_Sede)
+                    .addComponent(lbSede)
                     .addComponent(txt_PrevSede))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 97, Short.MAX_VALUE)
                 .addGroup(jp_FabricanteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btb_Confirmar)
                     .addComponent(btn_Regresar)
-                    .addComponent(jButton1))
+                    .addComponent(btnCancelar))
                 .addGap(31, 31, 31))
         );
 
@@ -142,21 +159,28 @@ public class Frm_FabricantePrev extends javax.swing.JFrame {
 
     private void btb_ConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btb_ConfirmarActionPerformed
         // TODO add your handling code here:
-        String nombre = txt_Nombre.getText();
-        int id_sede = Integer.parseInt(txt_Sede.getText());
-        
-        try{
-            int res = CA.insertarDatos(nombre, id_sede);
-            if (res > 0) {
-               JOptionPane.showMessageDialog(null, "Registro Exitoso", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-            } 
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(null, "Error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-            
-        }
-       
-        
+        String nombre = txt_PrevNombre.getText();
+        int res = CA.insertarDatos(nombre, id_sede);
+        if (res > 0) {
+           JOptionPane.showMessageDialog(null, "Registro Exitoso", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+        } 
+        this.dispose();
+        fFabricante.setVisible(true);
+        fFabricante.limpiar();
     }//GEN-LAST:event_btb_ConfirmarActionPerformed
+
+    private void btn_RegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_RegresarActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        fFabricante.setVisible(true);
+    }//GEN-LAST:event_btn_RegresarActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        fFabricante.setVisible(true);
+        fFabricante.limpiar();
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -195,13 +219,13 @@ public class Frm_FabricantePrev extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btb_Confirmar;
+    private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btn_Regresar;
-    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jp_Fabricante;
-    private javax.swing.JLabel txt_Nombre;
+    private javax.swing.JLabel lbNombre;
+    private javax.swing.JLabel lbSede;
     private javax.swing.JLabel txt_PrevNombre;
     private javax.swing.JLabel txt_PrevSede;
-    private javax.swing.JLabel txt_Sede;
     private javax.swing.JLabel txt_Titulo;
     // End of variables declaration//GEN-END:variables
 }
