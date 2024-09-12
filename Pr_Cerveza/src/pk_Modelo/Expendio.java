@@ -4,6 +4,7 @@ public class Expendio {
     private int id_Expendio;
     private String exp_Nombre;
     private String exp_RFC;
+<<<<<<< Updated upstream
     private String exp_Calle;
     private int exp_Postal;
     private String exp_Municipio;
@@ -20,6 +21,35 @@ public class Expendio {
         this.exp_Municipio = exp_Municipio;
         this.exp_Estado = exp_Estado;
         this.exp_NumExterior = exp_NumExterior;       
+=======
+    private String exp_estado;
+    private int exp_cp;
+    private String exp_municipio;
+    private String exp_calle;
+    private int exp_exterior;
+
+    public Expendio(int id_Expendio, String exp_Nombre, String exp_RFC, String exp_estado,
+            int exp_cp, String exp_municipio, String exp_calle, int exp_exterior) {
+        this.id_Expendio = id_Expendio;
+        this.exp_Nombre = exp_Nombre;
+        this.exp_RFC = exp_RFC;
+        this.exp_estado = exp_estado;
+        this.exp_cp = exp_cp;
+        this.exp_municipio = exp_municipio;
+        this.exp_calle = exp_calle;
+        this.exp_exterior = exp_exterior;
+    }
+
+    public Expendio() {
+        this.id_Expendio = 0;
+        this.exp_Nombre = "";
+        this.exp_RFC = "";
+        this.exp_estado = "";
+        this.exp_cp = 0;
+        this.exp_municipio = "";
+        this.exp_calle = "";
+        this.exp_exterior = 0;
+>>>>>>> Stashed changes
     }
 
     public int getId_Expendio() {
@@ -46,6 +76,7 @@ public class Expendio {
         this.exp_RFC = exp_RFC;
     }
 
+<<<<<<< Updated upstream
     public String getExp_Calle() {
         return exp_Calle;
     }
@@ -85,5 +116,47 @@ public class Expendio {
     public void setExp_NumExterior(int exp_NumExterior) {
         this.exp_NumExterior = exp_NumExterior;
     }
+=======
+    public String getExp_estado() {
+        return exp_estado;
+    }
+
+    public void setExp_estado(String exp_estado) {
+        this.exp_estado = exp_estado;
+    }
+
+    public int getExp_cp() {
+        return exp_cp;
+    }
+
+    public void setExp_cp(int exp_cp) {
+        this.exp_cp = exp_cp;
+    }
+
+    public String getExp_municipio() {
+        return exp_municipio;
+    }
+
+    public void setExp_municipio(String exp_municipio) {
+        this.exp_municipio = exp_municipio;
+    }
+
+    public String getExp_calle() {
+        return exp_calle;
+    }
+
+    public void setExp_calle(String exp_calle) {
+        this.exp_calle = exp_calle;
+    }
+
+    public int getExp_exterior() {
+        return exp_exterior;
+    }
+
+    public void setExp_exterior(int exp_exterior) {
+        this.exp_exterior = exp_exterior;
+    }
+
+>>>>>>> Stashed changes
     
 }

@@ -3,6 +3,7 @@ package pk_Vista.Insert;
 
 import javax.swing.JOptionPane;
 import pk_CRUD.Cls_Grano;
+import pk_Modelo.Grano;
 import pk_Vista.Preview.Frm_GranoPrev;
 
 public class Frm_Grano extends javax.swing.JFrame {
@@ -18,6 +19,11 @@ public class Frm_Grano extends javax.swing.JFrame {
         setTitle("Registro de Granos");
         setLocationRelativeTo(null);
         CA = new Cls_Grano();
+    }
+    
+    public void limpiar(){
+        txt_Nombre.setText("");
+        cmb_Procedencia.setSelectedIndex(0);
     }
 
     /**
@@ -113,17 +119,19 @@ public class Frm_Grano extends javax.swing.JFrame {
 
     private void btn_AgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AgregarActionPerformed
         String gra_nombre = txt_Nombre.getText().trim();
-        String gra_procedencia = cmb_Procedencia.getSelectedItem().toString();
+        String gra_procedencia = "";
         StringBuilder mensajeError = new StringBuilder();
 
         // Validación del nombre
-        if (gra_nombre.length() < 3) {
-            mensajeError.append("El nombre debe tener al menos 3 caracteres.\n");
+        if (gra_nombre.length() < 3 || gra_nombre.length() >25) {
+            mensajeError.append("Longitud del nombre muy largo o muy corto.\n");
         }
 
         // Validación de la procedencia
-        if (cmb_Procedencia.getSelectedIndex() == -1) {
+        if (cmb_Procedencia.getSelectedIndex() < 0) {
             mensajeError.append("Seleccione un Estado.\n");
+        }else{
+            gra_procedencia = cmb_Procedencia.getSelectedItem().toString();
         }
 
         // Mostrar errores si existen
@@ -132,7 +140,8 @@ public class Frm_Grano extends javax.swing.JFrame {
         } else {
             // Si no hay errores, mostrar preview           
             this.setVisible(false); 
-            Frm_GranoPrev preview = new Frm_GranoPrev(gra_nombre, gra_procedencia);
+            Grano grano = new Grano(0,gra_nombre,gra_procedencia);
+            Frm_GranoPrev preview = new Frm_GranoPrev(Frm_Grano.this, grano);
             preview.setVisible(true);
             
         }

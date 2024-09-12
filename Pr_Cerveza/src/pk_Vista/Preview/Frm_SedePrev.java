@@ -185,12 +185,39 @@ public class Frm_SedePrev extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btb_ConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btb_ConfirmarActionPerformed
+<<<<<<< Updated upstream
         int res = CA.insertarDatos(s[0].getSed_Nombre(), s[0].getSed_Telefono(),
                 s[0].getSed_Tipo(), s[0].getSed_Calle(), s[0].getSed_CPostal(),
                 s[0].getSed_Municipio(), s[0].getSed_Estado(), s[0].getSed_NumExt());
         if (res > 0) {
             JOptionPane.showMessageDialog(null, "Registro Exitoso", "Éxito", JOptionPane.INFORMATION_MESSAGE);
         }
+=======
+        try {
+            int res = CA.insertarDatos(s.getSed_Nombre(), s.getSed_Telefono(),
+                    s.getSed_Tipo(), s.getSed_Calle(), s.getSed_CPostal(),
+                    s.getSed_Municipio(), s.getSed_Estado(), s.getSed_NumExt());
+
+            if (res > 0) {
+                JOptionPane.showMessageDialog(null, "Registro Exitoso", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                // Cierra la ventana actual si el registro fue exitoso
+                this.dispose();
+                // Muestra la ventana de fSede
+                fSede.setVisible(true);
+                // Limpia los campos en la ventana de fSede
+                fSede.limpiar();
+            } else {
+                // Muestra un mensaje de error si no se pudo registrar
+                JOptionPane.showMessageDialog(null, "Error en el Registro", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }catch (Exception e) {
+            // Muestra un mensaje de error general para cualquier otra excepción
+            JOptionPane.showMessageDialog(null, "Ocurrió un error inesperado: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        // Muestra un mensaje de error específico si ocurre una excepción de SQL
+        
+
+>>>>>>> Stashed changes
     }//GEN-LAST:event_btb_ConfirmarActionPerformed
 
     private void btn_RegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_RegresarActionPerformed

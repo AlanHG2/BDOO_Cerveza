@@ -4,19 +4,43 @@
  */
 package pk_Vista.Preview;
 
+import javax.swing.JOptionPane;
+import pk_CRUD.Cls_Expendio;
+import pk_Modelo.Expendio;
+import pk_Vista.Insert.Frm_Expendio;
+
 /**
  *
  * @author jadey
  */
 public class Frm_ExpendioPrev extends javax.swing.JFrame {
 
+<<<<<<< Updated upstream
     
+=======
+    private Frm_Expendio fexpendio;
+    private final Cls_Expendio CA;
+    Expendio e = new Expendio();
+>>>>>>> Stashed changes
     
     /**
      * Creates new form Frm_ExpendioPrev
      */
-    public Frm_ExpendioPrev() {
+    public Frm_ExpendioPrev(Frm_Expendio frmExpendio,Expendio expendio) {
+        CA = new Cls_Expendio();
+        setLocationRelativeTo(null);
         initComponents();
+        
+        txt_PrevNombre.setText(expendio.getExp_Nombre());
+        txt_rfc.setText(expendio.getExp_RFC());
+        txt_estado.setText(expendio.getExp_estado());
+        txt_cp.setText(String.valueOf(expendio.getExp_cp()));
+        txt_ubicacion.setText(expendio.getExp_municipio()+" "+expendio.getExp_calle()
+        +" "+expendio.getExp_exterior());
+        
+        e = expendio;
+        fexpendio =frmExpendio;
+
     }
 
     /**
@@ -35,12 +59,14 @@ public class Frm_ExpendioPrev extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        txt_PrevEstado = new javax.swing.JLabel();
-        txt_PrevMuni = new javax.swing.JLabel();
-        txt_PrevCalle = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        txt_rfc = new javax.swing.JLabel();
+        txt_estado = new javax.swing.JLabel();
+        txt_cp = new javax.swing.JLabel();
+        btnRegresar = new javax.swing.JButton();
+        btn_confimar = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        txt_ubicacion = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -50,48 +76,47 @@ public class Frm_ExpendioPrev extends javax.swing.JFrame {
 
         txt_PrevNombre.setText("jLabel3");
 
-        jLabel4.setText("Estado:");
+        jLabel4.setText("RFC:");
 
-        jLabel5.setText("Municipio:");
+        jLabel5.setText("Estado:");
 
-        jLabel6.setText("Calle:");
+        jLabel6.setText("C. Postal");
 
-        txt_PrevEstado.setText("jLabel7");
+        txt_rfc.setText("jLabel7");
 
-        txt_PrevMuni.setText("jLabel8");
+        txt_estado.setText("jLabel8");
 
-        txt_PrevCalle.setText("jLabel9");
+        txt_cp.setText("jLabel9");
 
-        jButton1.setText("Regresar");
+        btnRegresar.setText("Regresar");
+        btnRegresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegresarActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("Confirmar");
+        btn_confimar.setText("Confirmar");
+        btn_confimar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_confimarActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("Cancelar");
+        btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setText("Ubicacion:");
+
+        txt_ubicacion.setText("jLabel9");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(58, 58, 58)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txt_PrevCalle))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txt_PrevMuni))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txt_PrevEstado))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(70, 70, 70)
-                        .addComponent(txt_PrevNombre)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(88, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -99,39 +124,64 @@ public class Frm_ExpendioPrev extends javax.swing.JFrame {
                         .addComponent(jLabel1)
                         .addGap(85, 85, 85))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton2)
-                        .addGap(24, 24, 24)
-                        .addComponent(jButton3)
+                        .addComponent(btnRegresar)
+                        .addGap(18, 18, 18)
+                        .addComponent(btn_confimar)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnCancelar)
                         .addGap(5, 5, 5))))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(58, 58, 58)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(18, 18, 18)
+                        .addComponent(txt_ubicacion, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel4)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jLabel2)
+                                .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING))
+                            .addComponent(jLabel6))
+                        .addGap(27, 27, 27)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txt_PrevNombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txt_rfc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txt_estado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txt_cp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addComponent(jLabel1)
-                .addGap(46, 46, 46)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txt_PrevNombre))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(txt_PrevEstado))
+                    .addComponent(txt_rfc))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(txt_PrevMuni))
+                    .addComponent(txt_estado))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(txt_PrevCalle))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
+                    .addComponent(txt_cp))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(jLabel3)
+                    .addComponent(txt_ubicacion))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnRegresar)
+                    .addComponent(btn_confimar)
+                    .addComponent(btnCancelar))
                 .addGap(24, 24, 24))
         );
 
@@ -154,6 +204,54 @@ public class Frm_ExpendioPrev extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btn_confimarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_confimarActionPerformed
+        // TODO add your handling code here:
+        
+            try {
+        // Inserta los datos utilizando los métodos de la clase Expendio
+        int res = CA.insertarDatos(
+                e.getExp_Nombre(),
+                e.getExp_RFC(),
+                e.getExp_estado(),
+                e.getExp_cp(),
+                e.getExp_municipio(),
+                e.getExp_calle(),
+                e.getExp_exterior()
+        );
+
+        // Verifica si la inserción fue exitosa
+        if (res > 0) {
+            JOptionPane.showMessageDialog(null, "Registro Exitoso", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            // Cierra la ventana actual
+            this.dispose();
+            // Muestra la ventana de fexpendio
+            fexpendio.setVisible(true);
+            // Limpia los campos en la ventana de fexpendio
+            fexpendio.limpiar();
+        } else {
+            // Muestra un mensaje de error si la inserción falla
+            JOptionPane.showMessageDialog(null, "Error en el Registro", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    } catch (Exception e) {
+        // Muestra un mensaje de error general
+        JOptionPane.showMessageDialog(null, "Ocurrió un error inesperado: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    }
+        
+    }//GEN-LAST:event_btn_confimarActionPerformed
+
+    private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        fexpendio.setVisible(true);
+    }//GEN-LAST:event_btnRegresarActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        fexpendio.setVisible(true);
+        fexpendio.limpiar();
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -185,24 +283,26 @@ public class Frm_ExpendioPrev extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Frm_ExpendioPrev().setVisible(true);
+               // new Frm_ExpendioPrev().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnRegresar;
+    private javax.swing.JButton btn_confimar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JLabel txt_PrevCalle;
-    private javax.swing.JLabel txt_PrevEstado;
-    private javax.swing.JLabel txt_PrevMuni;
     private javax.swing.JLabel txt_PrevNombre;
+    private javax.swing.JLabel txt_cp;
+    private javax.swing.JLabel txt_estado;
+    private javax.swing.JLabel txt_rfc;
+    private javax.swing.JLabel txt_ubicacion;
     // End of variables declaration//GEN-END:variables
 }

@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public class C_Conexion {
     private static Connection cnx;
-    private static final String DRIVER= "com.mysql.jdbc.Driver";
+    private static final String DRIVER= "com.mysql.cj.jdbc.Driver";
     private static final String BD = "cervezas";
     private static final String USER = "root";
     private static final String PASS = "1234";

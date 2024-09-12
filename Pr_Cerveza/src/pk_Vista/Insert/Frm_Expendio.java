@@ -3,20 +3,46 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package pk_Vista.Insert;
+<<<<<<< Updated upstream
 import pk_CRUD.Cls_Expendio;
 import pk_Vista.Preview.Frm_GranoPrev;
+=======
+
+import javax.swing.JOptionPane;
+import pk_CRUD.Cls_Expendio;
+import pk_Modelo.Expendio;
+import pk_Vista.Preview.Frm_ExpendioPrev;
+import pk_Vista.Preview.Frm_SedePrev;
+
+>>>>>>> Stashed changes
 /**
  *
  * @author jadey
  */
-public class Frm_Expendio extends javax.swing.JPanel {
+public class Frm_Expendio extends javax.swing.JFrame {
 
+    private final Cls_Expendio CA;
+    
     /**
      * Creates new form Frm_Expendio
      */
     public Frm_Expendio() {
         initComponents();
+<<<<<<< Updated upstream
         
+=======
+        CA = new Cls_Expendio();
+        setTitle("Registro de expendio");
+    }
+    
+    public void limpiar(){
+        txt_nombre.setText("");
+        txt_rfc.setText("");
+        cmb_estado.setSelectedIndex(-1);
+        txt_municipio.setText("");
+        txt_calle.setText("");
+        txt_exterior.setText("");
+>>>>>>> Stashed changes
     }
 
     /**
@@ -38,10 +64,17 @@ public class Frm_Expendio extends javax.swing.JPanel {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+<<<<<<< Updated upstream
         jButton1 = new javax.swing.JButton();
         txt_nombre = new javax.swing.JTextField();
         txt_rfc = new javax.swing.JTextField();
         combo_estado = new javax.swing.JComboBox<>();
+=======
+        btn_agregar = new javax.swing.JButton();
+        txt_nombre = new javax.swing.JTextField();
+        txt_rfc = new javax.swing.JTextField();
+        cmb_estado = new javax.swing.JComboBox<>();
+>>>>>>> Stashed changes
         txt_postal = new javax.swing.JTextField();
         txt_municipio = new javax.swing.JTextField();
         txt_calle = new javax.swing.JTextField();
@@ -63,6 +96,7 @@ public class Frm_Expendio extends javax.swing.JPanel {
 
         jLabel8.setText("#Exterior:");
 
+<<<<<<< Updated upstream
         jButton1.setText("Agregar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -83,6 +117,16 @@ public class Frm_Expendio extends javax.swing.JPanel {
         txt_calle.setText("jTextField5");
 
         txt_exterior.setText("jTextField6");
+=======
+        btn_agregar.setText("Agregar");
+        btn_agregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_agregarActionPerformed(evt);
+            }
+        });
+
+        cmb_estado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Aguascalientes", "Baja California", "Baja California Sur", "Campeche", "Chiapas", "Chihuahua", "Ciudad de México", "Coahuila", "Colima", "Durango", "Guanajuato", "Guerrero", "Hidalgo", "Jalisco", "México", "Michoacán", "Morelos", "Nayarit", "Nuevo León", "Oaxaca", "Puebla", "Querétaro", "Quintana Roo", "San Luis Potosí", "Sinaloa", "Sonora", "Tabasco", "Tamaulipas", "Tlaxcala", "Veracruz", "Yucatán", "Zacatecas" }));
+>>>>>>> Stashed changes
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -103,7 +147,11 @@ public class Frm_Expendio extends javax.swing.JPanel {
                     .addComponent(txt_calle)
                     .addComponent(txt_municipio)
                     .addComponent(txt_postal)
+<<<<<<< Updated upstream
                     .addComponent(combo_estado, 0, 138, Short.MAX_VALUE)
+=======
+                    .addComponent(cmb_estado, 0, 138, Short.MAX_VALUE)
+>>>>>>> Stashed changes
                     .addComponent(txt_rfc)
                     .addComponent(txt_nombre)
                     .addComponent(txt_exterior))
@@ -114,7 +162,7 @@ public class Frm_Expendio extends javax.swing.JPanel {
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(btn_agregar)
                 .addGap(18, 18, 18))
         );
         jPanel2Layout.setVerticalGroup(
@@ -133,7 +181,11 @@ public class Frm_Expendio extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
+<<<<<<< Updated upstream
                     .addComponent(combo_estado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+=======
+                    .addComponent(cmb_estado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+>>>>>>> Stashed changes
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
@@ -154,7 +206,11 @@ public class Frm_Expendio extends javax.swing.JPanel {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(txt_exterior, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+<<<<<<< Updated upstream
                         .addComponent(jButton1)))
+=======
+                        .addComponent(btn_agregar)))
+>>>>>>> Stashed changes
                 .addContainerGap())
         );
 
@@ -191,6 +247,7 @@ public class Frm_Expendio extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+<<<<<<< Updated upstream
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         
@@ -201,10 +258,106 @@ public class Frm_Expendio extends javax.swing.JPanel {
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
+=======
+    private void btn_agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_agregarActionPerformed
+        // TODO add your handling code here:
+        
+        String nombre = txt_nombre.getText().trim();
+        String rfc = txt_rfc.getText().trim();
+        String estado = cmb_estado.getSelectedItem() != null ? cmb_estado.getSelectedItem().toString() : "";
+        String cpStr = txt_postal.getText().trim();
+        String municipio = txt_municipio.getText().trim();
+        String calle = txt_calle.getText().trim();
+        String exterior = txt_exterior.getText().trim();
+        
+        StringBuilder mensajeError = new StringBuilder();
+        
+        //validacion de longitud del nombre, asi como si no ponen nada
+        if (nombre.isEmpty() || nombre.length() < 3 || nombre.length() > 50) {
+            mensajeError.append("El nombre debe tener al menos 3 caracteres y no puede estar vacío.\n");
+        }
+        
+        // Validación de la rfc (no vacía o longitud)
+        if (rfc.isEmpty() || rfc.length() > 15) {
+            mensajeError.append("Longiutud de RFC no valida.\n");
+        }
+        
+        // Validación del estado (asegurar que se ha seleccionado un valor)
+        if (cmb_estado.getSelectedIndex() == -1) {
+            mensajeError.append("Debe seleccionar un Estado.\n");
+        }
+        
+        // Validación del Código Postal (no vacío, debe ser numérico y de 5 dígitos)
+        if (cpStr.isEmpty() || !cpStr.matches("\\d{5}")) {
+            mensajeError.append("El Código Postal no puede estar vacío y debe contener exactamente 5 dígitos numéricos.\n");
+        }
+        
+         // Validación del municipio (no vacío)
+        if (municipio.isEmpty() || municipio.length() > 25) {
+            mensajeError.append("El municipio no puede estar vacío.\n");
+        }
+        
+        // Validación de la calle (no vacía)
+        if (calle.isEmpty() || calle.length() > 25) {
+            mensajeError.append("La calle no puede estar vacía.\n");
+        }
+        
+        // Validación del número exterior (no vacío y debe ser numérico)
+        if (exterior.isEmpty() || !exterior.matches("\\d+")) {
+            mensajeError.append("El número exterior no puede estar vacío y debe ser un valor numérico.\n");
+        }
+        
+        // Mostrar los mensajes de error si existen
+        if (mensajeError.length() > 0) {
+            JOptionPane.showMessageDialog(null, mensajeError.toString(),
+                    "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            // Convertir valores numéricos después de las validaciones
+            int cp = Integer.parseInt(cpStr);
+            int numExt = Integer.parseInt(exterior);
+            
+            this.setVisible(false);
+            //se crea una instancia de Sede y se pasa como parámetro al otro formulario
+            Expendio expendio = new Expendio(0,nombre,rfc,estado,cp,
+                    municipio,calle,numExt);
+            Frm_ExpendioPrev preview = new Frm_ExpendioPrev(Frm_Expendio.this, expendio);
+            preview.setVisible(true);
+        }
+        
+    }//GEN-LAST:event_btn_agregarActionPerformed
+>>>>>>> Stashed changes
 
+public static void main(String[] args) {
+    // Establece el Look and Feel del sistema (opcional)
+    try {
+        for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+            if ("Nimbus".equals(info.getName())) {
+                javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                break;
+            }
+        }
+    } catch (Exception ex) {
+        java.util.logging.Logger.getLogger(Frm_Expendio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    }
+
+    // Crea y muestra el formulario
+    java.awt.EventQueue.invokeLater(new Runnable() {
+        public void run() {
+            new Frm_Expendio().setVisible(true);  // Crear instancia de Frm_Expendio y hacerla visible
+        }
+    });
+}
+
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+<<<<<<< Updated upstream
     private javax.swing.JComboBox<String> combo_estado;
     private javax.swing.JButton jButton1;
+=======
+    private javax.swing.JButton btn_agregar;
+    private javax.swing.JComboBox<String> cmb_estado;
+>>>>>>> Stashed changes
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

@@ -76,7 +76,11 @@
                           <Component id="txt_calle" max="32767" attributes="0"/>
                           <Component id="txt_municipio" max="32767" attributes="0"/>
                           <Component id="txt_postal" max="32767" attributes="0"/>
+<<<<<<< Updated upstream
                           <Component id="combo_estado" pref="138" max="32767" attributes="0"/>
+=======
+                          <Component id="cmb_estado" pref="138" max="32767" attributes="0"/>
+>>>>>>> Stashed changes
                           <Component id="txt_rfc" max="32767" attributes="0"/>
                           <Component id="txt_nombre" max="32767" attributes="0"/>
                           <Component id="txt_exterior" max="32767" attributes="0"/>
@@ -90,7 +94,7 @@
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                      <Component id="btn_agregar" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -113,7 +117,11 @@
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
+<<<<<<< Updated upstream
                           <Component id="combo_estado" alignment="3" min="-2" max="-2" attributes="0"/>
+=======
+                          <Component id="cmb_estado" alignment="3" min="-2" max="-2" attributes="0"/>
+>>>>>>> Stashed changes
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -139,7 +147,11 @@
                           <Group type="102" attributes="0">
                               <Component id="txt_exterior" min="-2" max="-2" attributes="0"/>
                               <EmptySpace pref="25" max="32767" attributes="0"/>
+<<<<<<< Updated upstream
                               <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+=======
+                              <Component id="btn_agregar" min="-2" max="-2" attributes="0"/>
+>>>>>>> Stashed changes
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -188,11 +200,12 @@
                 <Property name="text" type="java.lang.String" value="#Exterior:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton1">
+            <Component class="javax.swing.JButton" name="btn_agregar">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Agregar"/>
               </Properties>
               <Events>
+<<<<<<< Updated upstream
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
               </Events>
             </Component>
@@ -207,6 +220,16 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JComboBox" name="combo_estado">
+=======
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_agregarActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JTextField" name="txt_nombre">
+            </Component>
+            <Component class="javax.swing.JTextField" name="txt_rfc">
+            </Component>
+            <Component class="javax.swing.JComboBox" name="cmb_estado">
+>>>>>>> Stashed changes
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="32">
@@ -250,6 +273,7 @@
               </AuxValues>
             </Component>
             <Component class="javax.swing.JTextField" name="txt_postal">
+<<<<<<< Updated upstream
               <Properties>
                 <Property name="text" type="java.lang.String" value="jTextField3"/>
               </Properties>
@@ -268,6 +292,14 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="jTextField6"/>
               </Properties>
+=======
+            </Component>
+            <Component class="javax.swing.JTextField" name="txt_municipio">
+            </Component>
+            <Component class="javax.swing.JTextField" name="txt_calle">
+            </Component>
+            <Component class="javax.swing.JTextField" name="txt_exterior">
+>>>>>>> Stashed changes
             </Component>
           </SubComponents>
         </Container>
