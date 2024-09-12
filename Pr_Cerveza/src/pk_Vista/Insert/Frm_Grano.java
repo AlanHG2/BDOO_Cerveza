@@ -3,6 +3,7 @@ package pk_Vista.Insert;
 
 import javax.swing.JOptionPane;
 import pk_CRUD.Cls_Grano;
+import pk_Modelo.Grano;
 import pk_Vista.Preview.Frm_GranoPrev;
 
 public class Frm_Grano extends javax.swing.JFrame {
@@ -18,6 +19,11 @@ public class Frm_Grano extends javax.swing.JFrame {
         setTitle("Registro de Granos");
         setLocationRelativeTo(null);
         CA = new Cls_Grano();
+    }
+    
+    public void limpiar(){
+        txt_Nombre.setText("");
+        cmb_Procedencia.setSelectedIndex(-1);
     }
 
     /**
@@ -44,7 +50,6 @@ public class Frm_Grano extends javax.swing.JFrame {
         jLabel2.setText("Procedencia");
 
         cmb_Procedencia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Aguascalientes", "Baja California", "Baja California Sur", "Campeche", "Chiapas", "Chihuahua", "Ciudad de México", "Coahuila", "Colima", "Durango", "Guanajuato", "Guerrero", "Hidalgo", "Jalisco", "México", "Michoacán", "Morelos", "Nayarit", "Nuevo León", "Oaxaca", "Puebla", "Querétaro", "Quintana Roo", "San Luis Potosí", "Sinaloa", "Sonora", "Tabasco", "Tamaulipas", "Tlaxcala", "Veracruz", "Yucatán", "Zacatecas" }));
-        cmb_Procedencia.setSelectedIndex(-1);
 
         btn_Agregar.setText("Agregar");
         btn_Agregar.addActionListener(new java.awt.event.ActionListener() {
@@ -113,16 +118,16 @@ public class Frm_Grano extends javax.swing.JFrame {
 
     private void btn_AgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AgregarActionPerformed
         String gra_nombre = txt_Nombre.getText().trim();
-        String gra_procedencia = cmb_Procedencia.getSelectedItem().toString();
+        String gra_procedencia = cmb_Procedencia.getSelectedItem() != null ? cmb_Procedencia.getSelectedItem().toString() : "";
         StringBuilder mensajeError = new StringBuilder();
 
         // Validación del nombre
-        if (gra_nombre.length() < 3) {
+        if (gra_nombre.length() < 3 || gra_nombre.isEmpty()) {
             mensajeError.append("El nombre debe tener al menos 3 caracteres.\n");
         }
 
         // Validación de la procedencia
-        if (cmb_Procedencia.getSelectedIndex() == -1) {
+        if (cmb_Procedencia.getSelectedIndex() < 0) {
             mensajeError.append("Seleccione un Estado.\n");
         }
 
@@ -132,7 +137,8 @@ public class Frm_Grano extends javax.swing.JFrame {
         } else {
             // Si no hay errores, mostrar preview           
             this.setVisible(false); 
-            Frm_GranoPrev preview = new Frm_GranoPrev(gra_nombre, gra_procedencia);
+            Grano grano = new Grano(0,gra_nombre,gra_procedencia);
+            Frm_GranoPrev preview = new Frm_GranoPrev(Frm_Grano.this,grano);
             preview.setVisible(true);
             
         }
