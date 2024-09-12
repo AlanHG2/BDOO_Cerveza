@@ -4,6 +4,11 @@
  */
 package pk_Vista.Preview;
 
+import javax.swing.JOptionPane;
+import pk_CRUD.Cls_Expendio;
+import pk_Modelo.Expendio;
+import pk_Vista.Insert.Frm_Expendio;
+
 /**
  *
  * @author jadey
@@ -13,8 +18,23 @@ public class Frm_ExpendioPrev extends javax.swing.JFrame {
     /**
      * Creates new form Frm_ExpendioPrev
      */
-    public Frm_ExpendioPrev() {
+    
+    private Frm_Expendio fExpendio;
+    private final Cls_Expendio CA;
+    Expendio e = new Expendio();
+    
+    public Frm_ExpendioPrev(Frm_Expendio frmExpendio, Expendio expendio) {
+        CA = new Cls_Expendio();
+        setLocationRelativeTo(null);
         initComponents();
+        
+        txt_PrevNombre.setText(expendio.getExp_Nombre());
+        txt_PrevDireccion.setText(expendio.getExp_Municipio()+ ", " + expendio.getExp_Postal()+
+                ". " + expendio.getExp_Calle()+ " #" + expendio.getExp_NumExterior());
+        txt_PrevEstado.setText(expendio.getExp_Estado());
+        txt_PrevRFC.setText(expendio.getExp_RFC());
+        e = expendio;
+        fExpendio = frmExpendio;
     }
 
     /**
@@ -34,11 +54,11 @@ public class Frm_ExpendioPrev extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         txt_PrevEstado = new javax.swing.JLabel();
-        txt_PrevMuni = new javax.swing.JLabel();
-        txt_PrevCalle = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        txt_PrevRFC = new javax.swing.JLabel();
+        txt_PrevDireccion = new javax.swing.JLabel();
+        btnRegresar = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -50,21 +70,36 @@ public class Frm_ExpendioPrev extends javax.swing.JFrame {
 
         jLabel4.setText("Estado:");
 
-        jLabel5.setText("Municipio:");
+        jLabel5.setText("RFC");
 
-        jLabel6.setText("Calle:");
+        jLabel6.setText("Direccion");
 
         txt_PrevEstado.setText("jLabel7");
 
-        txt_PrevMuni.setText("jLabel8");
+        txt_PrevRFC.setText("jLabel8");
 
-        txt_PrevCalle.setText("jLabel9");
+        txt_PrevDireccion.setText("jLabel9");
 
-        jButton1.setText("Regresar");
+        btnRegresar.setText("Regresar");
+        btnRegresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegresarActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Confirmar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("Cancelar");
+        btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -76,11 +111,11 @@ public class Frm_ExpendioPrev extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txt_PrevCalle))
+                        .addComponent(txt_PrevDireccion))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txt_PrevMuni))
+                        .addComponent(txt_PrevRFC))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -97,11 +132,11 @@ public class Frm_ExpendioPrev extends javax.swing.JFrame {
                         .addComponent(jLabel1)
                         .addGap(85, 85, 85))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(btnRegresar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton2)
                         .addGap(24, 24, 24)
-                        .addComponent(jButton3)
+                        .addComponent(btnCancelar)
                         .addGap(5, 5, 5))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -120,16 +155,16 @@ public class Frm_ExpendioPrev extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(txt_PrevMuni))
+                    .addComponent(txt_PrevRFC))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(txt_PrevCalle))
+                    .addComponent(txt_PrevDireccion))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(btnRegresar)
                     .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(btnCancelar))
                 .addGap(24, 24, 24))
         );
 
@@ -152,6 +187,34 @@ public class Frm_ExpendioPrev extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        
+        int res = CA.insertarDatos(e.getExp_Nombre(),e.getExp_RFC(),
+                e.getExp_Calle(), e.getExp_Postal(), e.getExp_Municipio(),
+                e.getExp_Estado(),e.getExp_NumExterior());
+        if (res > 0) {
+            JOptionPane.showMessageDialog(null, "Registro Exitoso", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+        }
+        this.dispose();
+        fExpendio.setVisible(true);
+        fExpendio.limpiar();
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        fExpendio.setVisible(true);
+    }//GEN-LAST:event_btnRegresarActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        fExpendio.setVisible(true);
+        fExpendio.limpiar();
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -183,24 +246,24 @@ public class Frm_ExpendioPrev extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Frm_ExpendioPrev().setVisible(true);
+                //new Frm_ExpendioPrev().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnRegresar;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JLabel txt_PrevCalle;
+    private javax.swing.JLabel txt_PrevDireccion;
     private javax.swing.JLabel txt_PrevEstado;
-    private javax.swing.JLabel txt_PrevMuni;
     private javax.swing.JLabel txt_PrevNombre;
+    private javax.swing.JLabel txt_PrevRFC;
     // End of variables declaration//GEN-END:variables
 }

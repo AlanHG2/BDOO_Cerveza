@@ -24,6 +24,17 @@ public class Expendio {
         this.exp_NumExterior = exp_NumExterior;
     }
 
+    public Expendio() {
+        this.id_Expendio = 0; // Valor predeterminado
+        this.exp_Nombre = "";
+        this.exp_RFC = "";
+        this.exp_Calle = "";
+        this.exp_Postal = 0;
+        this.exp_Municipio = "";
+        this.exp_Estado = "";
+        this.exp_NumExterior = 0;
+    }
+
     public int getId_Expendio() {
         return id_Expendio;
     }
@@ -52,6 +63,9 @@ public class Expendio {
         return exp_Calle;
     }
 
+    public void setExp_Calle(String exp_Calle) {
+        this.exp_Calle = exp_Calle;
+    }
 
     public int getExp_Postal() {
         return exp_Postal;
