@@ -6,6 +6,7 @@ import javax.swing.JOptionPane;
 import pk_CRUD.Cls_Fabricante;
 import pk_CRUD.Cls_Marca;
 import pk_Modelo.Fabricante;
+import pk_Vista.Preview.Frm_MarcaPrev;
 
 
 public class Frm_Marca extends javax.swing.JFrame {
@@ -29,6 +30,11 @@ public class Frm_Marca extends javax.swing.JFrame {
             Fabricante f=list.get(i);
             cb_Fabricante.addItem(f.getFab_Nombre());
         }
+        cb_Fabricante.setSelectedIndex(-1);
+    }
+    
+    public void limpiar(){
+        txt_Nombre.setText("");
         cb_Fabricante.setSelectedIndex(-1);
     }
     /**
@@ -130,12 +136,35 @@ public class Frm_Marca extends javax.swing.JFrame {
     }//GEN-LAST:event_cb_FabricanteActionPerformed
 
     private void btn_AgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AgregarActionPerformed
-        Fabricante f=list.get(cb_Fabricante.getSelectedIndex());
         String nombre=txt_Nombre.getText();
-        int id_fab=f.getId_Fabricante();
-        int res=CA.insertarDatos(nombre, id_fab);
-        if(res>0){
-            JOptionPane.showMessageDialog(null, "Inserción correcta","Éxito",JOptionPane.INFORMATION_MESSAGE);
+        StringBuilder mensajeError = new StringBuilder();
+        int id = cb_Fabricante.getSelectedIndex();
+        
+        // Validación del campo de texto "nombre"
+        if (nombre.isEmpty() || nombre.length() > 50 || nombre.length() < 3) {
+            mensajeError.append("Longitud de nombre no válida (entre 3 y 50 caracteres).\n");
+        }
+        
+        if(id == -1){
+            mensajeError.append("Debe seleccionar una sede válida.\n");
+        }else{
+            Fabricante f = list.get(id);
+            if(f.getId_Fabricante()<0){
+                mensajeError.append("La sede seleccionada no es válida.\n");
+            }
+        }
+        
+        if(mensajeError.length() > 0){
+            JOptionPane.showMessageDialog(null, mensajeError.toString(),
+            "Error", JOptionPane.ERROR_MESSAGE);
+        }else{
+            // Si no hay errores, declara el id que el usuario selecciono
+            int id_fabricante = list.get(id).getId_Fabricante();
+            String nombreFabricante = (String) cb_Fabricante.getSelectedItem();
+            Frm_MarcaPrev preview = new Frm_MarcaPrev(Frm_Marca.this,
+                    nombre, nombreFabricante,id_fabricante);
+            preview.setVisible(true);
+            this.setVisible(false);  
         }
     }//GEN-LAST:event_btn_AgregarActionPerformed
 

@@ -182,7 +182,8 @@ public class Frm_Fabricante extends javax.swing.JFrame {
 
         // Si hay errores, mostrar un mensaje
         if (mensajeError.length() > 0) {
-            JOptionPane.showMessageDialog(null, mensajeError.toString(), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, mensajeError.toString(),
+                    "Error", JOptionPane.ERROR_MESSAGE);
         } else {
             // Si no hay errores, declara el id que el usuario selecciono
             int id_sede = list.get(id).getId_Sede();
