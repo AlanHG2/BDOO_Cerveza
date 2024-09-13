@@ -95,8 +95,8 @@ public class Cls_Grano {
             RS = PS.executeQuery();
             while (RS.next()) {
                 fila[0] = String.valueOf(RS.getInt("id_grano"));
-                fila[1] = RS.getString("gran_nombre");
-                fila[2] = RS.getString("gran_procedencia");
+                fila[1] = RS.getString("gra_nombre");
+                fila[2] = RS.getString("gra_procedencia");
                 dtm.addRow(fila);
             }
         } catch (SQLException e) {
@@ -119,8 +119,8 @@ public class Cls_Grano {
             RS = PS.executeQuery();
             while (RS.next()) {
                 fila[0] = String.valueOf(RS.getInt("id_grano"));
-                fila[1] = RS.getString("gran_nombre");
-                fila[2] = RS.getString("gran_procedencia");
+                fila[1] = RS.getString("gra_nombre");
+                fila[2] = RS.getString("gra_procedencia");
                 dtm.addRow(fila);
             }
         } catch (SQLException e) {
