@@ -15,9 +15,11 @@ import pk_CRUD.Cls_Receta;
 import pk_CRUD.Cls_Sede;
 import pk_Modelo.Expendio;
 import pk_Modelo.Fabricante;
+import pk_Modelo.Grano;
 import pk_Modelo.Sede;
 import pk_Vista.Insert.Frm_Expendio;
 import pk_Vista.Insert.Frm_Fabricante;
+import pk_Vista.Insert.Frm_Grano;
 import pk_Vista.Insert.Frm_Sede;
 
 /**
@@ -153,7 +155,7 @@ public class Frm_DisplayData extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         table_Datos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -313,6 +315,15 @@ public class Frm_DisplayData extends javax.swing.JFrame {
                     );
                     Frm_Fabricante frmfabricante = new Frm_Fabricante(f);
                     frmfabricante.setVisible(true);
+                    break;
+                case "grano":
+                    Grano g = new Grano (
+                            Integer.parseInt(table_Datos.getValueAt(row, 0).toString()),
+                            table_Datos.getValueAt(row, 1).toString(),
+                            table_Datos.getValueAt(row, 2).toString()
+                    );
+                    Frm_Grano frmGrano = new Frm_Grano(g);
+                    frmGrano.setVisible(true);
                     break;
                 case "expendio":
                     Expendio e = new Expendio(
