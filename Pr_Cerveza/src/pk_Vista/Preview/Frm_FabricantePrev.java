@@ -6,6 +6,7 @@ package pk_Vista.Preview;
 
 import javax.swing.JOptionPane;
 import pk_CRUD.Cls_Fabricante;
+import pk_Modelo.Fabricante;
 import pk_Modelo.Sede;
 import pk_Vista.Insert.Frm_Fabricante;
 
@@ -19,21 +20,32 @@ public class Frm_FabricantePrev extends javax.swing.JFrame {
     
     private Frm_Fabricante fFabricante;
     private final Cls_Fabricante CA;
+    boolean flag_insert = false;
+    Fabricante f = new Fabricante();   
     private int id_sede;
     
     /**
      * Creates new form Frm_FabricantePrev
+     * @param frmFabricante
+     * @param fabricante
+     * @param sede
      */
-    public Frm_FabricantePrev(Frm_Fabricante frmFabricante, String nombre, 
-            String nombreSede,int id_sede ) {      
-        initComponents();
-        txt_PrevNombre.setText(nombre);
-        txt_PrevSede.setText(nombreSede);
-        this.id_sede = id_sede;
-        setLocationRelativeTo(null);
+    public Frm_FabricantePrev(Frm_Fabricante frmFabricante, Fabricante fabricante, Sede sede) {             
         CA = new Cls_Fabricante();
-        fFabricante = frmFabricante;
+        initComponents();
+        setLocationRelativeTo(null);
         
+        txt_PrevNombre.setText(fabricante.getFab_Nombre());
+        txt_PrevSede.setText(sede.getSed_Nombre());  
+        fFabricante = frmFabricante;
+        f = fabricante;
+        id_sede = sede.getId_Sede();
+        if (f.getId_Sede() == 0) {            
+            flag_insert = true;
+        } else {
+            flag_insert = false;
+        }       
+        fFabricante = frmFabricante;
     }
 
     /**
@@ -55,7 +67,7 @@ public class Frm_FabricantePrev extends javax.swing.JFrame {
         btb_Confirmar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         txt_Titulo.setText("¿Desea agregar los siguientes datos?");
 
@@ -158,15 +170,24 @@ public class Frm_FabricantePrev extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btb_ConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btb_ConfirmarActionPerformed
-        // TODO add your handling code here:
-        String nombre = txt_PrevNombre.getText();
-        int res = CA.insertarDatos(nombre, id_sede);
-        if (res > 0) {
-           JOptionPane.showMessageDialog(null, "Registro Exitoso", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-        } 
-        this.dispose();
-        fFabricante.setVisible(true);
-        fFabricante.limpiar();
+        // TODO add your handling code here:        
+        if (flag_insert){    
+            int res = CA.insertarRegistro(f.getFab_Nombre(), id_sede);
+            if (res > 0) {
+               JOptionPane.showMessageDialog(null, "Registro Exitoso", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            } 
+            this.dispose();
+            fFabricante.setVisible(true);
+            fFabricante.limpiar();
+        } else {
+            int res = CA.actualizarRegistro(f.getId_Fabricante(),f.getFab_Nombre(), id_sede);
+            if (res > 0) {
+               JOptionPane.showMessageDialog(null, "Actualización exitosa", "Éxito",1);
+            } 
+            this.dispose();
+            fFabricante.limpiar(); 
+            fFabricante.dispose();
+        }
     }//GEN-LAST:event_btb_ConfirmarActionPerformed
 
     private void btn_RegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_RegresarActionPerformed
