@@ -65,7 +65,7 @@ public class Frm_Receta extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         btn_Agregar = new javax.swing.JButton();
-        btn_Finalizar = new javax.swing.JButton();
+        btn_Cancelar = new javax.swing.JButton();
         txt_Procedimiento = new javax.swing.JTextField();
         cb_Grano = new javax.swing.JComboBox<>();
         cb_Cerveza = new javax.swing.JComboBox<>();
@@ -80,25 +80,24 @@ public class Frm_Receta extends javax.swing.JFrame {
 
         jLabel4.setText("Cerveza");
 
-        btn_Agregar.setText("Agregar");
+        btn_Agregar.setText("Confirmar");
         btn_Agregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_AgregarActionPerformed(evt);
             }
         });
 
-        btn_Finalizar.setText("Finalizar");
+        btn_Cancelar.setText("Cancelar");
+        btn_Cancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_CancelarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(69, 69, 69)
-                .addComponent(btn_Agregar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 106, Short.MAX_VALUE)
-                .addComponent(btn_Finalizar)
-                .addGap(80, 80, 80))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -116,6 +115,12 @@ public class Frm_Receta extends javax.swing.JFrame {
                         .addGap(167, 167, 167)
                         .addComponent(jLabel1)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(126, 126, 126)
+                .addComponent(btn_Cancelar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
+                .addComponent(btn_Agregar)
+                .addGap(56, 56, 56))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -132,17 +137,16 @@ public class Frm_Receta extends javax.swing.JFrame {
                             .addComponent(cb_Grano, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(56, 56, 56)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(btn_Agregar)
-                                    .addComponent(btn_Finalizar)))
+                            .addComponent(jLabel2)
                             .addComponent(txt_Procedimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(35, 35, 35))
+                        .addGap(115, 115, 115))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(cb_Cerveza, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btn_Cancelar)
+                            .addComponent(btn_Agregar))
+                        .addGap(36, 36, 36))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -207,6 +211,10 @@ public class Frm_Receta extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btn_AgregarActionPerformed
 
+    private void btn_CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CancelarActionPerformed
+        this.dispose();        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_CancelarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -244,7 +252,7 @@ public class Frm_Receta extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_Agregar;
-    private javax.swing.JButton btn_Finalizar;
+    private javax.swing.JButton btn_Cancelar;
     private javax.swing.JComboBox<String> cb_Cerveza;
     private javax.swing.JComboBox<String> cb_Grano;
     private javax.swing.JLabel jLabel1;

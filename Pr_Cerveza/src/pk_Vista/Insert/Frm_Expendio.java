@@ -63,6 +63,7 @@ public class Frm_Expendio extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         txtExterior = new javax.swing.JTextField();
         btnAgrgar = new javax.swing.JButton();
+        btn_Cancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -86,10 +87,17 @@ public class Frm_Expendio extends javax.swing.JFrame {
 
         jLabel9.setText("No.Exterior");
 
-        btnAgrgar.setText("Agregar");
+        btnAgrgar.setText("Confirmar");
         btnAgrgar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAgrgarActionPerformed(evt);
+            }
+        });
+
+        btn_Cancelar.setText("Cancelar");
+        btn_Cancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_CancelarActionPerformed(evt);
             }
         });
 
@@ -123,9 +131,13 @@ public class Frm_Expendio extends javax.swing.JFrame {
                             .addComponent(txtPostal)
                             .addComponent(txtMunicipio)
                             .addComponent(cbmEstado, 0, 131, Short.MAX_VALUE)
-                            .addComponent(txtExterior)
-                            .addComponent(btnAgrgar, javax.swing.GroupLayout.Alignment.TRAILING))))
-                .addContainerGap(40, Short.MAX_VALUE))
+                            .addComponent(txtExterior)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(123, 123, 123)
+                        .addComponent(btn_Cancelar)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnAgrgar)))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -166,7 +178,9 @@ public class Frm_Expendio extends javax.swing.JFrame {
                     .addComponent(jLabel9)
                     .addComponent(txtExterior, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
-                .addComponent(btnAgrgar)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAgrgar)
+                    .addComponent(btn_Cancelar))
                 .addGap(25, 25, 25))
         );
 
@@ -226,6 +240,10 @@ public class Frm_Expendio extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnAgrgarActionPerformed
 
+    private void btn_CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CancelarActionPerformed
+        this.dispose();        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_CancelarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -263,6 +281,7 @@ public class Frm_Expendio extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgrgar;
+    private javax.swing.JButton btn_Cancelar;
     private javax.swing.JComboBox<String> cbmEstado;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
