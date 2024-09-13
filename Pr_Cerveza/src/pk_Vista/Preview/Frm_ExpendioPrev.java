@@ -207,11 +207,11 @@ public class Frm_ExpendioPrev extends javax.swing.JFrame {
             fExpendio.setVisible(true);
             fExpendio.limpiar();
         } else {
-            int res = CA.insertarDatos(e.getExp_Nombre(),e.getExp_RFC(),
+            int res = CA.actualizarRegistro(e.getId_Expendio(),e.getExp_Nombre(),e.getExp_RFC(),
                     e.getExp_Calle(), e.getExp_Postal(), e.getExp_Municipio(),
                     e.getExp_Estado(),e.getExp_NumExterior());
             if (res > 0) {
-                JOptionPane.showMessageDialog(this, "Registro Exitoso", "Éxito", 1);
+                JOptionPane.showMessageDialog(this, "Actualización exitosa", "Éxito", 1);
             }
             this.dispose();
             fExpendio.limpiar();
