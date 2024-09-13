@@ -99,7 +99,7 @@ public class Cls_Marca {
             while (RS.next()) {
                 fila[0] = String.valueOf(RS.getInt("id_marca"));
                 fila[1] = RS.getString("mar_nombre");
-                fila[2] = RS.getString("id_fabricante");
+                fila[2] = String.valueOf(RS.getInt("id_fabricante"));
                 dtm.addRow(fila);
             }
         } catch (SQLException e) {
@@ -116,14 +116,14 @@ public class Cls_Marca {
         columna = compararNombresCampos(columna);
         DefaultTableModel dtm = setColumnsDTM();
         String sql_select = "SELECT *FROM marca WHERE " + columna + " like'%" + criterio + "%'";
-        String[] fila = new String[9];
+        String[] fila = new String[3];
         try {
             PS = CN.getConexion().prepareStatement(sql_select);
             RS = PS.executeQuery();
             while (RS.next()) {
-                 fila[0] = String.valueOf(RS.getInt("id_marca"));
+                fila[0] = String.valueOf(RS.getInt("id_marca"));
                 fila[1] = RS.getString("mar_nombre");
-                fila[2] = RS.getString("id_fabricante");
+                fila[2] = String.valueOf(RS.getInt("id_fabricante"));
                 dtm.addRow(fila);
             }
         } catch (SQLException e) {
