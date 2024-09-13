@@ -26,7 +26,7 @@ public class Frm_Receta extends javax.swing.JFrame {
     }
     private void llenarCerveza(){
         Cls_Cerveza o =new Cls_Cerveza();
-        listCer=o.getCerveza();
+        listCer=o.getCervezas();
         for (int i = 0; i < listCer.size(); i++) {
             Cerveza c=listCer.get(i);
             cb_Cerveza.addItem(c.getCer_Nombre());
@@ -36,7 +36,7 @@ public class Frm_Receta extends javax.swing.JFrame {
     
     private void llenarGrano(){
         Cls_Grano o =new Cls_Grano();
-        listGra=o.getGrano();
+        listGra=o.getGranos();
         for (int i = 0; i < listGra.size(); i++) {
             Grano g=listGra.get(i);
             cb_Grano.addItem(g.getGra_nombre());
