@@ -140,7 +140,7 @@ public class Cls_Cerveza {
         String nombreCampo = null;
         if (columna.contains("nombre")) {
             nombreCampo = "cer_nombre";
-        } else if (columna.contains("graduacion")) {
+        } else if (columna.contains("graduación")) {
             nombreCampo = "cer_graduacion";
         } else if (columna.contains("marca")) {
             nombreCampo = "id_marca";

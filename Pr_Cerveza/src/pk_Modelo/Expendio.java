@@ -26,12 +26,12 @@ public class Expendio {
 
     public Expendio() {
         this.id_Expendio = 0; // Valor predeterminado
-        this.exp_Nombre = "";
-        this.exp_RFC = "";
-        this.exp_Calle = "";
+        this.exp_Nombre = null;
+        this.exp_RFC = null;
+        this.exp_Calle = null;
         this.exp_Postal = 0;
-        this.exp_Municipio = "";
-        this.exp_Estado = "";
+        this.exp_Municipio = null;
+        this.exp_Estado = null;
         this.exp_NumExterior = 0;
     }
 

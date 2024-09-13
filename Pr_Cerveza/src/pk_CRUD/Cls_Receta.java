@@ -151,7 +151,7 @@ public class Cls_Receta {
     private String compararNombresCampos(String columna) {
         String nombreCampo = null;
         if (columna.contains("procedimiento")) {
-            nombreCampo = "gra_procedimiento";
+            nombreCampo = "rec_procedimiento";
         } else if (columna.contains("grano")) {
             nombreCampo = "id_grano";
         } else if (columna.contains("cerveza")) {

@@ -18,7 +18,7 @@ public class Cerveza {
     public Cerveza() {
         this.id_Cerveza = 0;
         this.cer_Nombre = null;
-        this.cer_Graduacion = 0;
+        this.cer_Graduacion = 0.0f;
         this.id_Marca = 0;
     }
 

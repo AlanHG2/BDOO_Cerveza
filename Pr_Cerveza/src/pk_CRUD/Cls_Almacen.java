@@ -159,7 +159,7 @@ public class Cls_Almacen {
             nombreCampo = "alma_existencia";
         } else if (columna.contains("capacidad")) {
             nombreCampo = "alma_capacidad";
-        } else if (columna.contains("presentacion")) {
+        } else if (columna.contains("presentación")) {
             nombreCampo = "id_presentacion";
         } else if (columna.contains("expendio")) {
             nombreCampo = "id_expendio";

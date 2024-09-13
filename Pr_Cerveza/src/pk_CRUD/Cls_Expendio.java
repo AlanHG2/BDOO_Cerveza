@@ -127,10 +127,10 @@ public class Cls_Expendio {
                 fila[1] = RS.getString("exp_nombre");
                 fila[2] = RS.getString("exp_rfc");
                 fila[3] = RS.getString("exp_calle");
-                fila[5] = String.valueOf(RS.getInt("exp_postal"));
-                fila[6] = RS.getString("exp_municipio");
-                fila[7] = RS.getString("exp_estado");
-                fila[8] = String.valueOf(RS.getInt("exp_numExterior"));
+                fila[4] = String.valueOf(RS.getInt("exp_postal"));
+                fila[5] = RS.getString("exp_municipio");
+                fila[6] = RS.getString("exp_estado");
+                fila[7] = String.valueOf(RS.getInt("exp_numExterior"));
                 dtm.addRow(fila);
             }
         } catch (SQLException e) {
@@ -156,10 +156,10 @@ public class Cls_Expendio {
                 fila[1] = RS.getString("exp_nombre");
                 fila[2] = RS.getString("exp_rfc");
                 fila[3] = RS.getString("exp_calle");
-                fila[5] = String.valueOf(RS.getInt("exp_postal"));
-                fila[6] = RS.getString("exp_municipio");
-                fila[7] = RS.getString("exp_estado");
-                fila[8] = String.valueOf(RS.getInt("exp_numExterior"));
+                fila[4] = String.valueOf(RS.getInt("exp_postal"));
+                fila[5] = RS.getString("exp_municipio");
+                fila[6] = RS.getString("exp_estado");
+                fila[7] = String.valueOf(RS.getInt("exp_numExterior"));
                 dtm.addRow(fila);
             }
         } catch (SQLException e) {
