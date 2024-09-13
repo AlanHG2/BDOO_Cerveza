@@ -146,11 +146,11 @@ public class Frm_Marca extends javax.swing.JFrame {
         }
         
         if(id == -1){
-            mensajeError.append("Debe seleccionar una sede válida.\n");
+            mensajeError.append("Debe seleccionar un fabricante válido.\n");
         }else{
             Fabricante f = list.get(id);
             if(f.getId_Fabricante()<0){
-                mensajeError.append("La sede seleccionada no es válida.\n");
+                mensajeError.append("el fabricante seleccionado no es válido.\n");
             }
         }
         

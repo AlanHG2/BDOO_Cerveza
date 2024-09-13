@@ -5,9 +5,12 @@
 package pk_Vista.Insert;
 
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import pk_CRUD.Cls_Cerveza;
 import pk_CRUD.Cls_Presentacion;
 import pk_Modelo.Cerveza;
+import pk_Modelo.Presentacion;
+import pk_Vista.Preview.Frm_PresentacionPrev;
 
 /**
  *
@@ -81,8 +84,11 @@ public class Frm_Presentacion extends javax.swing.JFrame {
         cmb_Capacidad.setSelectedIndex(-1);
 
         btn_Agregar.setText("Agregar");
-
-        txt_Descripcion.setText("jTextField1");
+        btn_Agregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_AgregarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -145,6 +151,53 @@ public class Frm_Presentacion extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btn_AgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AgregarActionPerformed
+        // TODO add your handling code here:
+        
+        String descripcion = txt_Descripcion.getText();
+        String envase = cmb_Envase.getSelectedItem() != null ? cmb_Envase.getSelectedItem().toString() : "";
+        String capacidadStr = cmb_Capacidad.getSelectedItem() != null ? cmb_Capacidad.getSelectedItem().toString() : "";
+        int id = cmb_Cerveza.getSelectedIndex();
+        StringBuilder mensajeError = new StringBuilder();
+        
+        if (descripcion.isEmpty() || descripcion.length() > 50 || descripcion.length() < 3) {
+            mensajeError.append("Longitud de descripcion no válida (entre 3 y 50 caracteres).\n");
+        }
+        
+        if(id == -1){
+            mensajeError.append("Debe seleccionar una cerveza válida.\n");
+        }else{
+            Cerveza c = list.get(id);
+            if(c.getId_Cerveza()<0){
+                mensajeError.append("La cerveza seleccionada no es válida.\n");
+            }
+        }
+        
+        if (cmb_Capacidad.getSelectedIndex() == -1) {
+            mensajeError.append("Debe seleccionar una capacidad.\n");
+        }
+        
+        if (cmb_Envase.getSelectedIndex() == -1) {
+            mensajeError.append("Debe seleccionar un envase.\n");
+        }
+        
+        if(mensajeError.length() > 0){
+            JOptionPane.showMessageDialog(null, mensajeError.toString(),
+            "Error", JOptionPane.ERROR_MESSAGE);
+        }else{
+            // Si no hay errores, declara el id que el usuario selecciono
+            int id_cerveza = list.get(id).getId_Cerveza();
+            String nombreCerveza = (String) cmb_Cerveza.getSelectedItem();
+            int capacidad = Integer.parseInt(capacidadStr);
+            Presentacion presentacion = new Presentacion(0, id_cerveza, descripcion,
+                    envase, capacidad);
+            Frm_PresentacionPrev preview = new Frm_PresentacionPrev(Frm_Presentacion.this,
+                    presentacion, nombreCerveza);
+            preview.setVisible(true);
+            this.setVisible(false);  
+        }
+    }//GEN-LAST:event_btn_AgregarActionPerformed
 
     /**
      * @param args the command line arguments

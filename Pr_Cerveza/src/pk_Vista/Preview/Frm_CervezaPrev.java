@@ -169,8 +169,7 @@ public class Frm_CervezaPrev extends javax.swing.JFrame {
         } 
         this.dispose();
         fCerveza.setVisible(true);
-        fCerveza.limpiar();         
-        
+        fCerveza.limpiar();           
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
