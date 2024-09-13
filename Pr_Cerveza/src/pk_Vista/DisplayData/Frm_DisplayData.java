@@ -5,8 +5,17 @@
 package pk_Vista.DisplayData;
 
 import javax.swing.JOptionPane;
+import pk_CRUD.Cls_Almacen;
+import pk_CRUD.Cls_Cerveza;
+import pk_CRUD.Cls_Expendio;
+import pk_CRUD.Cls_Fabricante;
+import pk_CRUD.Cls_Grano;
+import pk_CRUD.Cls_Marca;
+import pk_CRUD.Cls_Receta;
 import pk_CRUD.Cls_Sede;
+import pk_Modelo.Fabricante;
 import pk_Modelo.Sede;
+import pk_Vista.Insert.Frm_Fabricante;
 import pk_Vista.Insert.Frm_Sede;
 
 /**
@@ -32,6 +41,14 @@ public class Frm_DisplayData extends javax.swing.JFrame {
     String[] cols_Venta = {"ID", "Precio unitario", "Cantidad", "Fecha", "Expendio", "Presentación"};
 
     Cls_Sede CS = new Cls_Sede();
+    Cls_Fabricante CF = new Cls_Fabricante();
+    Cls_Marca CM = new Cls_Marca();
+    Cls_Cerveza CC = new Cls_Cerveza();
+    Cls_Receta CR = new Cls_Receta();
+    Cls_Grano CG = new Cls_Grano();
+    Cls_Almacen CA = new Cls_Almacen();
+    Cls_Expendio CE = new Cls_Expendio();
+    
 
     public Frm_DisplayData() {
         initComponents();
@@ -54,25 +71,28 @@ public class Frm_DisplayData extends javax.swing.JFrame {
                 break;
             case "fabricante":
                 llenar_cbColumna(cols_Fabricante);
-                //table_Datos.setModel(CF.getDatosFabricantes());
+                table_Datos.setModel(CF.getDatosFabricantes());
                 break;
             case "marca":
                 llenar_cbColumna(cols_Marca);
-                //table_Datos.setModel(CM.getDatosMarcas());
+                table_Datos.setModel(CM.getDatosMarcas());
                 //...
                 break;
             case "cerveza":
                 llenar_cbColumna(cols_Cerveza);
+                table_Datos.setModel(CC.getDatosCervezas());
                 //...
 
                 break;
             case "receta":
                 llenar_cbColumna(cols_Receta);
+                table_Datos.setModel(CR.getDatosRecetas());
                 //...
 
                 break;
             case "grano":
                 llenar_cbColumna(cols_Grano);
+                table_Datos.setModel(CG.getDatosGranos());
                 //...
 
                 break;
@@ -93,11 +113,13 @@ public class Frm_DisplayData extends javax.swing.JFrame {
                 break;
             case "expendio":
                 llenar_cbColumna(cols_Expendio);
+                table_Datos.setModel(CE.getDatosExpendios());
                 //...
 
                 break;
             case "almacén":
                 llenar_cbColumna(cols_Almacen);
+                table_Datos.setModel(CA.getDatosAlmacenes());
                 //...
 
                 break;
@@ -208,7 +230,7 @@ public class Frm_DisplayData extends javax.swing.JFrame {
                                         .addComponent(cb_Tabla, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(31, 31, 31)
                                         .addComponent(jLabel2)
-                                        .addGap(30, 30, 30)
+                                        .addGap(41, 41, 41)
                                         .addComponent(cb_Columna, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(2, 2, 2)))
                         .addGap(0, 162, Short.MAX_VALUE))
@@ -262,32 +284,73 @@ public class Frm_DisplayData extends javax.swing.JFrame {
 
     private void btn_EditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_EditarActionPerformed
         int row = table_Datos.getSelectedRow();
+        String tabla = cb_Tabla.getSelectedItem().toString().toLowerCase();
         if (row < 0) {
             JOptionPane.showMessageDialog(this, "Seleccione una fila de la tabla para editar", "Error", 2);
-        } else {
-
-            Sede s = new Sede(
-                    Integer.parseInt(table_Datos.getValueAt(row, 0).toString()),
-                    table_Datos.getValueAt(row, 1).toString(),
-                    table_Datos.getValueAt(row, 8).toString(),
-                    table_Datos.getValueAt(row, 2).toString(),
-                    table_Datos.getValueAt(row, 6).toString(),
-                    Integer.parseInt(table_Datos.getValueAt(row, 5).toString()),
-                    table_Datos.getValueAt(row, 4).toString(),
-                    table_Datos.getValueAt(row, 3).toString(),
-                    Integer.parseInt(table_Datos.getValueAt(row, 7).toString())
-            );
-            Frm_Sede frmsede = new Frm_Sede(s);
-            frmsede.setVisible(true);
+        } else {          
+            switch (tabla){
+                case "sede":
+                    Sede s = new Sede(
+                            Integer.parseInt(table_Datos.getValueAt(row, 0).toString()),
+                            table_Datos.getValueAt(row, 1).toString(),
+                            table_Datos.getValueAt(row, 8).toString(),
+                            table_Datos.getValueAt(row, 2).toString(),
+                            table_Datos.getValueAt(row, 6).toString(),
+                            Integer.parseInt(table_Datos.getValueAt(row, 5).toString()),
+                            table_Datos.getValueAt(row, 4).toString(),
+                            table_Datos.getValueAt(row, 3).toString(),
+                            Integer.parseInt(table_Datos.getValueAt(row, 7).toString())
+                    );
+                    Frm_Sede frmsede = new Frm_Sede(s);
+                    frmsede.setVisible(true);
+                    break;
+                case "fabricante":
+                    Fabricante f = new Fabricante(
+                            Integer.parseInt(table_Datos.getValueAt(row,0).toString()),
+                            table_Datos.getValueAt(row,1).toString(),
+                            Integer.parseInt(table_Datos.getValueAt(row, 2).toString())
+                    );
+                    Frm_Fabricante frmfabricante = new Frm_Fabricante(f);
+                    frmfabricante.setVisible(true);
+                    break;
+            }
         }
     }//GEN-LAST:event_btn_EditarActionPerformed
 
     private void btn_BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_BuscarActionPerformed
+        //int row = table_Datos.getSelectedRow();
+        String tabla = cb_Tabla.getSelectedItem().toString().toLowerCase();
         String criterio = txt_Criterio.getText();
         String columna = cb_Columna.getSelectedItem().toString().toLowerCase();
         String errorMessage = "";
-        if (cb_Columna.getSelectedIndex() != -1 && (criterio != null && !criterio.trim().isEmpty() && criterio.length() >= 3)) {
-            table_Datos.setModel(CS.getCriterio(columna, criterio));
+        if (cb_Columna.getSelectedIndex() != -1 && (criterio != null && !criterio.trim().isEmpty() && criterio.length() >= 2)) {
+            switch (tabla){
+                case "sede":
+                    table_Datos.setModel(CS.getCriterio(columna, criterio));
+                    break;
+                case "fabricante":
+                    table_Datos.setModel(CF.getCriterio(columna, criterio));
+                    break;
+                case "marca":
+                    table_Datos.setModel(CM.getCriterio(columna, criterio));
+                    break;
+                case "cerveza":
+                    table_Datos.setModel(CC.getCriterio(columna, criterio));
+                    break;
+                case "receta":
+                    table_Datos.setModel(CR.getCriterio(columna, criterio));
+                    break;
+                case "grano":
+                    table_Datos.setModel(CG.getCriterio(columna, criterio));
+                    break;
+                case "expendio":
+                    table_Datos.setModel(CE.getCriterio(columna, criterio));
+                    break;
+                case "almacén":
+                    table_Datos.setModel(CA.getCriterio(columna, criterio));
+                    break;
+            }
+            
         } else {
             if (cb_Columna.getSelectedIndex() == -1) {
                 errorMessage += "Seleccione una columna de búsqueda";
@@ -316,6 +379,9 @@ public class Frm_DisplayData extends javax.swing.JFrame {
                     }
                     break;
                 case "fabricante":
+                    if (confirm == 0) {
+                        res = CF.eliminarRegistro(id);
+                    }
                     break;
                 case "marca":
                     //...
