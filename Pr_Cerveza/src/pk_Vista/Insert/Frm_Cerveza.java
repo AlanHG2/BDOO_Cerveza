@@ -56,6 +56,7 @@ public class Frm_Cerveza extends javax.swing.JFrame {
         txt_Graduacion = new javax.swing.JTextField();
         txt_Nombre = new javax.swing.JTextField();
         btn_Agregar = new javax.swing.JButton();
+        btn_Cancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -67,10 +68,17 @@ public class Frm_Cerveza extends javax.swing.JFrame {
 
         jLabel4.setText("Marca");
 
-        btn_Agregar.setText("Agregar");
+        btn_Agregar.setText("Confirmar");
         btn_Agregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_AgregarActionPerformed(evt);
+            }
+        });
+
+        btn_Cancelar.setText("Cancelar");
+        btn_Cancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_CancelarActionPerformed(evt);
             }
         });
 
@@ -95,10 +103,12 @@ public class Frm_Cerveza extends javax.swing.JFrame {
                             .addComponent(txt_Graduacion)
                             .addComponent(txt_Nombre))))
                 .addGap(60, 60, 60))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(145, 145, 145)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btn_Cancelar)
+                .addGap(29, 29, 29)
                 .addComponent(btn_Agregar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(33, 33, 33))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -117,9 +127,11 @@ public class Frm_Cerveza extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(cb_Marca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
-                .addComponent(btn_Agregar)
-                .addGap(44, 44, 44))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_Agregar)
+                    .addComponent(btn_Cancelar))
+                .addGap(45, 45, 45))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -192,6 +204,10 @@ public class Frm_Cerveza extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btn_AgregarActionPerformed
 
+    private void btn_CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CancelarActionPerformed
+        this.dispose();        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_CancelarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -229,6 +245,7 @@ public class Frm_Cerveza extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_Agregar;
+    private javax.swing.JButton btn_Cancelar;
     private javax.swing.JComboBox<String> cb_Marca;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
