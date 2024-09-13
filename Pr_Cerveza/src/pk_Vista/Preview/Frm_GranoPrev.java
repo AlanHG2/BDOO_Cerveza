@@ -13,19 +13,26 @@ import pk_Vista.Insert.Frm_Grano;
  * @author jadey
  */
 public class Frm_GranoPrev extends javax.swing.JFrame {
-
-    private final Cls_Grano CA;  
+    
     private Frm_Grano fGrano;
+    private final Cls_Grano CA;  
+    boolean flag_insert = false;
     Grano g = new Grano();
 
     public Frm_GranoPrev(Frm_Grano frmGrano, Grano grano) {
-        
-        initComponents();
-        txt_PrevGrano.setText(grano.getGra_nombre());
-        txt_PrevProce.setText(grano.getGra_procedencia());
-        setLocationRelativeTo(null);
         CA = new Cls_Grano();
+        initComponents();
+        setLocationRelativeTo(null);
+        
+        txt_PrevGrano.setText(grano.getGra_nombre());
+        txt_PrevProce.setText(grano.getGra_procedencia());       
         g = grano;
+        
+        if (g.getId_grano() == 0) {
+            flag_insert = true;
+        } else {
+            flag_insert = false;
+        }
         fGrano = frmGrano;
     }
 
@@ -154,13 +161,24 @@ public class Frm_GranoPrev extends javax.swing.JFrame {
 
     private void btb_ConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btb_ConfirmarActionPerformed
  
-        int res = CA.insertarDatos(g.getGra_nombre(), g.getGra_procedencia());
-        if (res > 0) {
-            JOptionPane.showMessageDialog(null, "Registro Exitoso", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+        if(flag_insert){
+            int res = CA.insertarDatos(g.getGra_nombre(), g.getGra_procedencia());
+            if (res > 0) {
+                JOptionPane.showMessageDialog(null, "Registro Exitoso", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            }
+            this.dispose();
+            fGrano.setVisible(true);
+            fGrano.limpiar();
+        } else {
+            int res = CA.actualizarRegistro(g.getId_grano(),g.getGra_nombre(), g.getGra_procedencia());
+            if (res > 0) {
+                JOptionPane.showMessageDialog(this, "Actualizacion exitosa", "Éxito", 1);
+            }
+            this.dispose();
+            fGrano.limpiar(); 
+            fGrano.dispose();
+                      
         }
-        this.dispose();
-        fGrano.setVisible(true);
-        fGrano.limpiar();
     }//GEN-LAST:event_btb_ConfirmarActionPerformed
 
     private void btn_RegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_RegresarActionPerformed

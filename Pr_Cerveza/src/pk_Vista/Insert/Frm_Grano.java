@@ -7,19 +7,28 @@ import pk_Modelo.Grano;
 import pk_Vista.Preview.Frm_GranoPrev;
 
 public class Frm_Grano extends javax.swing.JFrame {
-
-    /**
-     * Creates new form Frm_Grano
-     */
+    
     private final Cls_Grano CA;
+    private Grano g = null;
 
     public Frm_Grano() {
         initComponents();
-        // Constructor del formulario
         setTitle("Registro de Granos");
         setLocationRelativeTo(null);
         CA = new Cls_Grano();
+        g = null;
     }
+    
+    public Frm_Grano(Grano grano){
+        initComponents();
+        CA = new Cls_Grano();
+        setTitle("Registro de Granos");
+        setLocationRelativeTo(null);
+        cmb_Procedencia.setSelectedItem(grano.getGra_procedencia());
+        txt_Nombre.setText(grano.getGra_nombre());
+        g = grano;
+    }
+    
     
     public void limpiar(){
         txt_Nombre.setText("");
@@ -132,6 +141,8 @@ public class Frm_Grano extends javax.swing.JFrame {
         String gra_nombre = txt_Nombre.getText().trim();
         String gra_procedencia = cmb_Procedencia.getSelectedItem() != null ? cmb_Procedencia.getSelectedItem().toString() : "";
         StringBuilder mensajeError = new StringBuilder();
+        
+        Frm_GranoPrev preview;
 
         // Validación del nombre
         if (gra_nombre.length() < 3 || gra_nombre.isEmpty()) {
@@ -148,9 +159,19 @@ public class Frm_Grano extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, mensajeError.toString(), "Error", JOptionPane.ERROR_MESSAGE);
         } else {
             // Si no hay errores, mostrar preview           
-            this.setVisible(false); 
-            Grano grano = new Grano(0,gra_nombre,gra_procedencia);
-            Frm_GranoPrev preview = new Frm_GranoPrev(Frm_Grano.this,grano);
+//            this.setVisible(false); 
+//            Grano grano = new Grano(0,gra_nombre,gra_procedencia);
+//            Frm_GranoPrev preview = new Frm_GranoPrev(Frm_Grano.this,grano);
+//            preview.setVisible(true);
+            this.setVisible(false);
+            
+            if (g == null) {
+                  Grano grano = new Grano(0, gra_nombre, gra_procedencia);
+                  preview = new Frm_GranoPrev(Frm_Grano.this, grano);               
+            } else {
+                  Grano grano = new Grano(g.getId_grano(), gra_nombre, gra_procedencia);
+                  preview = new Frm_GranoPrev(Frm_Grano.this, grano); 
+            }
             preview.setVisible(true);
             
         }
