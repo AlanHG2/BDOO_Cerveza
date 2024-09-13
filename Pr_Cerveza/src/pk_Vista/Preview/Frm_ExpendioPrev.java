@@ -15,13 +15,12 @@ import pk_Vista.Insert.Frm_Expendio;
  */
 public class Frm_ExpendioPrev extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Frm_ExpendioPrev
-     */
     
     private Frm_Expendio fExpendio;
     private final Cls_Expendio CA;
+    boolean flag_insert = false;
     Expendio e = new Expendio();
+    
     
     public Frm_ExpendioPrev(Frm_Expendio frmExpendio, Expendio expendio) {
         CA = new Cls_Expendio();
@@ -34,6 +33,13 @@ public class Frm_ExpendioPrev extends javax.swing.JFrame {
         txt_PrevEstado.setText(expendio.getExp_Estado());
         txt_PrevRFC.setText(expendio.getExp_RFC());
         e = expendio;
+        fExpendio = frmExpendio;
+        
+        if (e.getId_Expendio()== 0) {
+            flag_insert = true;
+        } else {
+            flag_insert = false;
+        }
         fExpendio = frmExpendio;
     }
 
@@ -190,16 +196,28 @@ public class Frm_ExpendioPrev extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        
-        int res = CA.insertarDatos(e.getExp_Nombre(),e.getExp_RFC(),
-                e.getExp_Calle(), e.getExp_Postal(), e.getExp_Municipio(),
-                e.getExp_Estado(),e.getExp_NumExterior());
-        if (res > 0) {
-            JOptionPane.showMessageDialog(null, "Registro Exitoso", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+        if (flag_insert){
+            int res = CA.insertarDatos(e.getExp_Nombre(),e.getExp_RFC(),
+                    e.getExp_Calle(), e.getExp_Postal(), e.getExp_Municipio(),
+                    e.getExp_Estado(),e.getExp_NumExterior());
+            if (res > 0) {
+                JOptionPane.showMessageDialog(null, "Registro Exitoso", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            }
+            this.dispose();
+            fExpendio.setVisible(true);
+            fExpendio.limpiar();
+        } else {
+            int res = CA.insertarDatos(e.getExp_Nombre(),e.getExp_RFC(),
+                    e.getExp_Calle(), e.getExp_Postal(), e.getExp_Municipio(),
+                    e.getExp_Estado(),e.getExp_NumExterior());
+            if (res > 0) {
+                JOptionPane.showMessageDialog(this, "Registro Exitoso", "Éxito", 1);
+            }
+            this.dispose();
+            fExpendio.limpiar();
+            fExpendio.dispose();
+            
         }
-        this.dispose();
-        fExpendio.setVisible(true);
-        fExpendio.limpiar();
         
     }//GEN-LAST:event_jButton2ActionPerformed
 

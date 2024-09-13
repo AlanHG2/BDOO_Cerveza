@@ -174,7 +174,7 @@ public class Cls_Expendio {
     
     private String compararNombresCampos(String columna) {
         String nombreCampo = null;
-        if (columna.contains("expendio")) {
+        if (columna.contains("nombre")) {
             nombreCampo = "exp_nombre";
         }  else if (columna.contains("rfc")) {
             nombreCampo = "exp_rfc";

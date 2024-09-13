@@ -16,6 +16,7 @@ import pk_Vista.Preview.Frm_ExpendioPrev;
 public class Frm_Expendio extends javax.swing.JFrame {
 
     private final Cls_Expendio CA;
+    private Expendio e = null;
     
     /**
      * Creates new form Frm_Expendio
@@ -25,6 +26,22 @@ public class Frm_Expendio extends javax.swing.JFrame {
         CA = new Cls_Expendio();
         setTitle("Registro de Expendio");
         setLocationRelativeTo(null);
+        e = null;
+    }
+    
+    public Frm_Expendio (Expendio expendio){
+        initComponents();
+        CA = new Cls_Expendio();
+        setTitle("Registro de Expendio");
+        setLocationRelativeTo(null);
+        cbmEstado.setSelectedItem(expendio.getExp_Estado());
+        txtCalle.setText(expendio.getExp_Calle());
+        txtExterior.setText(String.valueOf(expendio.getExp_NumExterior()));
+        txtMunicipio.setText(expendio.getExp_Municipio());
+        txtNombre.setText(expendio.getExp_Nombre());
+        txtPostal.setText(String.valueOf(expendio.getExp_Postal()));
+        txtRfc.setText(expendio.getExp_RFC());
+        e = expendio;
     }
     
     public void limpiar(){
@@ -198,6 +215,7 @@ public class Frm_Expendio extends javax.swing.JFrame {
         String exteriorStr = txtExterior.getText().trim();
         
         StringBuilder mensajeError = new StringBuilder();
+        Frm_ExpendioPrev preview;
         
         if (nombre.isEmpty() || nombre.length() < 3 || nombre.length() > 25) {
             mensajeError.append("Longitud de nombre no valida y no puede estar vacío.\n");
@@ -231,10 +249,18 @@ public class Frm_Expendio extends javax.swing.JFrame {
             int numExt = Integer.parseInt(exteriorStr);
             
             this.setVisible(false);
-            //se crea una instancia de Sede y se pasa como parámetro al otro formulario
-            Expendio expendio = new Expendio(0,nombre,rfc,
-                    calle,cp,municipio,estado,numExt);
-            Frm_ExpendioPrev preview = new Frm_ExpendioPrev(Frm_Expendio.this, expendio);
+//            //se crea una instancia de Sede y se pasa como parámetro al otro formulario
+//            Expendio expendio = new Expendio(0,nombre,rfc,
+//                    calle,cp,municipio,estado,numExt);
+//            Frm_ExpendioPrev preview = new Frm_ExpendioPrev(Frm_Expendio.this, expendio);
+//            preview.setVisible(true);
+            if (e == null) {
+                Expendio expendio = new Expendio (0, nombre, rfc, calle, cp, municipio, estado, numExt);
+                preview = new Frm_ExpendioPrev(Frm_Expendio.this, expendio);
+            } else {
+                Expendio expendio = new Expendio (e.getId_Expendio(), nombre, rfc, calle, cp, municipio, estado, numExt);
+                preview = new Frm_ExpendioPrev(Frm_Expendio.this, expendio);
+            }
             preview.setVisible(true);
         }
         

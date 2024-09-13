@@ -13,8 +13,10 @@ import pk_CRUD.Cls_Grano;
 import pk_CRUD.Cls_Marca;
 import pk_CRUD.Cls_Receta;
 import pk_CRUD.Cls_Sede;
+import pk_Modelo.Expendio;
 import pk_Modelo.Fabricante;
 import pk_Modelo.Sede;
+import pk_Vista.Insert.Frm_Expendio;
 import pk_Vista.Insert.Frm_Fabricante;
 import pk_Vista.Insert.Frm_Sede;
 
@@ -88,7 +90,6 @@ public class Frm_DisplayData extends javax.swing.JFrame {
                 llenar_cbColumna(cols_Receta);
                 table_Datos.setModel(CR.getDatosRecetas());
                 //...
-
                 break;
             case "grano":
                 llenar_cbColumna(cols_Grano);
@@ -312,6 +313,20 @@ public class Frm_DisplayData extends javax.swing.JFrame {
                     );
                     Frm_Fabricante frmfabricante = new Frm_Fabricante(f);
                     frmfabricante.setVisible(true);
+                    break;
+                case "expendio":
+                    Expendio e = new Expendio(
+                            Integer.parseInt(table_Datos.getValueAt(row,0).toString()),
+                            table_Datos.getValueAt(row, 1).toString(),
+                            table_Datos.getValueAt(row, 2).toString(),
+                            table_Datos.getValueAt(row, 3).toString(),
+                            Integer.parseInt(table_Datos.getValueAt(row, 4).toString()),
+                            table_Datos.getValueAt(row, 5).toString(),
+                            table_Datos.getValueAt(row, 6).toString(),
+                           Integer.parseInt(table_Datos.getValueAt(row, 7).toString())
+                    );
+                    Frm_Expendio frmExpendio = new Frm_Expendio(e);
+                    frmExpendio.setVisible(true);
                     break;
             }
         }
