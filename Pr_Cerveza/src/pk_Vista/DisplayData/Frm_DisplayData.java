@@ -384,13 +384,24 @@ public class Frm_DisplayData extends javax.swing.JFrame {
                     }
                     break;
                 case "marca":
-                    //...
+                    if (confirm == 0) {
+                        res = CM.eliminarRegistro(id);
+                    }
                     break;
                 case "cerveza":
+                    if (confirm == 0) {
+                        res = CC.eliminarRegistro(id);
+                    }
                     break;
                 case "receta":
+                    if (confirm == 0) {
+                        res = CR.eliminarRegistro(id);
+                    }
                     break;
                 case "grano":
+                    if (confirm == 0) {
+                        res = CG.eliminarRegistro(id);
+                    }
                     break;
                 case "lote":
                     break;
@@ -399,8 +410,14 @@ public class Frm_DisplayData extends javax.swing.JFrame {
                 case "pedido":
                     break;
                 case "expendio":
+                    if (confirm == 0) {
+                        res = CE.eliminarRegistro(id);
+                    }
                     break;
                 case "almacén":
+                    if (confirm == 0) {
+                        res = CA.eliminarRegistro(id);
+                    }
                     break;
                 case "venta":
                     break;
