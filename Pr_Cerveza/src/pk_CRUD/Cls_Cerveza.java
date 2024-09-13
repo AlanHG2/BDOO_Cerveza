@@ -3,7 +3,9 @@ package pk_CRUD;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import pk_Conexion.C_Conexion;
+import pk_Modelo.Cerveza;
 
 public class Cls_Cerveza {
 
@@ -35,5 +37,30 @@ public class Cls_Cerveza {
             CN.close();
             return res;
         }
+    }
+    
+    public ArrayList<Cerveza> getCerveza() {
+        ArrayList<Cerveza> lista = new ArrayList();
+        String SQL_Select = "SELECT *FROM cerveza";
+        try {
+            PS = CN.getConexion().prepareStatement(SQL_Select);
+            RS = PS.executeQuery();
+            while (RS.next()) {
+                lista.add(new Cerveza(
+                        RS.getInt("id_cerveza"),
+                        RS.getString("cer_nombre"),
+                        RS.getFloat("cer_graduacion"),
+                        RS.getInt("id_marca"),
+                        RS.getInt("cer_existencia_total")
+                ));
+            }
+        } catch (SQLException e) {
+            System.out.println("Error:"+e);
+        } finally {
+            RS=null;
+            PS=null;
+            CN.close();
+        }
+        return lista;
     }
 }

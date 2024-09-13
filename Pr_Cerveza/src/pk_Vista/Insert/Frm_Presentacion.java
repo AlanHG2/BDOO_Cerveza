@@ -4,6 +4,11 @@
  */
 package pk_Vista.Insert;
 
+import java.util.ArrayList;
+import pk_CRUD.Cls_Cerveza;
+import pk_CRUD.Cls_Presentacion;
+import pk_Modelo.Cerveza;
+
 /**
  *
  * @author jadey
@@ -13,9 +18,30 @@ public class Frm_Presentacion extends javax.swing.JFrame {
     /**
      * Creates new form Frm_Presentacion
      */
+    ArrayList <Cerveza> list;
+    Cls_Presentacion CA;
     public Frm_Presentacion() {
         initComponents();
         setLocationRelativeTo(null);
+        llenarCerveza();
+        CA = new Cls_Presentacion();
+    }
+    
+    private void llenarCerveza(){
+        Cls_Cerveza o =new Cls_Cerveza();
+        list=o.getCerveza();
+        for (int i = 0; i < list.size(); i++) {
+            Cerveza c=list.get(i);
+            cmb_Cerveza.addItem(c.getCer_Nombre());
+        }
+        cmb_Cerveza.setSelectedIndex(-1);
+    }
+    
+    public void limpiar(){
+         cmb_Cerveza.setSelectedIndex(-1);
+         cmb_Envase.setSelectedIndex(-1);
+         cmb_Capacidad.setSelectedIndex(-1);
+         txt_Descripcion.setText("");
     }
 
     /**
@@ -46,13 +72,13 @@ public class Frm_Presentacion extends javax.swing.JFrame {
 
         jLabel3.setText("Tipo de Envase:");
 
-        jLabel4.setText("Capacidad:");
+        jLabel4.setText("Capacidad (ml):");
 
-        cmb_Cerveza.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmb_Envase.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Vidrio verde", "Vidrio ambar", "Vidrio transparente", "Lata", "Barril", "Growlers", "Envases plásticos (PET)", "Botellas cerámicas" }));
+        cmb_Envase.setSelectedIndex(-1);
 
-        cmb_Envase.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        cmb_Capacidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmb_Capacidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "330", "355", "500", "650", "750", "1000", "1200", "2000", "5000" }));
+        cmb_Capacidad.setSelectedIndex(-1);
 
         btn_Agregar.setText("Agregar");
 
@@ -72,7 +98,7 @@ public class Frm_Presentacion extends javax.swing.JFrame {
                 .addGap(42, 42, 42)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(cmb_Cerveza, 0, 135, Short.MAX_VALUE)
+                        .addComponent(cmb_Cerveza, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(cmb_Envase, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(cmb_Capacidad, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(txt_Descripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))

@@ -183,7 +183,8 @@ public class Frm_Cerveza extends javax.swing.JFrame {
             // Si no hay errores, declara el id que el usuario selecciono
             int id_marca = list.get(id).getId_Marca();
             String nombreMarca = (String) cb_Marca.getSelectedItem();
-            Cerveza cerveza = new Cerveza(0,nombre,graduacion,id_marca);
+            Cerveza cerveza = new Cerveza(0,nombre,graduacion,
+                    id_marca,0);
             Frm_CervezaPrev preview = new Frm_CervezaPrev(Frm_Cerveza.this, cerveza,
                     nombreMarca);
             preview.setVisible(true);
