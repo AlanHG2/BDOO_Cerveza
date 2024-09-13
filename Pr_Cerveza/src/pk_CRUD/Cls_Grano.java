@@ -94,7 +94,7 @@ public class Cls_Grano {
             PS = CN.getConexion().prepareStatement(sql_select);
             RS = PS.executeQuery();
             while (RS.next()) {
-                fila[0] = String.valueOf(RS.getInt("id_sede"));
+                fila[0] = String.valueOf(RS.getInt("id_grano"));
                 fila[1] = RS.getString("gran_nombre");
                 fila[2] = RS.getString("gran_procedencia");
                 dtm.addRow(fila);
@@ -118,7 +118,7 @@ public class Cls_Grano {
             PS = CN.getConexion().prepareStatement(sql_select);
             RS = PS.executeQuery();
             while (RS.next()) {
-                fila[0] = String.valueOf(RS.getInt("id_sede"));
+                fila[0] = String.valueOf(RS.getInt("id_grano"));
                 fila[1] = RS.getString("gran_nombre");
                 fila[2] = RS.getString("gran_procedencia");
                 dtm.addRow(fila);
