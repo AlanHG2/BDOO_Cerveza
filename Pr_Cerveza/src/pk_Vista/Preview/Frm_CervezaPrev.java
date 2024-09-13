@@ -5,31 +5,45 @@
 package pk_Vista.Preview;
 
 import javax.swing.JOptionPane;
-import pk_CRUD.Cls_Marca;
-import pk_Vista.Insert.Frm_Marca;
+import pk_CRUD.Cls_Cerveza;
+import pk_Modelo.Cerveza;
+import pk_Vista.Insert.Frm_Cerveza;
 
 /**
  *
  * @author obeth
  */
-public class Frm_MarcaPrev extends javax.swing.JFrame {
+public class Frm_CervezaPrev extends javax.swing.JFrame {
 
-    private Frm_Marca fMarca;
-    private final Cls_Marca CA;
-    private int id_fabicante;
+    private Frm_Cerveza fCerveza;
+    private final Cls_Cerveza CA;
+    boolean flag_insert = false; //para conocer si se hace inserción o actualización
+    Cerveza c = new Cerveza();
     
     /**
-     * Creates new form Frm_MarcaPrev
+     * Creates new form Frm_CervezaPrev
      */
-    public Frm_MarcaPrev(Frm_Marca frmMarca, String nombre, 
-            String nombreFabricante,int id_fabricante) {
-        initComponents();
-        txtNombre.setText(nombre);
-        txtFab.setText(nombreFabricante);
-        this.id_fabicante = id_fabricante;
+    public Frm_CervezaPrev(Frm_Cerveza frmCerveza,Cerveza cerveza, 
+            String nombreMarca) {
+        CA = new Cls_Cerveza();
         setLocationRelativeTo(null);
-        CA = new Cls_Marca();
-        fMarca = frmMarca;
+        initComponents();
+        
+        txtNombre.setText(cerveza.getCer_Nombre());
+        float graduacion = cerveza.getCer_Graduacion();
+
+        // Convertir el valor float a String y asignarlo al campo de texto
+        txtGraduacion.setText(String.valueOf(graduacion));
+        txtMarca.setText(nombreMarca);
+        
+        c = cerveza;
+        
+        if (c.getId_Cerveza()== 0) {
+            flag_insert = true;
+        } else {
+            flag_insert = false;
+        }
+        fCerveza = frmCerveza;
     }
 
     /**
@@ -41,22 +55,32 @@ public class Frm_MarcaPrev extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        txtNombre = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        btnRegresar = new javax.swing.JToggleButton();
+        txtGraduacion = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        txtMarca = new javax.swing.JLabel();
+        btnRegresar = new javax.swing.JButton();
         btnConfirmar = new javax.swing.JToggleButton();
         btnCancelar = new javax.swing.JToggleButton();
-        txtNombre = new javax.swing.JLabel();
-        txtFab = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel2.setText("¿Desea agregar los siguientes datos?");
+        jLabel1.setText("¿Esta eguro de insertar estos datos?");
 
-        jLabel1.setText("Nombre:");
+        jLabel2.setText("Nombre:");
 
-        jLabel3.setText("Fabrcante");
+        txtNombre.setText("jLabel3");
+
+        jLabel3.setText("Graduacion: ");
+
+        txtGraduacion.setText("jLabel4");
+
+        jLabel5.setText("Marca");
+
+        txtMarca.setText("jLabel6");
 
         btnRegresar.setText("Regresar");
         btnRegresar.addActionListener(new java.awt.event.ActionListener() {
@@ -79,58 +103,58 @@ public class Frm_MarcaPrev extends javax.swing.JFrame {
             }
         });
 
-        txtNombre.setText("jLabel4");
-
-        txtFab.setText("jLabel4");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(125, 125, 125))
             .addGroup(layout.createSequentialGroup()
+                .addGap(73, 73, 73)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtFab, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel5))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtNombre, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtGraduacion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtMarca, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(86, 86, 86)
-                        .addComponent(jLabel2))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(66, 66, 66)
                         .addComponent(btnRegresar)
-                        .addGap(39, 39, 39)
+                        .addGap(32, 32, 32)
                         .addComponent(btnConfirmar)
-                        .addGap(39, 39, 39)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                         .addComponent(btnCancelar)))
-                .addContainerGap(63, Short.MAX_VALUE))
+                .addGap(81, 81, 81))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(jLabel2)
+                .addGap(25, 25, 25)
+                .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
+                    .addComponent(jLabel2)
                     .addComponent(txtNombre))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(txtFab))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                    .addComponent(txtGraduacion))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(txtMarca))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRegresar)
                     .addComponent(btnConfirmar)
                     .addComponent(btnCancelar))
-                .addGap(35, 35, 35))
+                .addGap(62, 62, 62))
         );
 
         pack();
@@ -138,27 +162,28 @@ public class Frm_MarcaPrev extends javax.swing.JFrame {
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
         // TODO add your handling code here:
-        String nombre = txtNombre.getText();
-        int res = CA.insertarDatos(nombre, id_fabicante);
+        
+        int res = CA.insertarDatos(c.getCer_Nombre(), c.getCer_Graduacion(), c.getId_Marca());
         if (res > 0) {
            JOptionPane.showMessageDialog(null, "Registro Exitoso", "Éxito", JOptionPane.INFORMATION_MESSAGE);
         } 
         this.dispose();
-        fMarca.setVisible(true);
-        fMarca.limpiar();
+        fCerveza.setVisible(true);
+        fCerveza.limpiar();         
+        
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         // TODO add your handling code here:
         this.dispose();
-        fMarca.setVisible(true);
+        fCerveza.setVisible(true);
     }//GEN-LAST:event_btnRegresarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
         this.dispose();
-        fMarca.setVisible(true);
-        fMarca.limpiar();
+        fCerveza.setVisible(true);
+        fCerveza.limpiar();  
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     /**
@@ -178,20 +203,20 @@ public class Frm_MarcaPrev extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Frm_MarcaPrev.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Frm_CervezaPrev.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Frm_MarcaPrev.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Frm_CervezaPrev.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Frm_MarcaPrev.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Frm_CervezaPrev.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Frm_MarcaPrev.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Frm_CervezaPrev.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                //new Frm_MarcaPrev().setVisible(true);
+               // new Frm_CervezaPrev().setVisible(true);
             }
         });
     }
@@ -199,11 +224,13 @@ public class Frm_MarcaPrev extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton btnCancelar;
     private javax.swing.JToggleButton btnConfirmar;
-    private javax.swing.JToggleButton btnRegresar;
+    private javax.swing.JButton btnRegresar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel txtFab;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel txtGraduacion;
+    private javax.swing.JLabel txtMarca;
     private javax.swing.JLabel txtNombre;
     // End of variables declaration//GEN-END:variables
 }

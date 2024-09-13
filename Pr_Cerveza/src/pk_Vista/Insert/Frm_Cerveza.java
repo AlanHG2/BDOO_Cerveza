@@ -5,13 +5,18 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import pk_CRUD.Cls_Cerveza;
 import pk_CRUD.Cls_Marca;
+import pk_Modelo.Cerveza;
 import pk_Modelo.Marca;
+import pk_Vista.Preview.Frm_CervezaPrev;
 
 
 public class Frm_Cerveza extends javax.swing.JFrame {
 
+    
     ArrayList<Marca> list;
-    Cls_Cerveza CA;
+    private final Cls_Cerveza CA;
+    private Cerveza c = null;
+    
     public Frm_Cerveza() {
         initComponents();
         setLocationRelativeTo(null);
@@ -24,6 +29,12 @@ public class Frm_Cerveza extends javax.swing.JFrame {
             Marca m =list.get(i);
             cb_Marca.addItem(m.getMar_Nombre());
         }
+        cb_Marca.setSelectedIndex(-1);
+    }
+    
+    public void limpiar(){
+        txt_Nombre.setText("");
+        txt_Graduacion.setText("");
         cb_Marca.setSelectedIndex(-1);
     }
 
@@ -127,12 +138,56 @@ public class Frm_Cerveza extends javax.swing.JFrame {
 
     private void btn_AgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AgregarActionPerformed
         String nombre=txt_Nombre.getText();
-        float graduacion=Float.parseFloat(txt_Graduacion.getText());
-        Marca m=list.get(cb_Marca.getSelectedIndex());
-        int id_marca=m.getId_Marca();
-        int res=CA.insertarDatos(nombre, graduacion,id_marca);
-        if (res>0) {
-            JOptionPane.showMessageDialog(null, "Registro exitoso", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+        float graduacion = 0.0f;
+        StringBuilder mensajeError = new StringBuilder();
+        int id = cb_Marca.getSelectedIndex();
+        
+        if (nombre.isEmpty() || nombre.length() > 30 || nombre.length() < 3) {
+            mensajeError.append("Longitud de nombre no válida (entre 3 y 30 caracteres).\n");
+        }
+        
+        // Obtén el texto del campo de texto
+        String graduaciontxt = txt_Graduacion.getText();
+
+// Verifica si el campo está vacío
+        if (graduaciontxt.isEmpty()) {
+            mensajeError.append("El campo de graduación no puede estar vacío.\n");
+        } else {
+            try {
+                // Intenta convertir el texto a un valor float
+                graduacion = Float.parseFloat(graduaciontxt);
+
+                // Verifica si el valor está dentro del rango deseado
+                if (graduacion < 0.0 || graduacion > 100.0) {
+                    mensajeError.append("La graduación debe estar entre 0.0 y 100.0.\n");
+                }
+            } catch (NumberFormatException e) {
+                // Si no se puede convertir el texto a un número, muestra un mensaje de error
+                mensajeError.append("El valor de graduación debe ser un número flotante válido.\n");
+            }
+        }
+        
+        if(id == -1){
+            mensajeError.append("Debe seleccionar una sede válida.\n");
+        }else{
+            Marca m = list.get(id);
+            if(m.getId_Marca() < 0){
+                mensajeError.append("La sede seleccionada no es válida.\n");
+            }
+        }
+        
+        if(mensajeError.length() > 0){
+            JOptionPane.showMessageDialog(null, mensajeError.toString(),
+            "Error", JOptionPane.ERROR_MESSAGE);
+        }else{
+            // Si no hay errores, declara el id que el usuario selecciono
+            int id_marca = list.get(id).getId_Marca();
+            String nombreMarca = (String) cb_Marca.getSelectedItem();
+            Cerveza cerveza = new Cerveza(0,nombre,graduacion,id_marca);
+            Frm_CervezaPrev preview = new Frm_CervezaPrev(Frm_Cerveza.this, cerveza,
+                    nombreMarca);
+            preview.setVisible(true);
+            this.setVisible(false);  
         }
     }//GEN-LAST:event_btn_AgregarActionPerformed
 

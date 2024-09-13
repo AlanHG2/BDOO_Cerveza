@@ -18,4 +18,39 @@ public class Cerveza {
         this.cer_Graduacion = 0;
         this.id_Marca = 0;
     }
+
+    public int getId_Cerveza() {
+        return id_Cerveza;
+    }
+
+    public void setId_Cerveza(int id_Cerveza) {
+        this.id_Cerveza = id_Cerveza;
+    }
+
+    public String getCer_Nombre() {
+        return cer_Nombre;
+    }
+
+    public void setCer_Nombre(String cer_Nombre) {
+        this.cer_Nombre = cer_Nombre;
+    }
+
+    public float getCer_Graduacion() {
+        return cer_Graduacion;
+    }
+
+    public void setCer_Graduacion(float cer_Graduacion) {
+        this.cer_Graduacion = cer_Graduacion;
+    }
+
+    public int getId_Marca() {
+        return id_Marca;
+    }
+
+    public void setId_Marca(int id_Marca) {
+        this.id_Marca = id_Marca;
+    }
+    
+    
+    
 }
