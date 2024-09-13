@@ -5,6 +5,7 @@
 package pk_Menu;
 
 import javax.swing.JOptionPane;
+import pk_Vista.DisplayData.Frm_DisplayData;
 import pk_Vista.Insert.Frm_Almacen;
 import pk_Vista.Insert.Frm_Cerveza;
 import pk_Vista.Insert.Frm_Expendio;
@@ -145,6 +146,11 @@ public class Frm_Menu extends javax.swing.JFrame {
         btn_Buscar.setForeground(new java.awt.Color(0, 0, 0));
         btn_Buscar.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         btn_Buscar.setText("Buscar, modificar o eliminar  un registro");
+        btn_Buscar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_BuscarMouseClicked(evt);
+            }
+        });
         jPanel1.add(btn_Buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 280, 370, 70));
 
         txt_Opcion1.setFont(new java.awt.Font("Gadugi", 1, 16)); // NOI18N
@@ -185,6 +191,12 @@ public class Frm_Menu extends javax.swing.JFrame {
         String selectedTable = (String) cmb_Entidades.getSelectedItem();
         openForm(selectedTable);
     }//GEN-LAST:event_cmb_EntidadesActionPerformed
+
+    private void btn_BuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_BuscarMouseClicked
+        Frm_DisplayData formDis= new Frm_DisplayData();
+        formDis.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btn_BuscarMouseClicked
 
     /**
      * @param args the command line arguments
