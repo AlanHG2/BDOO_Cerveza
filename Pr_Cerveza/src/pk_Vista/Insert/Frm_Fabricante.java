@@ -26,18 +26,25 @@ public class Frm_Fabricante extends javax.swing.JFrame {
         f = null;
     }
     
-    public Frm_Fabricante(Fabricante fabricante){
+    public Frm_Fabricante(Fabricante fabricante) {
         initComponents();
         CA = new Cls_Fabricante();
         setTitle("Registro de Fabricantes");
         setLocationRelativeTo(null);
-        System.out.println(fabricante.getId_Fabricante()); //!!!!!!!!
-        cb_Sede.setSelectedItem(fabricante.getId_Sede());
-        txt_Nombre.setText(fabricante.getFab_Nombre());
         llenarSedes();
+        int idSedeFabricante = fabricante.getId_Sede();
+
+        for (Sede sede : list) { 
+            if (sede.getId_Sede() == idSedeFabricante) {
+                cb_Sede.setSelectedItem(sede.getSed_Nombre()); 
+                break;
+            }
+        }
+
+        txt_Nombre.setText(fabricante.getFab_Nombre());
         f = fabricante;
     }
-    
+  
     public void limpiar(){
         cb_Sede.setSelectedIndex(-1);
         txt_Nombre.setText("");
