@@ -1,33 +1,48 @@
 
 package pk_Vista.Insert;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
+
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import pk_CRUD.Cls_Fabricante;
 import pk_CRUD.Cls_Sede;
+import pk_Modelo.Fabricante;
 import pk_Modelo.Sede;
 import pk_Vista.Preview.Frm_FabricantePrev;
 
 
 public class Frm_Fabricante extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Frm_Fabricante
-     */ 
     ArrayList<Sede> list;
     private final Cls_Fabricante CA;
+    private Fabricante f = null;
+    
     public Frm_Fabricante() {
         initComponents();
+        CA = new Cls_Fabricante();
+        setTitle("Registro de Fabricantes");
+        setLocationRelativeTo(null);       
+        llenarSedes();
+        f = null;
+    }
+    
+    public Frm_Fabricante(Fabricante fabricante){
+        initComponents();
+        CA = new Cls_Fabricante();
         setTitle("Registro de Fabricantes");
         setLocationRelativeTo(null);
-        
+        System.out.println(fabricante.getId_Fabricante()); //!!!!!!!!
+        cb_Sede.setSelectedItem(fabricante.getId_Sede());
+        txt_Nombre.setText(fabricante.getFab_Nombre());
         llenarSedes();
-        CA = new Cls_Fabricante();
+        f = fabricante;
     }
+    
+    public void limpiar(){
+        cb_Sede.setSelectedIndex(-1);
+        txt_Nombre.setText("");
+    }
+    
     private void llenarSedes(){
 //        Instancia la clase controladora (de pk_Crud)
         Cls_Sede o=new Cls_Sede();
@@ -41,10 +56,10 @@ public class Frm_Fabricante extends javax.swing.JFrame {
         cb_Sede.setSelectedIndex(-1);
     }
     
-    public void limpiar(){
-        txt_Nombre.setText("");
-        cb_Sede.setSelectedIndex(-1);
-    }
+    
+    
+    
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -62,6 +77,7 @@ public class Frm_Fabricante extends javax.swing.JFrame {
         cb_Sede = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         btn_Agregar = new javax.swing.JButton();
+        btn_Cancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -82,10 +98,17 @@ public class Frm_Fabricante extends javax.swing.JFrame {
 
         jLabel3.setText("Fabricante");
 
-        btn_Agregar.setText("Agregar");
+        btn_Agregar.setText("Confirmar");
         btn_Agregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_AgregarActionPerformed(evt);
+            }
+        });
+
+        btn_Cancelar.setText("Cancelar");
+        btn_Cancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_CancelarActionPerformed(evt);
             }
         });
 
@@ -105,15 +128,16 @@ public class Frm_Fabricante extends javax.swing.JFrame {
                             .addComponent(txt_Nombre)
                             .addComponent(cb_Sede, 0, 196, Short.MAX_VALUE)))
                     .addGroup(jp_FabricanteLayout.createSequentialGroup()
-                        .addGroup(jp_FabricanteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jp_FabricanteLayout.createSequentialGroup()
-                                .addGap(168, 168, 168)
-                                .addComponent(jLabel3))
-                            .addGroup(jp_FabricanteLayout.createSequentialGroup()
-                                .addGap(152, 152, 152)
-                                .addComponent(btn_Agregar)))
+                        .addGap(168, 168, 168)
+                        .addComponent(jLabel3)
                         .addGap(0, 164, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jp_FabricanteLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btn_Cancelar)
+                .addGap(34, 34, 34)
+                .addComponent(btn_Agregar)
+                .addGap(14, 14, 14))
         );
         jp_FabricanteLayout.setVerticalGroup(
             jp_FabricanteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -128,9 +152,11 @@ public class Frm_Fabricante extends javax.swing.JFrame {
                 .addGroup(jp_FabricanteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cb_Sede, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
-                .addComponent(btn_Agregar)
-                .addGap(42, 42, 42))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
+                .addGroup(jp_FabricanteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_Agregar)
+                    .addComponent(btn_Cancelar))
+                .addGap(35, 35, 35))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -154,16 +180,18 @@ public class Frm_Fabricante extends javax.swing.JFrame {
     }//GEN-LAST:event_cb_SedeItemStateChanged
 
     private void cb_SedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_SedeActionPerformed
-//        Para seleccionar el id del elemento seleccionado en el combobox
-//        Sede s=list.get(cb_Sede.getSelectedIndex());
-//        System.out.println("Id seleccionado:"+s.getId_Sede());
+        //Para seleccionar el id del elemento seleccionado en el combobox
+        //Sede sede=list.get(cb_Sede.getSelectedIndex());
+        //System.out.println("Id seleccionado:"+sede.getId_Sede());
     }//GEN-LAST:event_cb_SedeActionPerformed
 
     private void btn_AgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AgregarActionPerformed
         String nombre = txt_Nombre.getText();
-        int id = cb_Sede.getSelectedIndex(); // Obtener el índice seleccionado
-    
+        int index_combo_sede = cb_Sede.getSelectedIndex(); // Obtener el índice seleccionado
+        Sede sede = null;
+        
         StringBuilder mensajeError = new StringBuilder();
+        Frm_FabricantePrev preview;
     
         // Validación del campo de texto "nombre"
         if (nombre.isEmpty() || nombre.length() > 40 || nombre.length() < 3) {
@@ -171,11 +199,11 @@ public class Frm_Fabricante extends javax.swing.JFrame {
         }
 
         // Validación del JComboBox "cb_Sede"
-        if (id == -1) { // No se ha seleccionado ninguna sede
+        if (index_combo_sede == -1) { // No se ha seleccionado ninguna sede
             mensajeError.append("Debe seleccionar una sede válida.\n");
         } else {
-            Sede s = list.get(id); // Obtener la sede seleccionada
-            if (s.getId_Sede() < 0) { 
+            sede = list.get(index_combo_sede); // Obtener la sede seleccionada
+            if (sede.getId_Sede() < 0) { 
                 mensajeError.append("La sede seleccionada no es válida.\n");
             }
         }
@@ -186,14 +214,23 @@ public class Frm_Fabricante extends javax.swing.JFrame {
                     "Error", JOptionPane.ERROR_MESSAGE);
         } else {
             // Si no hay errores, declara el id que el usuario selecciono
-            int id_sede = list.get(id).getId_Sede();
-            String nombreSede = (String) cb_Sede.getSelectedItem();
-            Frm_FabricantePrev preview = new Frm_FabricantePrev(Frm_Fabricante.this,
-                    nombre, nombreSede,id_sede);
-            preview.setVisible(true);
-            this.setVisible(false); 
+            // int id_sede = list.get(id).getId_Sede();
+            // String nombreSede = (String) cb_Sede.getSelectedItem();
+            this.setVisible(false);
+            if (f == null) {
+                Fabricante fabricante = new Fabricante (0, nombre, sede.getId_Sede());
+                preview = new Frm_FabricantePrev(Frm_Fabricante.this, fabricante, sede);                          
+            } else {
+                Fabricante fabricante = new Fabricante (f.getId_Fabricante(), nombre, sede.getId_Sede());
+                preview = new Frm_FabricantePrev(Frm_Fabricante.this, fabricante, sede);
+            }                       
+            preview.setVisible(true); 
         }  
     }//GEN-LAST:event_btn_AgregarActionPerformed
+
+    private void btn_CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CancelarActionPerformed
+        this.dispose();        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_CancelarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -232,6 +269,7 @@ public class Frm_Fabricante extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_Agregar;
+    private javax.swing.JButton btn_Cancelar;
     private javax.swing.JComboBox<String> cb_Sede;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
