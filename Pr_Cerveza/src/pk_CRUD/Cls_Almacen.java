@@ -112,9 +112,9 @@ public class Cls_Almacen {
             while (RS.next()) {
                 fila[0] = String.valueOf(RS.getInt("id_almacen"));
                 fila[1] = String.valueOf(RS.getInt("alma_existencia"));
-                fila[2] = String.valueOf(RS.getInt("alma_capacidadd"));
-                fila[3] = String.valueOf(RS.getInt("id_presetacion"));
-                fila[3] = String.valueOf(RS.getInt("id_expendio"));
+                fila[2] = String.valueOf(RS.getInt("alma_capacidad"));
+                fila[3] = String.valueOf(RS.getInt("id_presentacion"));
+                fila[4] = String.valueOf(RS.getInt("id_expendio"));
                 dtm.addRow(fila);
             }
         } catch (SQLException e) {
@@ -138,9 +138,9 @@ public class Cls_Almacen {
             while (RS.next()) {
                 fila[0] = String.valueOf(RS.getInt("id_almacen"));
                 fila[1] = String.valueOf(RS.getInt("alma_existencia"));
-                fila[2] = String.valueOf(RS.getInt("alma_capacidadd"));
-                fila[3] = String.valueOf(RS.getInt("id_presetacion"));
-                fila[3] = String.valueOf(RS.getInt("id_expendio"));
+                fila[2] = String.valueOf(RS.getInt("alma_capacidad"));
+                fila[3] = String.valueOf(RS.getInt("id_presentacion"));
+                fila[4] = String.valueOf(RS.getInt("id_expendio"));
                 dtm.addRow(fila);
             }
         } catch (SQLException e) {
@@ -179,7 +179,7 @@ public class Cls_Almacen {
                         RS.getInt("alma_existencia"),
                         RS.getInt("alma_capacidad"),
                         RS.getInt("id_presentacion"),
-                        RS.getInt("id_expendioe")));
+                        RS.getInt("id_expendio")));
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error:" + e, "Error", 0);
