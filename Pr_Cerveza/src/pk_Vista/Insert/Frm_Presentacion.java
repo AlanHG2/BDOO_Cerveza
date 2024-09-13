@@ -31,7 +31,7 @@ public class Frm_Presentacion extends javax.swing.JFrame {
     
     private void llenarCerveza(){
         Cls_Cerveza o =new Cls_Cerveza();
-        list=o.getCerveza();
+        list=o.getCervezas();
         for (int i = 0; i < list.size(); i++) {
             Cerveza c=list.get(i);
             cmb_Cerveza.addItem(c.getCer_Nombre());
