@@ -4,6 +4,8 @@ import javax.swing.table.DefaultTableModel;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import pk_Modelo.Grano;
 
 public class Cls_Grano {
 
@@ -29,7 +31,7 @@ public class Cls_Grano {
                 System.out.println("Registro exitoso");
             }
         } catch (SQLException e) {
-            System.out.println("Error de inserción");
+            System.out.println("Error de inserción "+e);
         } finally {
             PS = null;
             CN.close();
@@ -37,5 +39,27 @@ public class Cls_Grano {
         return res;
     }
 
+    public ArrayList<Grano> getGrano() {
+        ArrayList<Grano> lista = new ArrayList();
+        String SQL_Select = "SELECT *FROM grano";
+        try {
+            PS = CN.getConexion().prepareStatement(SQL_Select);
+            RS = PS.executeQuery();
+            while (RS.next()) {
+                lista.add(new Grano(
+                        RS.getInt("id_grano"),
+                        RS.getString("gra_nombre"),
+                        RS.getString("gra_procedencia")
+                ));
+            }
+        } catch (SQLException e) {
+            System.out.println("Error:"+e);
+        } finally {
+            RS=null;
+            PS=null;
+            CN.close();
+        }
+        return lista;
+    }
 
 }

@@ -22,12 +22,11 @@ public class Frm_Presentacion extends javax.swing.JFrame {
      * Creates new form Frm_Presentacion
      */
     ArrayList <Cerveza> list;
-    Cls_Presentacion CA;
+
     public Frm_Presentacion() {
         initComponents();
         setLocationRelativeTo(null);
         llenarCerveza();
-        CA = new Cls_Presentacion();
     }
     
     private void llenarCerveza(){

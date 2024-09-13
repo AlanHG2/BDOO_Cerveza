@@ -1,14 +1,53 @@
 
 package pk_Vista.Insert;
 
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import pk_CRUD.Cls_Cerveza;
+import pk_CRUD.Cls_Grano;
+import pk_Modelo.Cerveza;
+import pk_Modelo.Grano;
+import pk_Modelo.Receta;
+import pk_Vista.Preview.Frm_RecetaPrev;
+
 
 public class Frm_Receta extends javax.swing.JFrame {
 
     /**
      * Creates new form Frm_Receta
      */
+    ArrayList <Cerveza> listCer;
+    ArrayList <Grano> listGra;
     public Frm_Receta() {
         initComponents();
+        setLocationRelativeTo(null);
+        llenarCerveza();
+        llenarGrano();
+    }
+    private void llenarCerveza(){
+        Cls_Cerveza o =new Cls_Cerveza();
+        listCer=o.getCerveza();
+        for (int i = 0; i < listCer.size(); i++) {
+            Cerveza c=listCer.get(i);
+            cb_Cerveza.addItem(c.getCer_Nombre());
+        }
+        cb_Cerveza.setSelectedIndex(-1);
+    }
+    
+    private void llenarGrano(){
+        Cls_Grano o =new Cls_Grano();
+        listGra=o.getGrano();
+        for (int i = 0; i < listGra.size(); i++) {
+            Grano g=listGra.get(i);
+            cb_Grano.addItem(g.getGra_nombre());
+        }
+        cb_Grano.setSelectedIndex(-1);
+    }
+    
+    public void limpiar(){
+        cb_Cerveza.setSelectedIndex(-1);
+        cb_Grano.setSelectedIndex(-1);
+        txt_Procedimiento.setText("");
     }
 
     /**
@@ -42,6 +81,11 @@ public class Frm_Receta extends javax.swing.JFrame {
         jLabel4.setText("Cerveza");
 
         btn_Agregar.setText("Agregar");
+        btn_Agregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_AgregarActionPerformed(evt);
+            }
+        });
 
         btn_Finalizar.setText("Finalizar");
 
@@ -114,6 +158,54 @@ public class Frm_Receta extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btn_AgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AgregarActionPerformed
+        // TODO add your handling code here:
+        String procedimientos = txt_Procedimiento.getText();
+        int idCer = cb_Cerveza.getSelectedIndex();
+        int idGra = cb_Grano.getSelectedIndex();
+        StringBuilder mensajeError = new StringBuilder();
+        
+        
+        if (procedimientos.isEmpty() || procedimientos.length() > 100 || procedimientos.length() < 3) {
+            mensajeError.append("Longitud de Procedimiento no válida (entre 3 y 100 caracteres).\n");
+        }
+        
+        if(idCer == -1){
+            mensajeError.append("Debe seleccionar una cerveza valida.\n");
+        }else{
+            Cerveza c = listCer.get(idCer);
+            if(c.getId_Cerveza()< 0){
+                mensajeError.append("La cerveza seleccionada no es válida.\n");
+            }
+        }
+        
+        if(idGra == -1){
+            mensajeError.append("Debe seleccionar un grano valido.\n");
+        }else{
+            Grano  g = listGra.get(idGra);
+            if(g.getId_grano()< 0){
+                mensajeError.append("El grano seleccionado no es válido.\n");
+            }
+        }
+        
+        if(mensajeError.length() > 0){
+            JOptionPane.showMessageDialog(null, mensajeError.toString(),
+            "Error", JOptionPane.ERROR_MESSAGE);
+        }else{
+            // Si no hay errores, declara el id que el usuario selecciono
+            int id_cerveza = listCer.get(idCer).getId_Cerveza();
+            int id_grano = listGra.get(idGra).getId_grano();
+            String nombreCerveza = (String) cb_Cerveza.getSelectedItem();
+            String nombreGrano = (String) cb_Grano.getSelectedItem();
+            Receta receta = new Receta(0,procedimientos,id_grano,
+                    id_cerveza);
+            Frm_RecetaPrev preview = new Frm_RecetaPrev(Frm_Receta.this, receta,
+                    nombreCerveza,nombreGrano);
+            preview.setVisible(true);
+            this.setVisible(false);  
+        }
+    }//GEN-LAST:event_btn_AgregarActionPerformed
 
     /**
      * @param args the command line arguments
