@@ -2,9 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package pk_Menu;
+package pk_Vista.Menu;
 
-import pk_Menu.Frm_Menu;
+import pk_Vista.Menu.Frm_Menu;
 
 /**
  *
