@@ -4,18 +4,47 @@
  */
 package pk_Vista.Insert;
 
+import java.util.Date;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import pk_CRUD.Cls_Cerveza;
+import pk_Modelo.Cerveza;
+import pk_Modelo.Lote;
+import pk_Vista.Preview.Frm_LotePrev;
+
 /**
  *
  * @author jadey
  */
 public class Frm_Lote extends javax.swing.JFrame {
 
+    
+    ArrayList<Cerveza> list;
+    
     /**
      * Creates new form Frm_Lote
      */
     public Frm_Lote() {
         initComponents();
         setLocationRelativeTo(null);
+        
+        llenarCerveza();
+    }
+    
+    private void llenarCerveza(){
+         list=new Cls_Cerveza().getCervezas();
+        for (int i = 0; i < list.size(); i++) {
+            Cerveza c =list.get(i);
+            cmb_Cerveza.addItem(c.getCer_Nombre());
+        }
+        cmb_Cerveza.setSelectedIndex(-1);
+    }
+    
+    public void limpiar(){
+        cmb_Cerveza.setSelectedIndex(-1);
+        date_Produccion.setDate(null);
+        date_Caducidad.setDate(null);
+        txt_Cantidad.setText("");
     }
 
     /**
@@ -49,11 +78,12 @@ public class Frm_Lote extends javax.swing.JFrame {
 
         jLabel4.setText("Cantidad:");
 
-        txt_Cantidad.setText("jTextField1");
-
-        cmb_Cerveza.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         btn_Agregar.setText("Agregar");
+        btn_Agregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_AgregarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -116,6 +146,79 @@ public class Frm_Lote extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btn_AgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AgregarActionPerformed
+        // TODO add your handling code here:
+        int cantidad = 0;
+        String cantidadtxt = txt_Cantidad.getText();
+        Date fech_prod = (Date) date_Produccion.getDate();
+        Date fech_cadu = (Date) date_Caducidad.getDate();
+        int id = cmb_Cerveza.getSelectedIndex();
+        StringBuilder mensajeError = new StringBuilder();
+
+        // Validación de selección de cerveza
+        if (id == -1) {
+            mensajeError.append("Debe seleccionar una cerveza válida.\n");
+        } else {
+            Cerveza m = list.get(id);
+            if (m.getId_Cerveza() < 0) {
+                mensajeError.append("La cerveza seleccionada no es válida.\n");
+            }
+        }
+
+        // Validación de cantidad
+        if (cantidadtxt.isEmpty()) {
+            mensajeError.append("El campo de cantidad no puede estar vacío.\n");
+        } else {
+            try {
+                cantidad = Integer.parseInt(cantidadtxt);
+
+                if (cantidad <= 0) {
+                    mensajeError.append("La cantidad no puede ser negativa o nula.\n");
+                }
+            } catch (NumberFormatException e) {
+                mensajeError.append("El valor de cantidad debe ser un número entero válido.\n");
+            }
+        }
+
+        // Validación de fechas
+        if (fech_prod == null) {
+            mensajeError.append("Debe ingresar una fecha de producción.\n");
+        }
+        if (fech_cadu == null) {
+            mensajeError.append("Debe ingresar una fecha de caducidad.\n");
+        }
+        if (fech_prod != null && fech_cadu != null) {
+            if (fech_prod.after(fech_cadu)) {
+                mensajeError.append("La fecha de producción no puede ser posterior a la fecha de caducidad.\n");
+            }
+
+            // Validar que la fecha de producción no esté en el futuro
+            Date fechaActual = new Date();
+            if (fech_prod.after(fechaActual)) {
+                mensajeError.append("La fecha de producción no puede estar en el futuro.\n");
+            }
+        }
+
+        // Mostrar mensajes de error si existen
+        if (mensajeError.length() > 0) {
+            JOptionPane.showMessageDialog(null, mensajeError.toString(), 
+                "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            java.sql.Date prod = new java.sql.Date(fech_prod.getTime());
+            java.sql.Date cadu = new java.sql.Date(fech_cadu.getTime());
+            
+            
+            int id_cerveza = list.get(id).getId_Cerveza();
+            String nombreCerveza = (String) cmb_Cerveza.getSelectedItem();
+            Lote lote = new Lote(0,id_cerveza,prod,
+                    cadu,cantidad);
+            Frm_LotePrev preview = new Frm_LotePrev(this, lote, nombreCerveza);
+            
+            preview.setVisible(true);
+            this.setVisible(false);  
+        }
+    }//GEN-LAST:event_btn_AgregarActionPerformed
 
     /**
      * @param args the command line arguments

@@ -4,15 +4,19 @@
  */
 package pk_Modelo;
 
+import java.sql.Date;
+
+
+
 public class Lote {
     
     public int id_lote;
     public int id_cerveza;
-    public String lot_fecha_prod;
-    public String lot_fecha_cadu;
+    public Date lot_fecha_prod;
+    public Date lot_fecha_cadu;
     public int lot_cantidad;
 
-    public Lote(int id_lote, int id_cerveza, String lot_fecha_prod, String lot_fecha_cadu, int lot_cantidad) {
+    public Lote(int id_lote, int id_cerveza, Date lot_fecha_prod, Date lot_fecha_cadu, int lot_cantidad) {
         this.id_lote = id_lote;
         this.id_cerveza = id_cerveza;
         this.lot_fecha_prod = lot_fecha_prod;
@@ -44,19 +48,19 @@ public class Lote {
         this.id_cerveza = id_cerveza;
     }
 
-    public String getLot_fecha_prod() {
+    public Date getLot_fecha_prod() {
         return lot_fecha_prod;
     }
 
-    public void setLot_fecha_prod(String lot_fecha_prod) {
+    public void setLot_fecha_prod(Date lot_fecha_prod) {
         this.lot_fecha_prod = lot_fecha_prod;
     }
 
-    public String getLot_fecha_cadu() {
+    public Date getLot_fecha_cadu() {
         return lot_fecha_cadu;
     }
 
-    public void setLot_fecha_cadu(String lot_fecha_cadu) {
+    public void setLot_fecha_cadu(Date lot_fecha_cadu) {
         this.lot_fecha_cadu = lot_fecha_cadu;
     }
 

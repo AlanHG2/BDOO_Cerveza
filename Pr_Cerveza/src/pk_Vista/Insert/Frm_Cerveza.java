@@ -152,7 +152,7 @@ public class Frm_Cerveza extends javax.swing.JFrame {
         String nombre=txt_Nombre.getText();
         float graduacion = 0.0f;
         StringBuilder mensajeError = new StringBuilder();
-        int id = cb_Marca.getSelectedIndex();
+        int id = cb_Marca.getSelectedIndex();   
         
         if (nombre.isEmpty() || nombre.length() > 30 || nombre.length() < 3) {
             mensajeError.append("Longitud de nombre no válida (entre 3 y 30 caracteres).\n");
