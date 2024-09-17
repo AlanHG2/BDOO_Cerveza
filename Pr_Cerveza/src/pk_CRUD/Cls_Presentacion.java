@@ -7,8 +7,11 @@ package pk_CRUD;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import pk_Conexion.C_Conexion;
+import pk_Modelo.Presentacion;
 
 /**
  *
@@ -46,6 +49,30 @@ public class Cls_Presentacion {
             CN.close();
         }
         return res;
+    }
+    
+    public ArrayList<Presentacion> getPresentaciones(int id_cerveza) {
+        ArrayList<Presentacion> lista = new ArrayList();
+        String SQL_Select = "SELECT * FROM presentacion WHERE id_cerveza = "+id_cerveza;
+        try {
+            PS = CN.getConexion().prepareStatement(SQL_Select);
+            RS = PS.executeQuery();
+            while (RS.next()) {
+                lista.add(new Presentacion(
+                        RS.getInt("id_presentacion"),
+                        RS.getInt("id_cerveza"),
+                        RS.getString("pre_descripcion"),
+                        RS.getString("pre_tipo_envase"),
+                        RS.getInt("pre_capacidad")));
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error:" + e, "Error", 0);
+        } finally {
+            RS=null;
+            PS=null;
+            CN.close();
+        }
+        return lista;
     }
     
     

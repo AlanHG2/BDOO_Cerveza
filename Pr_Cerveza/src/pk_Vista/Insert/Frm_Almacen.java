@@ -4,6 +4,17 @@
  */
 package pk_Vista.Insert;
 
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import pk_CRUD.Cls_Cerveza;
+import pk_CRUD.Cls_Expendio;
+import pk_CRUD.Cls_Presentacion;
+import pk_Modelo.Almacen;
+import pk_Modelo.Cerveza;
+import pk_Modelo.Expendio;
+import pk_Modelo.Presentacion;
+import pk_Vista.Preview.Frm_AlmacenPrev;
+
 /**
  *
  * @author jadey
@@ -13,11 +24,58 @@ public class Frm_Almacen extends javax.swing.JFrame {
     /**
      * Creates new form Frm_Almacen
      */
+    
+    ArrayList<Cerveza> listCerveza;
+    ArrayList<Expendio> listExpendio;
+    ArrayList<Presentacion> listPresentacion;
+    
     public Frm_Almacen() {
         initComponents();
         setLocationRelativeTo(null);
+        
+        llenarCerveza();
+        llenarExpendio();
+        
+        cmb_Presentacion.setEnabled(false);
+    }
+    
+    
+    private void llenarCerveza(){
+         listCerveza=new Cls_Cerveza().getCervezas();
+        for (int i = 0; i < listCerveza.size(); i++) {
+            Cerveza c =listCerveza.get(i);
+            cmb_Cerveza.addItem(c.getCer_Nombre());
+        }
+        cmb_Cerveza.setSelectedIndex(-1);
     }
 
+    private void llenarExpendio(){
+         listExpendio = new Cls_Expendio().getExpendios();
+        for (int i = 0; i < listExpendio.size(); i++) {
+            Expendio e =listExpendio.get(i);
+            cmb_Expendio.addItem(e.getExp_Nombre());
+        }
+        cmb_Expendio.setSelectedIndex(-1);
+    }
+    
+    private void llenarPresentacion(int id_cerveza){
+         listPresentacion = new Cls_Presentacion().getPresentaciones(id_cerveza);
+        for (int i = 0; i < listPresentacion.size(); i++) {
+            Presentacion p =listPresentacion.get(i);
+            cmb_Presentacion.addItem(p.getPre_tipo_envase()+" "+p.getPre_capacidad());
+        }
+        cmb_Presentacion.setSelectedIndex(-1);
+    }
+    
+    public void limpiar(){
+        cmb_Expendio.setSelectedIndex(-1);
+        cmb_Cerveza.setSelectedIndex(-1);
+        cmb_Presentacion.setSelectedIndex(-1);
+        txt_Capacidad.setText("");
+        txt_Existencia.setText("");
+    }
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -37,18 +95,17 @@ public class Frm_Almacen extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        cmb_Cerveza = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        cmb_Expendio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        cmb_Presentacion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        txt_Existencia.setText("jTextField1");
-
-        txt_Capacidad.setText("jTextField2");
-
         btn_Agregar.setText("Agregar");
+        btn_Agregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_AgregarActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Presentación:");
 
@@ -57,6 +114,14 @@ public class Frm_Almacen extends javax.swing.JFrame {
         jLabel3.setText("Expendio:");
 
         jLabel4.setText("Capacidad:");
+
+        jLabel5.setText("Cerveza");
+
+        cmb_Cerveza.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmb_CervezaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -71,23 +136,29 @@ public class Frm_Almacen extends javax.swing.JFrame {
                             .addComponent(jLabel1)
                             .addComponent(jLabel3)
                             .addComponent(jLabel2)
-                            .addComponent(jLabel4))
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5))
                         .addGap(42, 42, 42)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(cmb_Presentacion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(cmb_Expendio, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txt_Existencia)
-                            .addComponent(txt_Capacidad, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txt_Capacidad, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
+                            .addComponent(cmb_Cerveza, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(72, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(88, Short.MAX_VALUE)
+                .addGap(39, 39, 39)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cmb_Expendio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addGap(28, 28, 28)
+                    .addComponent(jLabel3)
+                    .addComponent(cmb_Expendio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(cmb_Cerveza, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(cmb_Presentacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -120,6 +191,107 @@ public class Frm_Almacen extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void cmb_CervezaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_CervezaActionPerformed
+        // TODO add your handling code here:
+        cmb_Presentacion.removeAllItems();
+        int id_cerveza = cmb_Cerveza.getSelectedIndex();
+        
+        cmb_Presentacion.setEnabled(true);
+        
+        llenarPresentacion(id_cerveza+1);
+    }//GEN-LAST:event_cmb_CervezaActionPerformed
+
+    private void btn_AgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AgregarActionPerformed
+        // TODO add your handling code here:
+        int idExpendio = cmb_Expendio.getSelectedIndex();
+        int idCerveza = cmb_Cerveza.getSelectedIndex();
+        int idPresentacion = cmb_Presentacion.getSelectedIndex();
+        int capacidad = 0, existencia = 0;
+        String capacidadtxt = txt_Capacidad.getText();
+        String existenciatxt = txt_Existencia.getText();
+        
+        StringBuilder mensajeError = new StringBuilder();
+        
+        if (idExpendio == -1) {
+            mensajeError.append("Debe seleccionar un expendio válido.\n");
+        } else {
+            Expendio e = listExpendio.get(idExpendio);
+            if (e.getId_Expendio()< 0) {
+                mensajeError.append("El expendio seleccionado no es valido.\n");
+            }
+        }
+        
+        if (idCerveza == -1) {
+            mensajeError.append("Debe seleccionar una cerveza válido.\n");
+        } else {
+            Expendio e = listExpendio.get(idExpendio);
+            if (e.getId_Expendio()< 0) {
+                mensajeError.append("La cerveza seleccionada no es valida.\n");
+            }
+        }
+        
+        if (idPresentacion == -1) {
+            mensajeError.append("Debe seleccionar una presentacion válida.\n");
+        } else {
+            Presentacion p = listPresentacion.get(idPresentacion);
+            if (p.getId_presentacion()< 0) {
+                mensajeError.append("La presentacion seleccionada no es valida.\n");
+            }
+        }
+        
+        if (capacidadtxt.isEmpty()) {
+            mensajeError.append("El campo de capacidad no puede estar vacío.\n");
+        } else {
+            try {
+                capacidad = Integer.parseInt(capacidadtxt);
+
+                if (capacidad <= 0) {
+                    mensajeError.append("La cantidad no puede ser negativa o nula.\n");
+                }
+            } catch (NumberFormatException e) {
+                mensajeError.append("El valor de cantidad debe ser un número entero válido.\n");
+            }
+        }
+        
+        if (existenciatxt.isEmpty()) {
+            mensajeError.append("El campo de existencias no puede estar vacío.\n");
+        } else {
+            try {
+                existencia = Integer.parseInt(existenciatxt);
+
+                if (existencia < 0) {
+                    mensajeError.append("La Existencia no puede ser negativa.\n");
+                }
+            } catch (NumberFormatException e) {
+                mensajeError.append("El valor de existencia debe ser un número entero válido.\n");
+            }
+        }
+        if (existencia > capacidad) {
+            mensajeError.append("El valor de la existencia no puede superar a la capacidad del almacen.\n");
+        }
+        
+        if (mensajeError.length() > 0) {
+            JOptionPane.showMessageDialog(null, mensajeError.toString(), 
+                "Error", JOptionPane.ERROR_MESSAGE);
+        }else{
+            int idExp = listExpendio.get(idExpendio).getId_Expendio();
+            //int idCer = listCerveza.get(idCerveza).getId_Cerveza();
+            int idPre = listPresentacion.get(idPresentacion).getId_presentacion();
+            
+            String nombreExpendio = listExpendio.get(idExpendio).getExp_Nombre();
+            String nombreCerveza = listCerveza.get(idCerveza).getCer_Nombre();
+            String nombrePresentacion = cmb_Presentacion.getSelectedItem().toString(); 
+            
+            Almacen almacen = new Almacen(0,existencia,capacidad,
+                    idPre,idExp);
+            Frm_AlmacenPrev preview = new Frm_AlmacenPrev(this, almacen, nombreExpendio,
+                    nombreCerveza, nombrePresentacion);
+            
+            preview.setVisible(true);
+            this.setVisible(false);  
+        }
+    }//GEN-LAST:event_btn_AgregarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -158,12 +330,14 @@ public class Frm_Almacen extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_Agregar;
+    private javax.swing.JComboBox<String> cmb_Cerveza;
     private javax.swing.JComboBox<String> cmb_Expendio;
     private javax.swing.JComboBox<String> cmb_Presentacion;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField txt_Capacidad;
     private javax.swing.JTextField txt_Existencia;

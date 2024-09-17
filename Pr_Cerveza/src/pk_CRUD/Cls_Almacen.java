@@ -44,7 +44,7 @@ public class Cls_Almacen {
                 System.out.println("Registro exitoso");
             }
         } catch (SQLException e) {
-            System.out.println("Error de inserción");
+            System.out.println("Error de inserción"+e);
         } finally {
             PS = null;
             CN.close();
