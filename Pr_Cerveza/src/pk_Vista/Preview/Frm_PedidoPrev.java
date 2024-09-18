@@ -5,41 +5,45 @@
 package pk_Vista.Preview;
 
 import javax.swing.JOptionPane;
-import pk_CRUD.Cls_Venta;
-import pk_Modelo.Venta;
-import pk_Vista.Insert.Frm_Venta;
+import pk_CRUD.Cls_Pedido;
+import pk_Modelo.Pedido;
+import pk_Vista.Insert.Frm_Pedido;
 
 /**
  *
  * @author obeth
  */
-public class Frm_VentaPrev extends javax.swing.JFrame {
+
+
+public class Frm_PedidoPrev extends javax.swing.JFrame {
 
     /**
-     * Creates new form Frm_VentaPrev
+     * Creates new form Frm_PedidoPrev
      */
-    
-    private Frm_Venta fVenta;
-    private final Cls_Venta CA;
+    private Frm_Pedido fPedido;
+    private final Cls_Pedido CA;
     boolean flag_insert = false; //para conocer si se hace inserción o actualización
-    Venta v = new Venta();
+    Pedido p = new Pedido();
     
-    public Frm_VentaPrev(Frm_Venta frmVenta, Venta venta, String nombreExpendio,
+    public Frm_PedidoPrev(Frm_Pedido frmPedido, Pedido pedido, String nombreExpendio,
             String nombreCerveza,String nombrePresentacion) {
         initComponents();
-        CA = new Cls_Venta();
+        CA = new Cls_Pedido();
         
         txtExpendio.setText(nombreExpendio);
         txtCerveza.setText(nombreCerveza);
         txtPresentacion.setText(nombrePresentacion);
         
-        txtCantidad.setText(String.valueOf(venta.getVen_Cantidad()));
-        txtPrecio.setText(String.valueOf(venta.getVen_PrecioU()));
+        txtCantidad.setText(String.valueOf(pedido.getPed_Cantidad()));
+        txtSubtotal.setText(String.valueOf((double) pedido.getPed_Subtotal()));
+        txtIVA.setText(String.valueOf((double) pedido.getPed_IVA()));
+        txtTotal.setText(String.valueOf((double) pedido.getPed_Total()));
         
-        txtFecha.setText(venta.getVen_Fecha());
+        txtOrden.setText(pedido.getPed_FechaOrden());
+        txtDespacho.setText(pedido.getPed_FechaDesp());
         
-        fVenta = frmVenta; 
-        v = venta;
+        fPedido = frmPedido; 
+        p = pedido;
     }
 
     /**
@@ -51,32 +55,33 @@ public class Frm_VentaPrev extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        txtExpendio = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txtCerveza = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        txtExpendio = new javax.swing.JLabel();
         txtPresentacion = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        txtPrecio = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         txtCantidad = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        txtOrden = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        txtDespacho = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        txtFecha = new javax.swing.JLabel();
+        txtSubtotal = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        txtIVA = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        txtTotal = new javax.swing.JLabel();
         btnRegresar = new javax.swing.JButton();
         btnConfirmar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
 
-        jButton1.setText("jButton1");
-
-        jButton2.setText("jButton2");
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Esta seguro de insertar esta informacion?");
+        jLabel1.setText("Expendio");
+
+        txtExpendio.setText("jLabel2");
 
         jLabel2.setText("Cerveza:");
 
@@ -84,23 +89,31 @@ public class Frm_VentaPrev extends javax.swing.JFrame {
 
         jLabel3.setText("Presentacion:");
 
-        jLabel4.setText("Expendio:");
+        txtPresentacion.setText("jLabel4");
 
-        txtExpendio.setText("jLabel5");
+        jLabel4.setText("Cantidad:");
 
-        txtPresentacion.setText("jLabel5");
+        txtCantidad.setText("jLabel5");
 
-        jLabel5.setText("Precio por unidad:");
+        jLabel5.setText("Fecha Orden:");
 
-        txtPrecio.setText("jLabel6");
+        txtOrden.setText("jLabel6");
 
-        jLabel6.setText("Cantidad");
+        jLabel6.setText("Fecha Despacho:");
 
-        txtCantidad.setText("jLabel7");
+        txtDespacho.setText("jLabel7");
 
-        jLabel7.setText("Fecha:");
+        jLabel7.setText("Subtotal:");
 
-        txtFecha.setText("jLabel8");
+        txtSubtotal.setText("jLabel8");
+
+        jLabel8.setText("IVA:");
+
+        txtIVA.setText("jLabel9");
+
+        jLabel9.setText("Total:");
+
+        txtTotal.setText("jLabel10");
 
         btnRegresar.setText("Regresar");
         btnRegresar.addActionListener(new java.awt.event.ActionListener() {
@@ -128,47 +141,42 @@ public class Frm_VentaPrev extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(45, 45, 45)
+                .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel7))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtExpendio, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(txtFecha, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
-                        .addComponent(txtCantidad, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtPrecio, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtPresentacion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtCerveza, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGap(41, 41, 41))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(78, 78, 78)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel1)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(jLabel2)
+                        .addComponent(jLabel3)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel7))
+                    .addComponent(jLabel9)
+                    .addComponent(btnRegresar))
+                .addGap(40, 40, 40)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addComponent(btnRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addComponent(btnConfirmar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+                        .addComponent(btnCancelar))
+                    .addComponent(txtExpendio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtCerveza, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtPresentacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtCantidad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtOrden, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtDespacho, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtSubtotal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtIVA, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtTotal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(jLabel1)
-                .addGap(10, 10, 10)
+                .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
+                    .addComponent(jLabel1)
                     .addComponent(txtExpendio))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -180,22 +188,34 @@ public class Frm_VentaPrev extends javax.swing.JFrame {
                     .addComponent(txtPresentacion))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(txtCantidad))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(txtPrecio))
+                    .addComponent(txtOrden))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(txtCantidad))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtDespacho))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(txtFecha))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                    .addComponent(txtSubtotal))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(txtIVA))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(txtTotal))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRegresar)
                     .addComponent(btnConfirmar)
                     .addComponent(btnCancelar))
-                .addGap(24, 24, 24))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         pack();
@@ -203,34 +223,34 @@ public class Frm_VentaPrev extends javax.swing.JFrame {
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
         // TODO add your handling code here:
-        System.out.println(v.getVen_PrecioU()+" "+
-                v.getVen_Cantidad()+" "+ v.getVen_Fecha()+" "+
-                v.getId_Expendio()+ " "+v.getId_Presentacion());
         
-        int res = CA.insertarDatos(v.getVen_PrecioU(),
-                v.getVen_Cantidad(), v.getVen_Fecha(),
-                v.getId_Expendio(), v.getId_Presentacion());
+        
+        
+        int res = CA.insertarDatos(p.getId_Presentacion(), p.getId_Expendio(),
+                p.getPed_Cantidad(), p.getPed_FechaOrden(), p.getPed_FechaDesp(),
+                p.getPed_Total(), p.getPed_Subtotal(), p.getPed_IVA());
 
         
         if (res > 0) {
            JOptionPane.showMessageDialog(null, "Registro Exitoso", "Éxito", JOptionPane.INFORMATION_MESSAGE);
         } 
         this.dispose();
-        fVenta.setVisible(true);
-        fVenta.limpiar();
+        fPedido.setVisible(true);
+        fPedido.limpiar();
+        
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         // TODO add your handling code here:
         this.dispose();
-        fVenta.setVisible(true);
+        fPedido.setVisible(true);
     }//GEN-LAST:event_btnRegresarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
         this.dispose();
-        fVenta.setVisible(true);
-        fVenta.limpiar();
+        fPedido.setVisible(true);
+        fPedido.limpiar();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     /**
@@ -250,20 +270,20 @@ public class Frm_VentaPrev extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Frm_VentaPrev.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Frm_PedidoPrev.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Frm_VentaPrev.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Frm_PedidoPrev.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Frm_VentaPrev.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Frm_PedidoPrev.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Frm_VentaPrev.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Frm_PedidoPrev.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                //new Frm_VentaPrev().setVisible(true);
+                //new Frm_PedidoPrev().setVisible(true);
             }
         });
     }
@@ -272,8 +292,6 @@ public class Frm_VentaPrev extends javax.swing.JFrame {
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnConfirmar;
     private javax.swing.JButton btnRegresar;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -281,11 +299,16 @@ public class Frm_VentaPrev extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel txtCantidad;
     private javax.swing.JLabel txtCerveza;
+    private javax.swing.JLabel txtDespacho;
     private javax.swing.JLabel txtExpendio;
-    private javax.swing.JLabel txtFecha;
-    private javax.swing.JLabel txtPrecio;
+    private javax.swing.JLabel txtIVA;
+    private javax.swing.JLabel txtOrden;
     private javax.swing.JLabel txtPresentacion;
+    private javax.swing.JLabel txtSubtotal;
+    private javax.swing.JLabel txtTotal;
     // End of variables declaration//GEN-END:variables
 }

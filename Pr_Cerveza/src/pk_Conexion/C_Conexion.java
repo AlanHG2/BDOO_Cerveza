@@ -11,7 +11,7 @@ public class C_Conexion {
     private static final String USER = "root";
     private static final String PASS = "1234";
     private static final String URL = "jdbc:mysql://localhost:3306/" + BD +
-            "?useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC";
+            "?useSSL=false&useLegacyDatetimeCode=false&serverTimezone=GMT";
 
     public Connection getConexion(){
         cnx=null;

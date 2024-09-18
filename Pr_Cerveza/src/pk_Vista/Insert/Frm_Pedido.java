@@ -4,6 +4,20 @@
  */
 package pk_Vista.Insert;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.TimeZone;
+import javax.swing.JOptionPane;
+import pk_CRUD.Cls_Cerveza;
+import pk_CRUD.Cls_Expendio;
+import pk_CRUD.Cls_Presentacion;
+import pk_Modelo.Cerveza;
+import pk_Modelo.Expendio;
+import pk_Modelo.Pedido;
+import pk_Modelo.Presentacion;
+import pk_Vista.Preview.Frm_PedidoPrev;
+
 /**
  *
  * @author jadey
@@ -13,11 +27,63 @@ public class Frm_Pedido extends javax.swing.JFrame {
     /**
      * Creates new form Frm_Pedido
      */
+    ArrayList<Cerveza> listCerveza;
+    ArrayList<Expendio> listExpendio;
+    ArrayList<Presentacion> listPresentacion;
     public Frm_Pedido() {
         initComponents();
         setLocationRelativeTo(null);
+        
+        llenarCerveza();
+        llenarExpendio();
+        
+        cmb_Presentacion.setEnabled(false);
+    }
+    
+    private void llenarCerveza(){
+         listCerveza=new Cls_Cerveza().getCervezas();
+        for (int i = 0; i < listCerveza.size(); i++) {
+            Cerveza c =listCerveza.get(i);
+            cmb_Cerveza.addItem(c.getCer_Nombre());
+        }
+        cmb_Cerveza.setSelectedIndex(-1);
     }
 
+    private void llenarExpendio(){
+         listExpendio = new Cls_Expendio().getExpendios();
+        for (int i = 0; i < listExpendio.size(); i++) {
+            Expendio e =listExpendio.get(i);
+            cmb_Expendio.addItem(e.getExp_Nombre());
+        }
+        cmb_Expendio.setSelectedIndex(-1);
+    }
+    
+    private void llenarPresentacion(int id_cerveza){
+         listPresentacion = new Cls_Presentacion().getPresentaciones(id_cerveza);
+        for (int i = 0; i < listPresentacion.size(); i++) {
+            Presentacion p =listPresentacion.get(i);
+            cmb_Presentacion.addItem(p.getPre_tipo_envase()+" "+p.getPre_capacidad());
+        }
+        cmb_Presentacion.setSelectedIndex(-1);
+    }
+    
+    public void limpiar(){
+        cmb_Cerveza.setSelectedIndex(-1);
+        cmb_Expendio.setSelectedIndex(-1);
+        cmb_Presentacion.setSelectedIndex(-1);
+        cmb_horaDespacho.setSelectedIndex(-1);
+        cmb_horaOrden.setSelectedIndex(-1);
+        
+        txt_Cantidad.setText("");
+        txt_Subtotal.setText("");
+        txt_IVA.setText("");
+        
+        date_Despacho.setDate(null);
+        date_Orden.setDate(null);
+        
+        spn_minDespacho.setValue(0);
+        spn_minOrden.setValue(0);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -33,22 +99,26 @@ public class Frm_Pedido extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
         cmb_Cerveza = new javax.swing.JComboBox<>();
         cmb_Presentacion = new javax.swing.JComboBox<>();
         cmb_Expendio = new javax.swing.JComboBox<>();
         date_Orden = new com.toedter.calendar.JDateChooser();
         date_Despacho = new com.toedter.calendar.JDateChooser();
         txt_Cantidad = new javax.swing.JTextField();
-        txt_PrecioUnidad = new javax.swing.JTextField();
         txt_Subtotal = new javax.swing.JTextField();
         txt_IVA = new javax.swing.JTextField();
-        txt_Total = new javax.swing.JTextField();
         btn_Agregar = new javax.swing.JButton();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        cmb_horaDespacho = new javax.swing.JComboBox<>();
+        cmb_horaOrden = new javax.swing.JComboBox<>();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        spn_minDespacho = new javax.swing.JSpinner();
+        spn_minOrden = new javax.swing.JSpinner();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -62,31 +132,40 @@ public class Frm_Pedido extends javax.swing.JFrame {
 
         jLabel5.setText("Fecha de Despacho:");
 
-        jLabel6.setText("Total:");
-
         jLabel7.setText("Subtotal:");
 
-        jLabel8.setText("IVA:");
+        jLabel8.setText("IVA:   %");
 
         jLabel9.setText("Cerveza:");
 
-        jLabel10.setText("Precio por Unidad:");
-
-        cmb_Cerveza.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        cmb_Presentacion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        cmb_Expendio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        txt_Cantidad.setText("jTextField1");
-
-        txt_Subtotal.setText("jTextField3");
-
-        txt_IVA.setText("jTextField4");
-
-        txt_Total.setText("jTextField5");
+        cmb_Cerveza.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmb_CervezaActionPerformed(evt);
+            }
+        });
 
         btn_Agregar.setText("Agregar");
+        btn_Agregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_AgregarActionPerformed(evt);
+            }
+        });
+
+        jLabel13.setText("Hora:");
+
+        jLabel14.setText("Hora:");
+
+        cmb_horaDespacho.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24" }));
+
+        cmb_horaOrden.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24" }));
+
+        jLabel15.setText("Min:");
+
+        jLabel16.setText("Min:");
+
+        spn_minDespacho.setModel(new javax.swing.SpinnerNumberModel(0, 0, 59, 1));
+
+        spn_minOrden.setModel(new javax.swing.SpinnerNumberModel(0, 0, 59, 1));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -97,10 +176,8 @@ public class Frm_Pedido extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel10)
                             .addComponent(jLabel8)
                             .addComponent(jLabel7)
-                            .addComponent(jLabel6)
                             .addComponent(jLabel5)
                             .addComponent(jLabel4)
                             .addComponent(jLabel3))
@@ -109,13 +186,13 @@ public class Frm_Pedido extends javax.swing.JFrame {
                             .addComponent(txt_Cantidad)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(date_Orden, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
-                                    .addComponent(date_Despacho, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txt_PrecioUnidad)
+                                    .addComponent(date_Despacho, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
                                     .addComponent(txt_Subtotal)
-                                    .addComponent(txt_IVA)
-                                    .addComponent(txt_Total))
-                                .addGap(0, 0, Short.MAX_VALUE))))
+                                    .addComponent(txt_IVA))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(date_Orden, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel9)
@@ -127,13 +204,31 @@ public class Frm_Pedido extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addComponent(cmb_Presentacion, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(17, 17, 17))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(18, 18, 18)
+                                .addComponent(cmb_Presentacion, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel13)
+                                .addGap(18, 18, 18)
+                                .addComponent(cmb_horaOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel15)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(spn_minOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel14)
+                                .addGap(18, 18, 18)
+                                .addComponent(cmb_horaDespacho, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel16)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(spn_minDespacho, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(12, 12, 12))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(btn_Agregar)
-                        .addGap(53, 53, 53))))
+                        .addGap(49, 49, 49))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -152,39 +247,48 @@ public class Frm_Pedido extends javax.swing.JFrame {
                                     .addComponent(jLabel9)
                                     .addComponent(cmb_Cerveza, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(cmb_Presentacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(11, 11, 11)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel3)
-                                    .addComponent(txt_Cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(9, 9, 9)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel10)
-                                    .addComponent(txt_PrecioUnidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel4))
-                            .addComponent(date_Orden, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(11, 11, 11)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(jLabel3)
+                                            .addComponent(txt_Cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                                        .addComponent(date_Orden, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(jLabel13)
+                                            .addComponent(cmb_horaOrden, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel15)
+                                            .addComponent(spn_minOrden, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addComponent(jLabel4))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
-                            .addComponent(date_Despacho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(19, 19, 19)
-                        .addComponent(jLabel7))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel5)
+                                    .addComponent(date_Despacho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(19, 19, 19)
+                                .addComponent(jLabel7))
+                            .addComponent(jLabel14)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(cmb_horaDespacho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel16)
+                                .addComponent(spn_minDespacho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(txt_Subtotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addComponent(txt_IVA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(12, 12, 12)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txt_IVA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btn_Agregar)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel8)))
-                .addGap(12, 12, 12)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_Total, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6)
-                    .addComponent(btn_Agregar))
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -193,7 +297,7 @@ public class Frm_Pedido extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 15, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -204,6 +308,181 @@ public class Frm_Pedido extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void cmb_CervezaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_CervezaActionPerformed
+        // TODO add your handling code here:
+        cmb_Presentacion.removeAllItems();
+        int id_cerveza = cmb_Cerveza.getSelectedIndex();
+        
+        cmb_Presentacion.setEnabled(true);
+        
+        llenarPresentacion(id_cerveza+1);
+    }//GEN-LAST:event_cmb_CervezaActionPerformed
+
+    private void btn_AgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AgregarActionPerformed
+        // TODO add your handling code here:
+        int idExpendio = cmb_Expendio.getSelectedIndex();
+        int idCerveza = cmb_Cerveza.getSelectedIndex();
+        int idPresentacion = cmb_Presentacion.getSelectedIndex();
+        
+        int cantidad=0;
+        double subtotal =0.0,iva=0.0;
+        
+        String cantidadtxt = txt_Cantidad.getText();
+        String subtotaltxt = txt_Subtotal.getText();
+        String ivatxt = txt_IVA.getText();
+        String horaDestxt = cmb_horaDespacho.getSelectedItem() != null ? cmb_horaDespacho.getSelectedItem().toString() : "";
+        String horaOrdtxt = cmb_horaOrden.getSelectedItem() != null ? cmb_horaOrden.getSelectedItem().toString() : "";
+        
+        Date fechaDespacho = date_Despacho.getDate();
+        String fchDespacho="";
+        
+        Date fechaOrden = date_Orden.getDate();
+        String fchOrden="";
+        
+        int minDes = (Integer) spn_minDespacho.getValue();
+        int minOrd = (Integer) spn_minOrden.getValue();
+        int horaDes = Integer.parseInt(horaDestxt);
+        int horaOrd = Integer.parseInt(horaOrdtxt);
+        
+        StringBuilder mensajeError = new StringBuilder();
+        
+        //Validaciones de las llaves foraneas
+        if (idExpendio == -1) {
+            mensajeError.append("Debe seleccionar un expendio válido.\n");
+        } else {
+            Expendio e = listExpendio.get(idExpendio);
+            if (e.getId_Expendio()< 0) {
+                mensajeError.append("El expendio seleccionado no es valido.\n");
+            }
+        }
+        
+        if (idCerveza == -1) {
+            mensajeError.append("Debe seleccionar una cerveza válido.\n");
+        } else {
+            Expendio e = listExpendio.get(idExpendio);
+            if (e.getId_Expendio()< 0) {
+                mensajeError.append("La cerveza seleccionada no es valida.\n");
+            }
+        }
+        
+        if (idPresentacion == -1) {
+            mensajeError.append("Debe seleccionar una presentacion válida.\n");
+        } else {
+            Presentacion p = listPresentacion.get(idPresentacion);
+            if (p.getId_presentacion()< 0) {
+                mensajeError.append("La presentacion seleccionada no es valida.\n");
+            }
+        }
+        
+        //Validaciones de variebles enteras o boleanas
+        if (cantidadtxt.isEmpty()) {
+            mensajeError.append("El campo de cantidad no puede estar vacío.\n");
+        } else {
+            try {
+                cantidad = Integer.parseInt(cantidadtxt);
+
+                if (cantidad <= 0) {
+                    mensajeError.append("La cantidad no puede ser negativa o nula.\n");
+                }
+            } catch (NumberFormatException e) {
+                mensajeError.append("El valor de cantidad debe ser un número entero válido.\n");
+            }
+        }
+        
+        if (subtotaltxt.isEmpty()) {
+            mensajeError.append("El campo de Subtotal no puede estar vacío.\n");
+        } else {
+            try {
+                subtotal = Double.parseDouble(subtotaltxt);
+
+                if (subtotal <= 0) {
+                    mensajeError.append("El subtotal no puede ser negativa o nula.\n");
+                }
+            } catch (NumberFormatException e) {
+                mensajeError.append("El valor de subtotal debe ser un número decimal válido.\n");
+            }
+        }
+        
+        if (ivatxt.isEmpty()) {
+            mensajeError.append("El campo de IVA no puede estar vacío.\n");
+        } else {
+            try {
+                iva = Double.parseDouble(ivatxt);
+
+                if (iva <= 0) {
+                    mensajeError.append("El iva no puede ser negativo o nulo.\n");
+                }
+            } catch (NumberFormatException e) {
+                mensajeError.append("El valor de IVA debe ser un número Decimal válido.\n");
+            }
+        }
+        
+        //Validaciones de fecha y hora
+         if (fechaDespacho == null) {
+            mensajeError.append("Debe ingresar una fecha de despacho.\n");
+        }else{
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+            dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+            fchDespacho = dateFormat.format(fechaDespacho); 
+        }
+        if (fechaOrden == null) {
+            mensajeError.append("Debe ingresar una fecha de Orden.\n");
+        }else{
+            SimpleDateFormat dateFormatOrden = new SimpleDateFormat("yyyy-mm-dd");
+            dateFormatOrden.setTimeZone(TimeZone.getTimeZone("GMT-6"));
+            fchOrden = dateFormatOrden.format(fechaOrden);
+        }
+        if (fechaDespacho != null && fechaOrden != null) {
+            if (fechaOrden.after(fechaDespacho)) {
+                mensajeError.append("La fecha de Orden no puede ser posterior a la fecha de Despacho.\n");
+            }
+
+            // Validar que la fecha de producción no esté en el futuro
+            Date fechaActual = new Date();
+            if (fechaOrden.after(fechaActual)) {
+                mensajeError.append("La fecha de producción no puede estar en el futuro.\n");
+            }
+        }
+        
+        if (cmb_horaDespacho.getSelectedIndex() == -1) {
+            mensajeError.append("Debe seleccionar una hora valida.\n");
+        }
+        if (cmb_horaOrden.getSelectedIndex() == -1) {
+            mensajeError.append("Debe seleccionar una hora valida.\n");
+        }
+        
+        if (minDes<0||minDes>59 || minOrd<0 || minOrd > 59) {
+            mensajeError.append("Los minutos deben de estar en un rango de 0 a 59.\n");
+        }
+        
+        if (mensajeError.length() > 0) {
+            JOptionPane.showMessageDialog(null, mensajeError.toString(), 
+                "Error", JOptionPane.ERROR_MESSAGE);
+        }else{
+            int idExp = listExpendio.get(idExpendio).getId_Expendio();
+            //int idCer = listCerveza.get(idCerveza).getId_Cerveza();
+            int idPre = listPresentacion.get(idPresentacion).getId_presentacion();
+            
+            String nombreExpendio = listExpendio.get(idExpendio).getExp_Nombre();
+            String nombreCerveza = listCerveza.get(idCerveza).getCer_Nombre();
+            String nombrePresentacion = cmb_Presentacion.getSelectedItem().toString(); 
+            
+            String Despachofch = fchDespacho + " " + horaDes + ":" + minDes + ":00";
+            String Ordenfch = fchOrden + " " + horaOrd + ":" + minOrd + ":00";
+            //System.out.println("minutos "+min);
+            
+            double total = subtotal+(subtotal*(iva/100));
+            
+            Pedido pedido = new Pedido(0,idPre,idExp,cantidad,Ordenfch,Despachofch,
+                    total,subtotal,iva);
+            Frm_PedidoPrev preview = new Frm_PedidoPrev(this, pedido, nombreExpendio,
+                    nombreCerveza, nombrePresentacion);
+            
+            preview.setVisible(true);
+            this.setVisible(false);  
+        }
+    }//GEN-LAST:event_btn_AgregarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -245,23 +524,27 @@ public class Frm_Pedido extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cmb_Cerveza;
     private javax.swing.JComboBox<String> cmb_Expendio;
     private javax.swing.JComboBox<String> cmb_Presentacion;
+    private javax.swing.JComboBox<String> cmb_horaDespacho;
+    private javax.swing.JComboBox<String> cmb_horaOrden;
     private com.toedter.calendar.JDateChooser date_Despacho;
     private com.toedter.calendar.JDateChooser date_Orden;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JSpinner spn_minDespacho;
+    private javax.swing.JSpinner spn_minOrden;
     private javax.swing.JTextField txt_Cantidad;
     private javax.swing.JTextField txt_IVA;
-    private javax.swing.JTextField txt_PrecioUnidad;
     private javax.swing.JTextField txt_Subtotal;
-    private javax.swing.JTextField txt_Total;
     // End of variables declaration//GEN-END:variables
 }

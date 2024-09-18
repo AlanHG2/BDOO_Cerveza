@@ -206,8 +206,8 @@ public class Frm_Venta extends javax.swing.JFrame {
         int hora = Integer.parseInt(horatxt);
         
         Date fechaVenta = date_Venta.getDate();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        dateFormat.setTimeZone(TimeZone.getTimeZone("GMT+5"));
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+        dateFormat.setTimeZone(TimeZone.getTimeZone("GMT-6"));
         String fchVent = dateFormat.format(fechaVenta);
         
         StringBuilder mensajeError = new StringBuilder();

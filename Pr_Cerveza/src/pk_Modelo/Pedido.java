@@ -11,7 +11,8 @@ public class Pedido {
     private double ped_Subtotal;
     private double ped_IVA;
 
-    public Pedido(int id_Pedido, int id_Presentacion, int id_Expendio, int ped_Cantidad, String ped_FechaOrden, String ped_FechaDesp, double ped_Total, double ped_Subtotal, double ped_IVA) {
+    public Pedido(int id_Pedido, int id_Presentacion, int id_Expendio, int ped_Cantidad, String ped_FechaOrden, 
+            String ped_FechaDesp, double ped_Total, double ped_Subtotal, double ped_IVA) {
         this.id_Pedido = id_Pedido;
         this.id_Presentacion = id_Presentacion;
         this.id_Expendio = id_Expendio;
