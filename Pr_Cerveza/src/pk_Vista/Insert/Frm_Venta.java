@@ -4,6 +4,20 @@
  */
 package pk_Vista.Insert;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.TimeZone;
+import javax.swing.JOptionPane;
+import pk_CRUD.Cls_Cerveza;
+import pk_CRUD.Cls_Expendio;
+import pk_CRUD.Cls_Presentacion;
+import pk_Modelo.Cerveza;
+import pk_Modelo.Expendio;
+import pk_Modelo.Presentacion;
+import pk_Modelo.Venta;
+import pk_Vista.Preview.Frm_VentaPrev;
+
 /**
  *
  * @author jadey
@@ -13,11 +27,61 @@ public class Frm_Venta extends javax.swing.JFrame {
     /**
      * Creates new form Frm_Venta
      */
+    ArrayList<Cerveza> listCerveza;
+    ArrayList<Expendio> listExpendio;
+    ArrayList<Presentacion> listPresentacion;
+    
     public Frm_Venta() {
         initComponents();
         setLocationRelativeTo(null);
+    
+        llenarCerveza();
+        llenarExpendio();
+        
+        cmb_Presentacion.setEnabled(false);
+    }
+    
+    private void llenarCerveza(){
+         listCerveza=new Cls_Cerveza().getCervezas();
+        for (int i = 0; i < listCerveza.size(); i++) {
+            Cerveza c =listCerveza.get(i);
+            cmb_Cerveza.addItem(c.getCer_Nombre());
+        }
+        cmb_Cerveza.setSelectedIndex(-1);
     }
 
+    private void llenarExpendio(){
+         listExpendio = new Cls_Expendio().getExpendios();
+        for (int i = 0; i < listExpendio.size(); i++) {
+            Expendio e =listExpendio.get(i);
+            cmb_Expendio.addItem(e.getExp_Nombre());
+        }
+        cmb_Expendio.setSelectedIndex(-1);
+    }
+    
+    private void llenarPresentacion(int id_cerveza){
+         listPresentacion = new Cls_Presentacion().getPresentaciones(id_cerveza);
+        for (int i = 0; i < listPresentacion.size(); i++) {
+            Presentacion p =listPresentacion.get(i);
+            cmb_Presentacion.addItem(p.getPre_tipo_envase()+" "+p.getPre_capacidad());
+        }
+        cmb_Presentacion.setSelectedIndex(-1);
+    }
+
+    public void limpiar(){
+        cmb_Cerveza.setSelectedIndex(-1);
+        cmb_Expendio.setSelectedIndex(-1);
+        cmb_Presentacion.setSelectedIndex(-1);
+        cmb_hora.setSelectedIndex(-1);
+        
+        spn_min.setValue(0);
+        
+        txt_Cantidad.setText("");
+        txt_PrecioUnidad.setText("");
+        
+        date_Venta.setDate(null);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -33,144 +97,213 @@ public class Frm_Venta extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        cmb_Expendio = new javax.swing.JComboBox<>();
-        cmb_Ceveza = new javax.swing.JComboBox<>();
+        cmb_Cerveza = new javax.swing.JComboBox<>();
         cmb_Presentacion = new javax.swing.JComboBox<>();
         txt_Cantidad = new javax.swing.JTextField();
         txt_PrecioUnidad = new javax.swing.JTextField();
-        txt_Total = new javax.swing.JTextField();
         date_Venta = new com.toedter.calendar.JDateChooser();
         btn_Agregar = new javax.swing.JButton();
+        cmb_Expendio = new javax.swing.JComboBox<>();
+        spn_min = new javax.swing.JSpinner();
+        jLabel6 = new javax.swing.JLabel();
+        cmb_hora = new javax.swing.JComboBox<>();
+        jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         jLabel1.setText("Expendio:");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 40, -1, -1));
 
         jLabel2.setText("Cerveza:");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, -1, -1));
 
         jLabel3.setText("Presentación:");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, -1, -1));
 
         jLabel4.setText("Cantidad:");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 100, -1, -1));
 
         jLabel5.setText("Precio por Unidad:");
-
-        jLabel6.setText("Total:");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(48, 145, -1, -1));
 
         jLabel7.setText("Fecha de Venta:");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(48, 195, -1, -1));
 
-        cmb_Expendio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmb_Cerveza.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmb_CervezaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(cmb_Cerveza, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 40, 136, -1));
 
-        cmb_Ceveza.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        cmb_Presentacion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        txt_Cantidad.setText("jTextField1");
-
-        txt_PrecioUnidad.setText("jTextField1");
-
-        txt_Total.setText("jTextField1");
+        jPanel1.add(cmb_Presentacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 90, 153, -1));
+        jPanel1.add(txt_Cantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 100, 132, -1));
+        jPanel1.add(txt_PrecioUnidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 141, 87, -1));
+        jPanel1.add(date_Venta, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 182, 186, -1));
 
         btn_Agregar.setText("Agregar");
+        btn_Agregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_AgregarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btn_Agregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 250, 100, -1));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(48, 48, 48)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cmb_Expendio, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addGap(38, 38, 38)
-                                .addComponent(txt_Total))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txt_PrecioUnidad))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addGap(18, 18, 18)
-                                .addComponent(txt_Cantidad))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(18, 18, 18)
-                                .addComponent(cmb_Ceveza, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(19, 19, 19)
-                        .addComponent(jLabel3)
-                        .addGap(18, 18, 18)
-                        .addComponent(cmb_Presentacion, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(39, 39, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(date_Venta, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btn_Agregar)
-                        .addGap(29, 29, 29))))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(51, 51, 51)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(cmb_Expendio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(cmb_Ceveza, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmb_Presentacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(17, 17, 17)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(txt_Cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(txt_PrecioUnidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(22, 22, 22)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(txt_Total, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(25, 25, 25)
-                                .addComponent(jLabel7))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(date_Venta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
-                        .addComponent(btn_Agregar)
-                        .addGap(45, 45, 45))))
-        );
+        jPanel1.add(cmb_Expendio, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 40, 150, -1));
+
+        spn_min.setModel(new javax.swing.SpinnerNumberModel(0, 0, 59, 1));
+        jPanel1.add(spn_min, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 250, 60, -1));
+
+        jLabel6.setText("Min");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 250, -1, -1));
+
+        cmb_hora.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24" }));
+        jPanel1.add(cmb_hora, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 250, 90, -1));
+
+        jLabel8.setText("hora");
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 250, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 559, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void cmb_CervezaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_CervezaActionPerformed
+        // TODO add your handling code here:
+        cmb_Presentacion.removeAllItems();
+        int id_cerveza = cmb_Cerveza.getSelectedIndex();
+        
+        cmb_Presentacion.setEnabled(true);
+        
+        llenarPresentacion(id_cerveza+1);
+    }//GEN-LAST:event_cmb_CervezaActionPerformed
+
+    private void btn_AgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AgregarActionPerformed
+        // TODO add your handling code here:\
+        int idExpendio = cmb_Expendio.getSelectedIndex();
+        int idCerveza = cmb_Cerveza.getSelectedIndex();
+        int idPresentacion = cmb_Presentacion.getSelectedIndex();
+        int cantidad=0;
+        double precio =0.0;
+        String cantidadtxt = txt_Cantidad.getText();
+        String preciotxt = txt_PrecioUnidad.getText();
+        String horatxt = cmb_hora.getSelectedItem() != null ? cmb_hora.getSelectedItem().toString() : "";
+        int min = (Integer) spn_min.getValue();
+        int hora = Integer.parseInt(horatxt);
+        
+        Date fechaVenta = date_Venta.getDate();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        dateFormat.setTimeZone(TimeZone.getTimeZone("GMT+5"));
+        String fchVent = dateFormat.format(fechaVenta);
+        
+        StringBuilder mensajeError = new StringBuilder();
+        
+        if (idExpendio == -1) {
+            mensajeError.append("Debe seleccionar un expendio válido.\n");
+        } else {
+            Expendio e = listExpendio.get(idExpendio);
+            if (e.getId_Expendio()< 0) {
+                mensajeError.append("El expendio seleccionado no es valido.\n");
+            }
+        }
+        
+        if (idCerveza == -1) {
+            mensajeError.append("Debe seleccionar una cerveza válido.\n");
+        } else {
+            Expendio e = listExpendio.get(idExpendio);
+            if (e.getId_Expendio()< 0) {
+                mensajeError.append("La cerveza seleccionada no es valida.\n");
+            }
+        }
+        
+        if (idPresentacion == -1) {
+            mensajeError.append("Debe seleccionar una presentacion válida.\n");
+        } else {
+            Presentacion p = listPresentacion.get(idPresentacion);
+            if (p.getId_presentacion()< 0) {
+                mensajeError.append("La presentacion seleccionada no es valida.\n");
+            }
+        }
+        
+        if (cantidadtxt.isEmpty()) {
+            mensajeError.append("El campo de cantidad no puede estar vacío.\n");
+        } else {
+            try {
+                cantidad = Integer.parseInt(cantidadtxt);
+
+                if (cantidad <= 0) {
+                    mensajeError.append("La cantidad no puede ser negativa o nula.\n");
+                }
+            } catch (NumberFormatException e) {
+                mensajeError.append("El valor de cantidad debe ser un número entero válido.\n");
+            }
+        }
+        
+        if (preciotxt.isEmpty()) {
+            mensajeError.append("El campo de precio no puede estar vacío.\n");
+        } else {
+            try {
+                precio = Double.parseDouble(preciotxt);
+
+                if (precio < 0.0) {
+                    mensajeError.append("El precio no puede ser negativo.\n");
+                }
+            } catch (NumberFormatException e) {
+                mensajeError.append("El valor de precio debe ser un número decimal válido.\n");
+            }
+        }
+        
+        if (fechaVenta == null) {
+            mensajeError.append("Debe ingresar una fecha de venta.\n");
+        }
+        
+        if (cmb_hora.getSelectedIndex() == -1) {
+            mensajeError.append("Debe seleccionar una hora valida.\n");
+        }
+       
+        if (min<0||min>59) {
+            mensajeError.append("Los minutos deben de estar en un rango de 0 a 59.\n");
+        }
+        
+        if (mensajeError.length() > 0) {
+            JOptionPane.showMessageDialog(null, mensajeError.toString(), 
+                "Error", JOptionPane.ERROR_MESSAGE);
+        }else{
+            int idExp = listExpendio.get(idExpendio).getId_Expendio();
+            //int idCer = listCerveza.get(idCerveza).getId_Cerveza();
+            int idPre = listPresentacion.get(idPresentacion).getId_presentacion();
+            
+            String nombreExpendio = listExpendio.get(idExpendio).getExp_Nombre();
+            String nombreCerveza = listCerveza.get(idCerveza).getCer_Nombre();
+            String nombrePresentacion = cmb_Presentacion.getSelectedItem().toString(); 
+            
+            String ventafch = fchVent + " " + hora + ":" + min + ":00";
+            //System.out.println("minutos "+min);
+            
+            Venta venta = new Venta(0,precio,cantidad,ventafch,
+                    idExp,idPre);
+            Frm_VentaPrev preview = new Frm_VentaPrev(this, venta, nombreExpendio,
+                    nombreCerveza, nombrePresentacion);
+            
+            preview.setVisible(true);
+            this.setVisible(false);  
+        }
+        
+    }//GEN-LAST:event_btn_AgregarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -209,9 +342,10 @@ public class Frm_Venta extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_Agregar;
-    private javax.swing.JComboBox<String> cmb_Ceveza;
+    private javax.swing.JComboBox<String> cmb_Cerveza;
     private javax.swing.JComboBox<String> cmb_Expendio;
     private javax.swing.JComboBox<String> cmb_Presentacion;
+    private javax.swing.JComboBox<String> cmb_hora;
     private com.toedter.calendar.JDateChooser date_Venta;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -220,9 +354,10 @@ public class Frm_Venta extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JSpinner spn_min;
     private javax.swing.JTextField txt_Cantidad;
     private javax.swing.JTextField txt_PrecioUnidad;
-    private javax.swing.JTextField txt_Total;
     // End of variables declaration//GEN-END:variables
 }

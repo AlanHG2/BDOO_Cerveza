@@ -8,7 +8,8 @@ public class Venta {
     private int id_Expendio;
     private int id_Presentacion;
 
-    public Venta(int id_Venta, double ven_PrecioU, int ven_Cantidad, String ven_Fecha, int id_Expendio, int id_Presentacion) {
+    public Venta(int id_Venta, double ven_PrecioU, int ven_Cantidad, String ven_Fecha,
+            int id_Expendio, int id_Presentacion) {
         this.id_Venta = id_Venta;
         this.ven_PrecioU = ven_PrecioU;
         this.ven_Cantidad = ven_Cantidad;

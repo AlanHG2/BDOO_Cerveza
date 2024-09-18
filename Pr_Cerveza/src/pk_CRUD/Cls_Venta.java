@@ -26,7 +26,8 @@ public class Cls_Venta {
         this.CN = new C_Conexion();
     }
 
-    public int insertarDatos (Double vent_precioU, int vent_cantidad, String vent_fecha, int id_expendio, int id_presentacion){
+    public int insertarDatos (Double vent_precioU, int vent_cantidad, String vent_fecha,
+            int id_expendio, int id_presentacion){
         int res = 0;
         String SQL_Insert = "INSERT INTO venta (vent_precioU, vent_cantidad, vent_fecha, id_expendio, id_presentacion) VALUES (?,?,?,?,?)";
         try {
@@ -35,13 +36,13 @@ public class Cls_Venta {
             PS.setInt(2,vent_cantidad);
             PS.setString(3,vent_fecha);
             PS.setInt(4,id_expendio);
-            PS.setInt(4,id_presentacion);
+            PS.setInt(5,id_presentacion);
             res = PS.executeUpdate();
             if (res > 0){
                 System.out.println("Registro exitoso");
             }
         } catch (SQLException e) {
-            System.out.println("Error de inserción");
+            System.out.println("Error de inserción"+e);
         } finally {
             PS = null;
             CN.close();
